@@ -1,0 +1,6 @@
+Found errors:
+    login: ["Sorry, you entered an incorrect email address or password."],
+    invite: ["Sorry, but that email is invalid."],
+    general: ["Something went wrong."],
+    teamDetailsSetup: ["This URL is not available. Sorry!"],
+    channelForm: ["That name is already taken by a channel, username, or user group."]
