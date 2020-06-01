@@ -25,3 +25,4 @@ design_docs
 /config/master.key
 
 Gemfile.lock
+package-lock.json
