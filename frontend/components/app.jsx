@@ -6,9 +6,8 @@ const App = () => (
     <div>
         <header>
             <h1>
-                Test
+                Lax is Online!
             </h1>
-            
         </header>
 
     </div>

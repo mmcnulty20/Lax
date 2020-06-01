@@ -1,9 +1,9 @@
-class API::SessionsController < ApplicationController
+class Api::SessionsController < ApplicationController
     def create
         @user = User.find_by_credentials(user_params[:email], user_params[:password])
         if @user.save
             login!(@user)
-            render "api/users/show"
+            render "api/users/user_stub"
         else
             render json: ["Sorry, you entered an incorrect email address or password."], status: 401
         end

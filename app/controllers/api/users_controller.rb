@@ -1,13 +1,17 @@
-class API::UsersController < ApplicationController
+class Api::UsersController < ApplicationController
     def index
-        
+        @users = User.all
+    end
+
+    def show
+        @user = User.find(params[:id])
     end
 
     def create
         @user = User.new(user_params)
         if @user.save
             login!(@user)
-            render :show
+            render :user_stub
         else
             render json: @user.errors.full_messages, status: 401
         end
@@ -17,10 +21,18 @@ class API::UsersController < ApplicationController
         if current_user.id == params[:id]
             @user = current_user
             if @user.update(user_params)
-                render :show
+                render :user_stub
             else
                 render json: @user.errors.full_messages, status: 401
             end
+        end
+    end
+
+    def destroy
+        if current_user.id == params[:id]
+            user = User.find[:id].destroy
+            session[:session_token] = nil
+            current_user = nil
         end
     end
 

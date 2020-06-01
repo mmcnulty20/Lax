@@ -1,4 +1,4 @@
-const _nullSession = {id: null};
+const _nullSession = {currentUserId: null};
 
 const sessionReducer = (state = _nullSession, action) => {
     Object.freeze(state);
