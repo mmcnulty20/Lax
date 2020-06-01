@@ -1,4 +1,8 @@
 class API::UsersController < ApplicationController
+    def index
+        
+    end
+
     def create
         @user = User.new(user_params)
         if @user.save
@@ -6,6 +10,17 @@ class API::UsersController < ApplicationController
             render :show
         else
             render json: @user.errors.full_messages, status: 401
+        end
+    end
+
+    def update
+        if current_user.id == params[:id]
+            @user = current_user
+            if @user.update(user_params)
+                render :show
+            else
+                render json: @user.errors.full_messages, status: 401
+            end
         end
     end
 
