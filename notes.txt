@@ -4,3 +4,9 @@ Found errors:
     general: ["Something went wrong."],
     teamDetailsSetup: ["This URL is not available. Sorry!"],
     channelForm: ["That name is already taken by a channel, username, or user group."]
+
+
+Weirdness with login: Multiple ways to log in:
+    If you know the workspace url, search that then enter username and password
+    If you don't, submit only your email and it'll send you an email to click (doesn't seem to require password)
+    
