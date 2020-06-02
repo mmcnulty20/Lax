@@ -6,7 +6,6 @@ const mapStateToProps = state => {
     const user = { username: "", email: "", password: "" }
     const errors = [].concat(...Object.values(state.errors))
     return {
-        placeholders: false,
         user,
         errors,
         formType: 'Sign Up'

@@ -21,13 +21,13 @@ class EditUserForm extends Component {
 }
 
 const mapStateToProps = ({entities: { users }, errors}, ownProps) => {
-    const user = users[ownProps.match.params.userId]
-    const errors = [].concat(...Object.values(errors))
+    const user = users[ownProps.match.params.userId];
+    user.password = "";
+    const errors = [].concat(...Object.values(errors));
     return {
-        placeholders: false,
         user,
         errors,
-        formType: 'Edit your profile'
+        formType: 'Edit your profile',
     }
 }
 

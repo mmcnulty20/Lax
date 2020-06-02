@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = ({session}) => {
     return {
-        loggedIn: Boolean(session.id),
+        loggedIn: Boolean(session.currentUserId),
     }
 }
 

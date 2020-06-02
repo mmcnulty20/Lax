@@ -3,10 +3,9 @@ import { loginUser } from '../../actions/session_actions';
 import AuthForm from './auth_form';
 
 const mapStateToProps = state => {
-    const user = { username: "", password: "" }
+    const user = { username: "", email: "", password: "" }
     const errors = [].concat(...Object.values(state.errors))
     return {
-        placeholders: false,
         user,
         errors,
         formType: 'Sign In'
