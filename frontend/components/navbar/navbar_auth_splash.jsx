@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default props => (
     <div className={props.location === "/welcome" ? "splash-header" : "auth-header"}>
         <figure id="logo-button">
-            <Link to="/welcome">LAX</Link>
+            <Link to="/welcome">
+                <FontAwesomeIcon icon="umbrella-beach" flip="horizontal"/> LAX</Link>
         </figure>
         <button className="hamburger">
             <FontAwesomeIcon icon="bars" />

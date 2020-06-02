@@ -19,3 +19,6 @@ Default text:
     Password
 
     display name possibility on edit, will deal with later
+
+1085px+ -> Normal,
+less -> hamburger, flex items stacked

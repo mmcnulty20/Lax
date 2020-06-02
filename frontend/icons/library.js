@@ -1,5 +1,11 @@
-
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars,
+        faComments,
+        faScroll,
+        faCouch,
+        faUmbrellaBeach } from '@fortawesome/free-solid-svg-icons'
+import {
+    fab,
+  } from "@fortawesome/free-brands-svg-icons";
 
-export default library.add(faBars)
+export default library.add(fab, faBars, faComments, faScroll, faCouch, faUmbrellaBeach)
