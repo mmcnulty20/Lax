@@ -9,7 +9,7 @@ import SplashFooter from "./splash_footer";
 class Splash extends Component {
     render(){
         return(
-            <div>
+            <div className="splash">
                 <SplashIntro />
                 <SplashBreakdown />
                 {/* <SplashContent /> */}

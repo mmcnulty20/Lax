@@ -22,3 +22,7 @@ Default text:
 
 1085px+ -> Normal,
 less -> hamburger, flex items stacked
+
+fetch 20 at a time
+
+mailing bonus feature

@@ -1,4 +1,4 @@
-html, body, div, span, iframe,
+html, body, div, span, iframe, svg,
 h1, h2, h3, h4, h5, h6, button,
 p, a, img, strong, main, small, input,
 ol, ul, li, label, form, textarea,
@@ -21,20 +21,20 @@ img {
     display: block;
     width: 100%;
     height: auto;
-  }
-  
-  input[type="password"],
-  input[type="email"],
-  input[type="text"],
-  input[type="submit"],
-  textarea,
-  button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-  
-  button,
-  input[type="submit"] {
-    cursor: pointer;
-  }
+}
+
+input[type="password"],
+input[type="email"],
+input[type="text"],
+input[type="submit"],
+textarea,
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}

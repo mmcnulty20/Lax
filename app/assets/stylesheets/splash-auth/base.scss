@@ -1,3 +1,47 @@
 body {
     background: $background;
 }
+
+.btn-purple {
+    background: $dark-blue;
+    color: white;
+}
+
+.btn-white {
+    border: 1px solid $dark-blue;
+    color: $dark-blue;
+}
+
+
+.splash {
+    font-size: 14px;
+    button {
+        height: 57px;
+        padding: 0 40px 0 40px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    font-family: $splash-sans-serif;
+}
+
+@mixin splash-navbar {
+    font-family: $splash-sans-serif;
+    #logo-button {
+        margin-top: 40px;
+        font-weight: 600;
+        font-size: 29px;
+        a svg *{
+            fill: url(#UmbrellaGradient)
+        }
+    }
+}
+
+.splash-header {
+    @include splash-navbar();
+}
+
+.auth-header {
+    @include splash-navbar();
+}

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 class SplashBreakdown extends Component {
     render(){
         return(
-            <section className="splash-vid">
+            <section className="splash-breakdown">
                 <h1>Break away from work</h1>
                 <p>Communicate seamlessly with groups of friends through channels for specific purposes</p>
                 {/* <figure className="temp-vid"></figure>*/}
