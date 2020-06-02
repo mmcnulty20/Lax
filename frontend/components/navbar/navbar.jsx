@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import NavBarItemContainer from "./navbar_item_container";
+import { Route, Switch } from "react-router-dom";
+import { AuthRoute, ProtectedRoute } from "../../utils/route_utils";
+import ExternalNavBar from "./navbar_auth_splash";
 
 class NavBar extends Component {
     render(){
         return(
             <nav>
-                <h2>NavBar</h2>
-                <NavBarItemContainer />
+                <Switch>
+                    <Route path={["/welcome","/login", "/signup"]} render={props => <ExternalNavBar {...this.props} />} />
+                </Switch>                   
             </nav>
         )
     }
