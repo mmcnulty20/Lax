@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import configureStore from "./store/store";
 import library from "./icons/library"
 import Root from "./components/root";
+// import patterns from "./icons/svg_patterns";
 
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById("root");

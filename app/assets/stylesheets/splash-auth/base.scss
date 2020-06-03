@@ -33,15 +33,29 @@ body {
         font-weight: 600;
         font-size: 29px;
         a svg *{
-            fill: url(#UmbrellaGradient)
+            fill: url(#logo-colors);
         }
     }
+    @include flex-row();
+    justify-content: space-between;
+}
+
+@mixin flex-row(){
+    display: flex;
+    flex-direction: row;
 }
 
 .splash-header {
     @include splash-navbar();
+    border-bottom: 1px solid black;
+    
 }
 
 .auth-header {
     @include splash-navbar();
+}
+
+#logo-bg {
+    height: 0;
+    width: 0;
 }
