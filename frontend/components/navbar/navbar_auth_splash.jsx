@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import logoUrl from '../../../app/assets/images/patterns/logo.svg'
-
+import LaunchButton from "./launch_button";
 
 export default props => (
     <div className={props.location === "/welcome" ? "splash-header" : "auth-header"}>
@@ -29,14 +29,7 @@ export default props => (
             </ul>
             {props.loggedIn ? (
                 <div className="nav-btns">
-                    <button onClick={e => {
-                        e.preventDefault();
-                        props.logout()}}>
-                            Sign Out
-                    </button><br/>
-                    <button>
-                        Lauch Lax
-                    </button>
+                    <LaunchButton logout={props.logout} />
                 </div>
                 ) : (
                 <div className="nav-btns">
