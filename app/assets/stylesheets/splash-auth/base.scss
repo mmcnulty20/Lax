@@ -224,8 +224,12 @@ header {
                 letter-spacing: 0.4px;
                 ul {
                     @include flex(row);
-                    &:last-of-type{
+                    svg {
                         font-size: 20px;
+                        vertical-align: middle;
+                    }
+                    &:first-of-type svg {
+                        color: $lightest-text;
                     }
                     li {
                         margin-right: 16px;
