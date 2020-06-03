@@ -54,7 +54,7 @@ class SplashFooter extends Component {
                             <li>Status</li>
                             <li>Privacy & Terms</li>
                             <li>Contact Us</li>
-                            <li>Change Region v</li>
+                            <li><FontAwesomeIcon icon="globe" /> Change Region <FontAwesomeIcon icon="chevron-down"/></li>
                         </ul>
                         <ul>
                             <li>

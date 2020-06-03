@@ -55,18 +55,21 @@ header {
     }
     .splash-intro {
         @include flex(row);
+        align-items: unset;
         height: 515px;
         width: 100%;
         font-size: 17px;
         font-weight: 500;
         padding-bottom: 80px;
         .intro-text {
+            align-self: center;
             height: 388px;
             margin: 25.5px 0 25.5px 0;
             p:first-of-type {
                 font-size: 14px;
                 font-weight: 600;
                 margin-bottom: 13px;
+                letter-spacing: 0.5px;
             }
             p:last-of-type {
                 margin-bottom: 30px;
@@ -88,15 +91,50 @@ header {
             background: #fffaf0;
         }
     }
-    .splash-breakdown {
-        @include flex(column);
-        height: 490px;
-        margin-top: 28px;
-        h1{
-            letter-spacing: -0.2px;
-        }
-        ul {
-            @include flex(row);
+    .splash-breakdown-underline {
+        @include fullWidthSubComponent();
+        border-bottom: 1px solid $dark-tan;
+        .splash-breakdown {
+            margin: 33px auto 0 auto;
+            @include flex(column,center,flex-start);
+            height: 490px;
+            font-size: 16px;
+            font-weight: 500;
+            width: 1230px;
+            padding-bottom: 24px;
+            h1{
+                margin-bottom: auto;
+                font-size: 45px;
+                letter-spacing: -0.5px;
+                margin-bottom: 15px;
+            }
+            ul {
+                margin-top: auto;
+                height: 286px;
+                @include flex(row, center, space-between);
+                width: 100%;
+                li {
+                    width: 390px;
+                    height: 286px;
+                    padding: 48px 0;
+                    font-size: 15px;
+                    @include flex(column, flex-start, space-between);
+                    svg:first-of-type {
+                        font-size: 48px;
+                    }
+                    h3 {
+                        font-size: 16px;
+                        height: 26px;
+                        font-weight: 600;
+                    }
+                    p {
+                        line-height: 1.75em;
+                    }
+                    &:first-of-type svg {
+                        font-size: 55px;
+                    }
+                }
+            }
         }
     }
     .splash-contact {
@@ -112,25 +150,34 @@ header {
         }
         button {
             font-size: 150px;
-
+            color: $dark-blue;
         }
     }
-    .splash-lower-btns {
+    .splash-lower-btns-bg {
         color: $background;
-        @include flex(column);
-        align-items: center;
-        justify-content: center;
-        height: 370px;
         @include fullWidthSubComponent();
+        height: 370px;
         background: $dark-blue;
-        .btn-white{
-            border-color: $background;
+        @include flex(column);
+        .splash-lower-btns {
+            @include flex(column);
+            height: 148px;
+            h1 {
+                margin-bottom: 21px;
+                position: relative;
+                bottom: 10px;
+            }
+            .btn-white{
+                border-color: $background;
+                margin-right: 8px;
+            }
         }
     }
 
     .splash-footer {
         font-size: 12px;
         .footer-lists {
+            margin: 80px 0;
             height: 400px;
             @include flex(row);
             align-items: flex-start;
@@ -142,8 +189,23 @@ header {
             nav {
                 @include flex(row);
                 ul {
+                    font-size: 13px;
                     width: 190px;
-                    height: 175px;
+                    height: 407px;
+                    margin-left: 16px;
+                    padding-bottom: 16px;
+                    // font-weight: 500;
+                    li {
+                        color: $lightest-text;
+                        padding: 9px;
+                        letter-spacing: 0.5px;
+                        width: 100%;
+                    }
+                    li:first-of-type {
+                        font-weight: 600;
+                        letter-spacing: 0.8px;
+                        color: $lighter-text;
+                    }
                 }
             }
         }
@@ -157,10 +219,16 @@ header {
                 @include flex(row);
                 align-items: center;
                 justify-content: space-between;
+                font-weight: 600;
+                color: $lighter-text;
+                letter-spacing: 0.4px;
                 ul {
                     @include flex(row);
                     &:last-of-type{
                         font-size: 20px;
+                    }
+                    li {
+                        margin-right: 16px;
                     }
                 }
             }

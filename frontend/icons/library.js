@@ -3,9 +3,11 @@ import { faBars,
         faComments,
         faScroll,
         faCouch,
-        faUmbrellaBeach } from '@fortawesome/free-solid-svg-icons'
+        faUmbrellaBeach,
+        faGlobe,
+        faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import {
     fab,
   } from "@fortawesome/free-brands-svg-icons";
 
-export default library.add(fab, faBars, faComments, faScroll, faCouch, faUmbrellaBeach)
+export default library.add(fab, faBars, faComments, faScroll, faCouch, faUmbrellaBeach, faGlobe, faChevronDown)

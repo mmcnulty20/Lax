@@ -1,7 +1,8 @@
-@mixin flex($dir){
+@mixin flex($dir, $align: center, $justify: center){
     display: flex;
     flex-direction: $dir;
-    align-items: center;
+    align-items: $align;
+    justify-content: $justify;
 }
 
 @mixin splash-navbar {
@@ -13,7 +14,7 @@
     height: 69px;
     letter-spacing: 1px;
     font-weight: 500;
-
+    z-index: 1;
     .nav-btns {
         padding: 16px;
         a:first-of-type {
@@ -77,5 +78,6 @@
     width: 100vw;
     margin-left: -50vw;
     position: relative;
+    z-index: -1;
     left: 50%;
 }
