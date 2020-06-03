@@ -8,16 +8,16 @@ class SplashContact extends Component {
             <section className="splash-contact">
                 <h1>Contact Me</h1>
                 <nav>
-                    <Link to="https://github.com/mmcnulty20/">
+                    <a href="https://github.com/mmcnulty20/">
                         <button>
                             <FontAwesomeIcon icon={["fab", "github"]} />
                         </button>
-                    </Link>
-                    <Link to="#">
+                    </a>
+                    <a href="#">
                         <button>
                             <FontAwesomeIcon icon={["fab", "linkedin"]} />
                         </button>
-                    </Link>
+                    </a>
                 </nav>
             </section>
         )

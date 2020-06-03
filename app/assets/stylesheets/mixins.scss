@@ -20,6 +20,7 @@
             margin-right: 16.5px;
         }
         button {
+            font-size: 13.5px;
             width: 134px;
             height: 42px;
             @include flex(row);
@@ -29,24 +30,19 @@
 
     #logo-button {
         font-weight: 600;
-        font-size: 29px;
+        @include logoLink();
         height: 100%;
-        // width: 125px;
         a {
-            height: 100%;
             width: 125px;
-            @include flex(row);
             span {
                 margin-left: 5px;
-            }
-            svg *{
-                fill: url(#logo-colors);
             }
         }
     }
     .main-header-nav {
         width: 100%;
         @include flex(row);
+        height: 69px;
         justify-content: space-between;
         & * {
             @include flex(row);
@@ -57,11 +53,29 @@
     }
 }
 
-@mixin button ($color1,$color2) {
-    border: 1px solid $dark-blue;
-    background: $color2;
-    color: $color1;
+@mixin button ($font,$background,$outline: $dark-blue) {
+    border: 1px solid $outline;
+    background: $background;
+    color: $font;
     border-radius: 4px;
     font-weight: 600;
     letter-spacing: 2px;
+}
+
+@mixin logoLink {
+    font-size: 29px;
+    a {
+        height: 100%;
+        @include flex(row);
+        svg *{
+            fill: url(#logo-colors);
+        }
+    }
+}
+
+@mixin fullWidthSubComponent {
+    width: 100vw;
+    margin-left: -50vw;
+    position: relative;
+    left: 50%;
 }

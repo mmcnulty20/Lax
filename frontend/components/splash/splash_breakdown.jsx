@@ -7,7 +7,6 @@ class SplashBreakdown extends Component {
             <section className="splash-breakdown">
                 <h1>Break away from work</h1>
                 <p>Communicate seamlessly with groups of friends through channels for specific purposes</p>
-                {/* <figure className="temp-vid"></figure>*/}
                 <ul>
                     <li>
                         <FontAwesomeIcon icon="comments" />

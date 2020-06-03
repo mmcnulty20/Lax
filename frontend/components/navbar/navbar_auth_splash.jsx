@@ -18,7 +18,7 @@ export default props => (
                         </pattern>
                     </defs>
                 </svg>
-        <nav class="main-header-nav">
+        <nav className="main-header-nav">
             <ul className="nav-menu-list">
                 <li>
                     <Link to="#">Github</Link>
@@ -40,7 +40,7 @@ export default props => (
                 </div>
                 ) : (
                 <div className="nav-btns">
-                    <Link to="/login">Sign In</Link>
+                    <Link to="/login">Sign in</Link>
                     <br/>
                     <Link to="/signup">
                         <button className="btn-purple">

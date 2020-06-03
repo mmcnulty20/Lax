@@ -26,11 +26,15 @@ header {
 
 
 .btn-purple {
-    @include button(white, $dark-blue)
+    @include button($background, $dark-blue)
 }
 
 .btn-white {
     @include button($dark-blue, $background)
+}
+
+.btn-transp {
+    @include button($background,transparent,$background)
 }
 
 
@@ -40,9 +44,9 @@ header {
     margin: 160px auto 0 auto;
     width: 1230px;
     h1 {
-        font-size: 50px;
+        font-size: 46px;
         font-weight: 600;
-        line-height: 1.3em;
+        letter-spacing: 0.7px;
     }
     button {
         font-size: 14px;
@@ -51,8 +55,32 @@ header {
     }
     .splash-intro {
         @include flex(row);
-        height: 435px;
+        height: 515px;
         width: 100%;
+        font-size: 17px;
+        font-weight: 500;
+        padding-bottom: 80px;
+        .intro-text {
+            height: 388px;
+            margin: 25.5px 0 25.5px 0;
+            p:first-of-type {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 13px;
+            }
+            p:last-of-type {
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                margin-bottom: 12px;
+                line-height: 1.3em;
+            }
+
+            a {
+                margin-right: 8px;
+            }
+        }
         .intro-img div {
             margin-left: 64px;
             width: 675px;
@@ -62,8 +90,14 @@ header {
     }
     .splash-breakdown {
         @include flex(column);
-        justify-content: center;
         height: 490px;
+        margin-top: 28px;
+        h1{
+            letter-spacing: -0.2px;
+        }
+        ul {
+            @include flex(row);
+        }
     }
     .splash-contact {
         height: 705px;
@@ -81,16 +115,56 @@ header {
 
         }
     }
-    .splash-footer {
+    .splash-lower-btns {
+        color: $background;
         @include flex(column);
         align-items: center;
         justify-content: center;
         height: 370px;
-        width: 100vw;
-        margin-left: -50vw;
-        position: relative;
-        left: 50%;
+        @include fullWidthSubComponent();
         background: $dark-blue;
+        .btn-white{
+            border-color: $background;
+        }
+    }
+
+    .splash-footer {
+        font-size: 12px;
+        .footer-lists {
+            height: 400px;
+            @include flex(row);
+            align-items: flex-start;
+            justify-content: space-between;
+            #logo-button {
+                @include logoLink();
+                font-size: 54px;
+            }
+            nav {
+                @include flex(row);
+                ul {
+                    width: 190px;
+                    height: 175px;
+                }
+            }
+        }
+        .footer-nav {
+            @include fullWidthSubComponent();
+            background: $dark-tan;
+            nav {
+                height: 84px;
+                margin: 0 auto;
+                width: 1230px;
+                @include flex(row);
+                align-items: center;
+                justify-content: space-between;
+                ul {
+                    @include flex(row);
+                    &:last-of-type{
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
     }
 
 }
