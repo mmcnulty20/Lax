@@ -8,25 +8,27 @@ export default props => (
     <div className={props.location === "/welcome" ? "splash-header" : "auth-header"}>
         <figure id="logo-button">
             <Link to="/welcome">
-                <svg id="logo-bg">
+                <FontAwesomeIcon id="logo-img" icon="umbrella-beach" flip="horizontal"/><span>lax</span></Link>
+        </figure>
+        <svg id="logo-bg">
                     <defs>
-                        <pattern id="logo-colors" patternUnits="userSpaceOnUse" width="780" height="780"
-                            patternTransform="scale(-1, 1) translate(90, -120)">
-                            <image href={logoUrl}  x="0" y="0" width="780" height="780" />
+                        <pattern id="logo-colors"  patternContentUnits="objectBoundingBox" width="1" height="1" 
+                                patternTransform="scale(-1.2,1.2) translate(66,-58)">
+                            <image href={logoUrl}  x="0" y="0" width="1" height="1" />
                         </pattern>
                     </defs>
                 </svg>
-                <FontAwesomeIcon id="logo-img" icon="umbrella-beach" flip="horizontal"/> lax</Link>
-        </figure>
-        <ul className="nav-menu-list">
-            <li>
-                <Link to="#">Github</Link>
-            </li>
-            <li>
-                <Link to="#">LinkedIn</Link>
-            </li>
-            {props.loggedIn ? (
+        <nav class="main-header-nav">
+            <ul className="nav-menu-list">
                 <li>
+                    <Link to="#">Github</Link>
+                </li>
+                <li>
+                    <Link to="#">LinkedIn</Link>
+                </li>
+            </ul>
+            {props.loggedIn ? (
+                <div className="nav-btns">
                     <button onClick={e => {
                         e.preventDefault();
                         props.logout()}}>
@@ -35,18 +37,18 @@ export default props => (
                     <button>
                         Lauch Lax
                     </button>
-                </li>
-            ) : (
-                <li>
+                </div>
+                ) : (
+                <div className="nav-btns">
                     <Link to="/login">Sign In</Link>
                     <br/>
                     <Link to="/signup">
-                        <button>
-                            Sign Up
+                        <button className="btn-purple">
+                            GET STARTED
                         </button>
                     </Link>
-                </li>
+                </div>
             )}
-        </ul>
+            </nav>
     </div>
 )

@@ -1,0 +1,63 @@
+@mixin flex-row(){
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@mixin splash-navbar {
+    font-family: $splash-sans-serif;
+    font-size: 14px;
+    margin: 0 auto;
+    @include flex-row();
+    width: 1230px;
+    height: 69px;
+    .nav-btns {
+        padding: 16px;
+        a:first-of-type {
+            padding: 5px;
+            margin-right: 14px;
+        }
+        button {
+            font-size: 12px;
+            padding: 10px 13.25px 10px 13.25px;
+        }
+    }
+
+    #logo-button {
+        font-weight: 600;
+        font-size: 29px;
+        height: 100%;
+        // width: 125px;
+        a {
+            height: 100%;
+            width: 125px;
+            @include flex-row();
+            span {
+                margin-left: 5px;
+            }
+            svg *{
+                fill: url(#logo-colors);
+            }
+        }
+    }
+    .main-header-nav {
+        width: 100%;
+        @include flex-row();
+        justify-content: space-between;
+        & * {
+            @include flex-row();
+        }
+        ul li {
+            padding: 16px;
+        }
+    }
+}
+
+@mixin button ($color1,$color2) {
+    border: 1px solid $dark-blue;
+    background: $color2;
+    color: $color1;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}

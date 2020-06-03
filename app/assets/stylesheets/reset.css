@@ -17,6 +17,10 @@ footer, header, figcaption, nav, section {
     vertical-align: inherit;
 }
 
+ul, ol {
+    list-style: none;
+}
+
 img {
     display: block;
     width: 100%;
