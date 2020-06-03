@@ -1,6 +1,6 @@
-@mixin flex-row(){
+@mixin flex($dir){
     display: flex;
-    flex-direction: row;
+    flex-direction: $dir;
     align-items: center;
 }
 
@@ -8,18 +8,22 @@
     font-family: $splash-sans-serif;
     font-size: 14px;
     margin: 0 auto;
-    @include flex-row();
+    @include flex(row);
     width: 1230px;
     height: 69px;
+    letter-spacing: 1px;
+    font-weight: 500;
+
     .nav-btns {
         padding: 16px;
         a:first-of-type {
-            padding: 5px;
-            margin-right: 14px;
+            margin-right: 16.5px;
         }
         button {
-            font-size: 12px;
-            padding: 10px 13.25px 10px 13.25px;
+            width: 134px;
+            height: 42px;
+            @include flex(row);
+            justify-content: center;
         }
     }
 
@@ -31,7 +35,7 @@
         a {
             height: 100%;
             width: 125px;
-            @include flex-row();
+            @include flex(row);
             span {
                 margin-left: 5px;
             }
@@ -42,10 +46,10 @@
     }
     .main-header-nav {
         width: 100%;
-        @include flex-row();
+        @include flex(row);
         justify-content: space-between;
         & * {
-            @include flex-row();
+            @include flex(row);
         }
         ul li {
             padding: 16px;

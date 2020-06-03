@@ -6,6 +6,9 @@ body {
 header {
     width: 100%;
     border-bottom: 1px solid $dark-tan;
+    position: fixed;
+    top: 0;
+    background: $background;
 }
 
 .splash-header {
@@ -32,11 +35,63 @@ header {
 
 
 .splash {
-    font-size: 14px;
+    font-size: 18px;
     font-family: $splash-sans-serif;
+    margin: 160px auto 0 auto;
+    width: 1230px;
+    h1 {
+        font-size: 50px;
+        font-weight: 600;
+        line-height: 1.3em;
+    }
     button {
+        font-size: 14px;
         height: 57px;
         padding: 0 40px 0 40px;
     }
+    .splash-intro {
+        @include flex(row);
+        height: 435px;
+        width: 100%;
+        .intro-img div {
+            margin-left: 64px;
+            width: 675px;
+            height: 100%;
+            background: #fffaf0;
+        }
+    }
+    .splash-breakdown {
+        @include flex(column);
+        justify-content: center;
+        height: 490px;
+    }
+    .splash-contact {
+        height: 705px;
+        @include flex(column);
+        align-items: center;
+        justify-content: center;
+        line-height: 0.8em;
+        nav {
+            @include flex(row);
+            justify-content: space-around;
+            width: 75%;
+        }
+        button {
+            font-size: 150px;
+
+        }
+    }
+    .splash-footer {
+        @include flex(column);
+        align-items: center;
+        justify-content: center;
+        height: 370px;
+        width: 100vw;
+        margin-left: -50vw;
+        position: relative;
+        left: 50%;
+        background: $dark-blue;
+    }
+
 }
 
