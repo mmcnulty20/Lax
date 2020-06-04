@@ -6,6 +6,14 @@ export const REMOVE_USER = "REMOVE_USER";
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
+export const PURGE_ERRORS = "PURGE_ERRORS"
+
+
+export const purgeErrors = () => (
+    {
+        type: PURGE_ERRORS   
+    }
+)
 
 const receiveAllUsers = users => (
     {
@@ -109,8 +117,5 @@ const demo = {
     password: "nobodyneedstoknowthisonelol"
 }
 
-export const loginDemo = () => {
-    return dispatch => SessionAPIUtil.loginUser(demo).then(res => {
-        return dispatch(receiveCurrentUser(res))
-    })
-}
+export const loginDemo = () => loginUser(demo)
+

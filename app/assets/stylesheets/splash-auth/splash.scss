@@ -23,15 +23,27 @@ header {
 
 
 .btn-blue {
-    @include button($background, $dark-blue)
+    @include button($background, $dark-blue);
+    transition: background-color 0.1s;
+    &:hover {
+        background-color: $hover-dark-blue;
+    }
 }
 
 .btn-white {
-    @include button($dark-blue, $background)
+    @include button($dark-blue, $background);
+    transition: box-shadow 0.3s;
+    &:hover {
+        box-shadow: inset 0 0 0 1px rgba($color: $dark-blue, $alpha: 1.0);
+    }
 }
 
 .btn-transp {
-    @include button($background,transparent,$background)
+    @include button($background,transparent,$background);
+    transition: box-shadow 0.3s;
+    &:hover {
+        box-shadow: inset 0 0 0 1px rgba($color: $background, $alpha: 1.0);
+    }
 }
 
 .splash-header {
@@ -80,7 +92,7 @@ header {
                             cursor: pointer;
                             color: $link-blue;
                             .fa-arrow-right {
-                                right: 28px
+                                right: 34px
                             }
 
                         }
@@ -96,7 +108,7 @@ header {
                                 border-radius: 4px;
                                 height: 44px;
                                 width: 44px;
-                                background-color: white;
+                                background-color: $pale-blue;
                                 margin-right: 16px;
                                 font-size: 40px;
                                 transform: scale(-1, 1);
@@ -109,15 +121,16 @@ header {
                         .fa-arrow-right {
                             transform: scale(1.5, .8);
                             position: absolute;
-                            right: 35px;
+                            right: 40px;
                             color: $link-blue;
-                            transition: right ease 0.5s;
+                            transition: right 0.5s;
                         }
                     }
                 }
                 .links {
                     div:hover {
                         cursor: pointer;
+                        text-decoration: underline;
                     }
                     height: 105px;
                     width: 100%;

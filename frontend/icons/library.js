@@ -7,7 +7,8 @@ import { faBars,
         faGlobe,
         faChevronDown,
         faChevronUp,
-        faArrowRight } from '@fortawesome/free-solid-svg-icons'
+        faArrowRight,
+        faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 import {
     fab,
   } from "@fortawesome/free-brands-svg-icons";
@@ -15,4 +16,5 @@ import {
 export default library.add(
     fab, faBars, faComments, faChevronUp,
     faScroll, faCouch, faUmbrellaBeach,
-    faGlobe, faChevronDown, faArrowRight)
+    faGlobe, faChevronDown, faArrowRight,
+    faExclamationTriangle)

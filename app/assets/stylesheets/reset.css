@@ -17,6 +17,11 @@ footer, header, figcaption, nav, section {
     vertical-align: inherit;
 }
 
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
 ul, ol {
     list-style: none;
 }
@@ -43,7 +48,12 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-#root {
-    /* z-index: -5; */
-    height: 100%;
+body > #root {
+    /* height: 100%; */
+    width: 100%;
+    position: relative;
+    min-height: 100%;
+    /* width: 100vw; */
+    /* display: flex;
+    flex-direction: column; */
 }

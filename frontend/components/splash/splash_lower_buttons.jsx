@@ -9,7 +9,9 @@ class SplashLowerButtons extends Component {
                     <h1>Choose the better way to play</h1>
                     <nav>
                         <Link to="/signup"><button className="btn-white">TRY LAX</button></Link>
-                        <Link to="#"><button className="btn-transp">SEE THE DEMO</button></Link>
+                        <Link to="#"><button onClick={e => {
+                            e.preventDefault();
+                            this.props.loginDemo()}} className="btn-transp">SEE THE DEMO</button></Link>
                     </nav>
                 </section>
             </section>

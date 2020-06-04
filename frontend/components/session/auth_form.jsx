@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import AuthFooter from "./auth_footer";
 
 class AuthForm extends Component {
+    componentWillUnmount(){
+        if (this.props.errors.length > 0) {
+            this.props.purgeErrors();
+        }
+    }
+
     constructor(props) {
         super(props);
         this.state = props.user;
@@ -61,15 +69,16 @@ class AuthForm extends Component {
     }
 
     render(){
-        const errors = this.props.errors.map((err,i) => <li key={i}>{err}</li> )
+        const errors = this.props.errors.map((err,i) => <li key={i}><FontAwesomeIcon icon="exclamation-triangle"/><p>{err}</p></li> )
         return (
+            <>
             <div className="auth-page">
-                <section className={ this.class }>
-                    {this.props.errors.length > 0 ? (
+                {this.props.errors.length > 0 ? (
                         <ul className="errors">
                             {errors}
                         </ul>
                     ) : null }
+                <section className={ this.class }>
                     <section className="auth-form">
                         {this.headerText}
                         <form onSubmit={this.handleSubmit}>
@@ -110,10 +119,14 @@ class AuthForm extends Component {
                         </form>
                             
                     </section>
-                    <button className="demo">Log in as a demo user</button>
+                    <button onClick={e => this.props.loginDemo()} className="demo">Log in as a demo user</button>
                 </section>
                     {this.redirectText}
             </div>
+            <div className="auth-footer-container">
+                <AuthFooter className=""/>
+            </div>
+            </>
             
         )
     }

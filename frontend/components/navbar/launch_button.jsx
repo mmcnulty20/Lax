@@ -12,16 +12,10 @@ class LaunchButton extends Component {
         this.handleLeave = this.handleLeave.bind(this);
     }
     handleClick(e) {
-        console.log(this.state)
         this.setState({dropped: true});
-        console.log("revealed!")
-        console.log(this.state)
     }
     handleLeave(e) {
-        console.log(this.state)
         this.setState({dropped: false});
-        console.log("hidden!")
-        console.log(this.state)
     }
 
 

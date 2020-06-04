@@ -3,6 +3,7 @@ import { Route,
         Redirect,
         withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { purgeErrors } from "./function_helpers";
 
 const mapStateToProps = ({session}) => {
     return {
@@ -10,10 +11,11 @@ const mapStateToProps = ({session}) => {
     }
 }
 
-const Auth = ({path, loggedIn, exact, component: Component}) => {
+const Auth = ({path, onLeave, loggedIn, exact, component: Component}) => {
     return (
         < Route 
             path={path}
+            onLeave={onLeave}
             exact={exact}
             render={props => 
                 loggedIn ? <Redirect to="/welcome" />: <Component {...props} />

@@ -4,16 +4,15 @@ import SplashBreakdown from "./splash_breakdown";
 import SplashContact from "./splash_contact";
 import SplashFooter from "./splash_footer";
 import SplashLowerButtons from "./splash_lower_buttons";
-import { loginDemo } from "../../actions/session_actions";
 
 class Splash extends Component {
     render(){
         return(
             <div className="splash">
-                <SplashIntro loginDemo={loginDemo}/>
+                <SplashIntro loginDemo={this.props.loginDemo}/>
                 <SplashBreakdown />
                 <SplashContact />
-                <SplashLowerButtons loginDemo={loginDemo}/>
+                <SplashLowerButtons loginDemo={this.props.loginDemo}/>
                 <SplashFooter />
             </div>
         )
