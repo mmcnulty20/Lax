@@ -1,0 +1,408 @@
+body {
+    background: $background;
+    color: $text;
+}
+
+input {
+    background: white;
+}
+
+header {
+    width: 100%;
+    border-bottom: 1px solid $dark-tan;
+    position: fixed;
+    top: 0;
+    background: $background;
+    z-index: 6;
+}
+
+#logo-bg {
+    height: 0;
+    width: 0;
+}
+
+
+.btn-blue {
+    @include button($background, $dark-blue);
+    transition: background-color 0.1s;
+    &:hover {
+        background-color: $hover-dark-blue;
+    }
+}
+
+.btn-white {
+    @include button($dark-blue, $background);
+    transition: box-shadow 0.3s;
+    &:hover {
+        box-shadow: inset 0 0 0 1px rgba($color: $dark-blue, $alpha: 1.0);
+    }
+}
+
+.btn-transp {
+    @include button($background,transparent,$background);
+    transition: box-shadow 0.3s;
+    &:hover {
+        box-shadow: inset 0 0 0 1px rgba($color: $background, $alpha: 1.0);
+    }
+}
+
+.splash-header {
+    @include splash-navbar();
+    .nav-btns {
+        &.logged-in{
+            padding: unset;
+        }
+        .launch-btn {
+            height: unset;
+            width: unset;
+            padding: 10px 16px 10px 16px;
+            position: relative;
+            .button-text {
+                svg {
+                    margin-left: 7px;
+                }
+            }
+            .dropdown {
+                &:hover {
+                    cursor: default;
+                }
+                height: 246px;
+                width: 380px;
+                position: absolute;
+                display: none;
+                background: $background;
+                border-top: 1px solid $dark-tan;
+                top: 69px;
+                right: 0;
+                z-index: 1;
+                padding: 8px 11px 0 16px;
+                box-shadow: 0 8px 32px rgba($color: $text, $alpha: 0.2);
+                &.reveal {
+                    display: block;
+                }
+                user-select: none;
+                .workspaces {
+                    height: 132px;
+                    width: 100%;
+                    border-bottom: 1px solid $dark-tan;
+                    box-shadow: inset 0 -10px 10px -10px rgba($color: $text, $alpha: 0.1);
+                    padding-right: 31px;
+                    li {
+                        &:hover {
+                            cursor: pointer;
+                            color: $link-blue;
+                            .fa-arrow-right {
+                                right: 34px
+                            }
+
+                        }
+                        height: 62px;
+                        color: $text;
+                        padding: 8px;
+                        width: 100%;
+                        font-size: 17px;
+                        @include flex(row, center, space-between);
+                        div {
+                            figure {
+                                border: 1px solid $dark-tan;
+                                border-radius: 4px;
+                                height: 44px;
+                                width: 44px;
+                                background-color: $pale-blue;
+                                margin-right: 16px;
+                                font-size: 40px;
+                                transform: scale(-1, 1);
+                                overflow: hidden;
+                                #logo-img * {
+                                    fill: url(#logo-colors);
+                                }
+                            }
+                        }
+                        .fa-arrow-right {
+                            transform: scale(1.5, .8);
+                            position: absolute;
+                            right: 40px;
+                            color: $link-blue;
+                            transition: right 0.5s;
+                        }
+                    }
+                }
+                .links {
+                    div:hover {
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
+                    height: 105px;
+                    width: 100%;
+                    color: $link-blue;
+                    font-size: 14px;
+                    letter-spacing: -0.5px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }    
+}
+
+.auth-header {
+    @include splash-navbar();
+    width: 100%;
+    box-shadow: 0 2px 1px rgba($color: $text, $alpha: 0.2);
+    #logo-button {
+        margin: 20px;
+    }
+    .main-header-nav {
+        justify-content: flex-end;
+        color: $lighter-grey-tan;
+        .nav-btns {
+            padding: unset;
+            width: unset;
+            padding-right: 20px;
+            a {
+                margin-right: unset;
+            }
+        }
+        .nav-menu-list {
+            li {
+                padding: 6px 7px 5px;
+            }
+        }
+        li, .signup {
+            margin-left: 9px; 
+            height: unset;
+            width: unset;
+            padding: 6px 7px 5px;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+            vertical-align: middle;
+            &:hover {
+                background: $dark-tan;
+                width: inherit;
+                height: inherit;
+                color: $light-grey-tan;
+                text-shadow: 1px 0 0 rgba($color: $light-grey-tan, $alpha: 0.2);
+            }
+        }
+        .signin {
+            border: 2px solid $light-grey-tan;
+            border-radius: 4px;
+            font-size: 14.5px;
+            height: 38px;
+            width: 75px;
+            margin-left: 17px;
+            font-weight: 600;
+            &:hover {
+                color: $light-grey-tan;
+                border-color: $lightest-text;
+            }
+        }
+    }
+}
+
+
+
+
+.splash {
+    font-size: 18px;
+    font-family: $splash-sans-serif;
+    margin: 160px auto 0 auto;
+    width: 1230px;
+    h1 {
+        font-size: 46px;
+        font-weight: 600;
+        letter-spacing: 0.7px;
+    }
+    button {
+        font-size: 14px;
+        height: 57px;
+        padding: 0 40px 0 40px;
+    }
+    .splash-intro {
+        @include flex(row);
+        align-items: unset;
+        height: 515px;
+        width: 100%;
+        font-size: 17px;
+        font-weight: 500;
+        padding-bottom: 80px;
+        .intro-text {
+            align-self: center;
+            height: 388px;
+            margin: 25.5px 0 25.5px 0;
+            p:first-of-type {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 13px;
+                letter-spacing: 0.5px;
+            }
+            p:last-of-type {
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                margin-bottom: 12px;
+                line-height: 1.3em;
+            }
+
+            a {
+                margin-right: 8px;
+            }
+        }
+        .intro-img div {
+            margin-left: 64px;
+            width: 675px;
+            height: 100%;
+            background: #fffaf0;
+        }
+    }
+    .splash-breakdown-underline {
+        @include fullWidthSubComponent();
+        border-bottom: 1px solid $dark-tan;
+        .splash-breakdown {
+            margin: 33px auto 0 auto;
+            @include flex(column,center,flex-start);
+            height: 490px;
+            font-size: 16px;
+            font-weight: 500;
+            width: 1230px;
+            padding-bottom: 24px;
+            h1{
+                margin-bottom: auto;
+                font-size: 45px;
+                letter-spacing: -0.5px;
+                margin-bottom: 15px;
+            }
+            ul {
+                margin-top: auto;
+                height: 286px;
+                @include flex(row, center, space-between);
+                width: 100%;
+                li {
+                    width: 390px;
+                    height: 286px;
+                    padding: 48px 0;
+                    font-size: 15px;
+                    @include flex(column, flex-start, space-between);
+                    svg:first-of-type {
+                        font-size: 48px;
+                    }
+                    h3 {
+                        font-size: 16px;
+                        height: 26px;
+                        font-weight: 600;
+                    }
+                    p {
+                        line-height: 1.75em;
+                    }
+                    &:first-of-type svg {
+                        font-size: 55px;
+                    }
+                }
+            }
+        }
+    }
+    .splash-contact {
+        height: 705px;
+        @include flex(column);
+        align-items: center;
+        justify-content: center;
+        line-height: 0.8em;
+        nav {
+            @include flex(row);
+            justify-content: space-around;
+            width: 75%;
+        }
+        button {
+            font-size: 150px;
+            color: $dark-blue;
+        }
+    }
+    .splash-lower-btns-bg {
+        color: $background;
+        @include fullWidthSubComponent();
+        height: 370px;
+        background: $dark-blue;
+        @include flex(column);
+        .splash-lower-btns {
+            @include flex(column);
+            height: 148px;
+            h1 {
+                margin-bottom: 21px;
+                position: relative;
+                bottom: 10px;
+            }
+            .btn-white{
+                border-color: $background;
+                margin-right: 8px;
+            }
+        }
+    }
+
+    .splash-footer {
+        font-size: 12px;
+        .footer-lists {
+            margin: 80px 0;
+            height: 400px;
+            @include flex(row);
+            align-items: flex-start;
+            justify-content: space-between;
+            #logo-button {
+                @include logoLink();
+                font-size: 54px;
+            }
+            nav {
+                @include flex(row);
+                ul {
+                    font-size: 13px;
+                    width: 190px;
+                    height: 407px;
+                    margin-left: 16px;
+                    padding-bottom: 16px;
+                    // font-weight: 500;
+                    li {
+                        color: $lightest-text;
+                        padding: 9px;
+                        letter-spacing: 0.5px;
+                        width: 100%;
+                    }
+                    li:first-of-type {
+                        font-weight: 600;
+                        letter-spacing: 0.8px;
+                        color: $lighter-text;
+                    }
+                }
+            }
+        }
+        .footer-nav {
+            @include fullWidthSubComponent();
+            background: $dark-tan;
+            nav {
+                height: 84px;
+                margin: 0 auto;
+                width: 1230px;
+                @include flex(row);
+                align-items: center;
+                justify-content: space-between;
+                font-weight: 600;
+                color: $lighter-text;
+                letter-spacing: 0.4px;
+                ul {
+                    @include flex(row);
+                    svg {
+                        font-size: 20px;
+                        vertical-align: middle;
+                    }
+                    &:first-of-type svg {
+                        color: $lightest-text;
+                    }
+                    li {
+                        margin-right: 16px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+

@@ -1,0 +1,183 @@
+.auth-page {
+    @include flex(row);
+    background: $light-tan;
+    border-bottom: 1px solid $dark-tan;
+    font-family: $splash-sans-serif;
+    position: relative;
+    padding-bottom: 183px;
+    // margin-bottom: 100px;
+    width: 100%;
+    @include flex(column,center, flex-start);
+    .auth-form-container {
+        width: 635px;
+        height: 450px;
+        background: $background;
+        margin: 147px 0 32px 0;
+        border: 1px solid $dark-tan;
+        border-radius: 5px;
+        box-shadow: 0 1px 1px -1px rgba($color: $text, $alpha: 1.0);
+        padding: 32px;
+        padding-top: 31px;
+        position: relative;
+        right: 6px;
+        button {
+            @include auth-button();
+            &.demo {
+                margin-left: 97px;
+            }
+        }
+        .auth-form {
+            @include flex(column);
+            h1 {
+                width: 572px;
+                font-size: 44px;
+                font-weight: 600;
+                margin-bottom: 56px;
+            }
+            h2 {
+                font-size: 26px;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+            }
+            h3 {
+                align-self: flex-start;
+                width: 375px;
+                margin: 0 auto 15px auto;
+                font-size: 15px;
+                strong {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+            h4 {
+                font-size:14px;
+                margin: 1px 0 24px;
+                letter-spacing: 0.5px;
+            }
+            form {
+                label span {
+                    display: block;
+                    font-size: 15px;
+                    font-weight: 600;
+                    margin: 20px 0 8px;
+                }
+                input {
+                    display: block;
+                    height: 50px;
+                    width: 375px;
+                    border: 1px solid $lightest-text;
+                    border-radius: 4px;
+                    margin-bottom: 8px;
+                    padding: 12px;
+                    font-size: 17px;
+                }
+                // button {
+                //     @include auth-button();
+                // }
+            }
+        }
+        &.login {
+            .auth-form form label span {
+                margin: unset;
+            }
+        }
+        &.signup {
+            height: 800px;
+            button {
+                margin-top: 32px
+            }
+        }
+    }
+    & > p {
+        font-size: 15px;
+        align-self: center;
+        // padding-bottom: 183px;
+        position: relative;
+        a {
+            color: $link-blue;
+            font-weight: 500;
+            &:hover {
+                color: $link-hover-blue;
+                text-decoration: underline;
+            }
+        }
+    }
+
+}
+
+.errors {
+    position: relative;
+    z-index: 8;
+    font-size: 15px;
+    width: 635px;
+    background: $background;
+    border: 1px solid $dark-tan;
+    border-left: 5px solid rgb(209, 21, 21);
+    border-radius: 4px;
+    li {
+        @include flex(row,center,flex-start);
+        svg {
+            margin-left: 14px;
+            color: rgb(209, 21, 21);
+            font-size: 18px;
+        }
+        p {
+            margin-left: 15px;
+        }
+        height: 49px;
+    }
+    left: -5px;
+    top: 128px;
+}
+.padding {
+    padding-top: auto;
+    background-color: $background;
+    width: 100%;
+}
+
+.auth-footer-container {
+    padding-top: 100px;
+    background: $background;
+.auth-footer {
+    font-family: $splash-sans-serif;
+    height: 50px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin-top: 100px;
+    // flex-shrink: 0;
+    background: $light-tan;
+    div {
+        height: 100%;
+        margin: 0 auto;
+        width: 1014px;
+        padding: 0 24px;
+        @include flex(row,center,space-between);
+        color: $light-grey-tan;
+        & > a {
+            font-size: 25px;
+        }
+        ul {
+            @include flex(row);
+            font-size: 20px;
+            margin-right: 20px;
+            span {
+                font-size: 13px;
+                font-weight: 500;
+                &:hover {
+                    color: $lighter-grey-tan;
+                    cursor: pointer;
+                }
+            }
+            li {
+                &:not(:last-child) {
+                    margin-right: 11px;
+                }
+                &:not(:first-child):hover {
+                    color: $link-blue;
+                }
+            }
+        }
+    }
+}
+}

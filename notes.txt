@@ -10,3 +10,19 @@ Weirdness with login: Multiple ways to log in:
     If you know the workspace url, search that then enter username and password
     If you don't, submit only your email and it'll send you an email to click (doesn't seem to require password)
     
+    How do you do the thing with the weak/strong password?
+
+
+Default text: 
+    name@work-email.com
+    Full Name
+    Password
+
+    display name possibility on edit, will deal with later
+
+1085px+ -> Normal,
+less -> hamburger, flex items stacked
+
+fetch 20 at a time
+
+mailing bonus feature

@@ -1,0 +1,93 @@
+@mixin flex($dir, $align: center, $justify: center){
+    display: flex;
+    flex-direction: $dir;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+@mixin splash-navbar {
+    font-family: $splash-sans-serif;
+    font-size: 14px;
+    margin: 0 auto;
+    @include flex(row);
+    width: 1230px;
+    height: 69px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    .nav-btns {
+        padding: 16px;
+        a:first-of-type {
+            margin-right: 16.5px;
+        }
+        button {
+            font-size: 13.5px;
+            width: 134px;
+            height: 42px;
+            @include flex(row);
+            justify-content: center;
+        }
+    }
+
+    #logo-button {
+        font-weight: 600;
+        @include logoLink();
+        height: 100%;
+        a {
+            width: 125px;
+            span {
+                margin-left: 5px;
+            }
+        }
+    }
+    .main-header-nav {
+        width: 100%;
+        @include flex(row);
+        height: 69px;
+        justify-content: space-between;
+        & * {
+            @include flex(row);
+        }
+        ul li {
+            padding: 16px;
+        }
+    }
+}
+
+@mixin button ($font,$background,$outline: $dark-blue) {
+    border: 1px solid $outline;
+    background: $background;
+    color: $font;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+@mixin logoLink {
+    font-size: 29px;
+    a {
+        height: 100%;
+        @include flex(row);
+        svg *{
+            fill: url(#logo-colors);
+        }
+    }
+}
+
+@mixin fullWidthSubComponent {
+    width: 100vw;
+    margin-left: -50vw;
+    position: relative;
+    left: 50%;
+}
+
+@mixin auth-button {
+    margin-top: 16px;
+    width: 375px;
+    height: 44px;
+    border-radius: 4px;
+    background: $dark-blue;
+    color: $background;
+    text-align: center;
+    font-size: 16.5px;
+    font-weight: 700;
+}
