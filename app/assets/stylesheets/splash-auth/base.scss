@@ -13,13 +13,43 @@ header {
     position: fixed;
     top: 0;
     background: $background;
+    z-index: 6;
+}
+
+#logo-bg {
+    height: 0;
+    width: 0;
+}
+
+
+.btn-blue {
+    @include button($background, $dark-blue)
+}
+
+.btn-white {
+    @include button($dark-blue, $background)
+}
+
+.btn-transp {
+    @include button($background,transparent,$background)
 }
 
 .splash-header {
     @include splash-navbar();
     .nav-btns {
+        &.logged-in{
+            padding: unset;
+        }
         .launch-btn {
+            height: unset;
+            width: unset;
+            padding: 10px 16px 10px 16px;
             position: relative;
+            .button-text {
+                svg {
+                    margin-left: 7px;
+                }
+            }
             .dropdown {
                 &:hover {
                     cursor: default;
@@ -32,7 +62,7 @@ header {
                 border-top: 1px solid $dark-tan;
                 top: 69px;
                 right: 0;
-                z-index: -1;
+                z-index: 1;
                 padding: 8px 11px 0 16px;
                 box-shadow: 0 8px 32px rgba($color: $text, $alpha: 0.2);
                 &.reveal {
@@ -48,6 +78,11 @@ header {
                     li {
                         &:hover {
                             cursor: pointer;
+                            color: $link-blue;
+                            .fa-arrow-right {
+                                right: 28px
+                            }
+
                         }
                         height: 62px;
                         color: $text;
@@ -67,7 +102,6 @@ header {
                                 transform: scale(-1, 1);
                                 overflow: hidden;
                                 #logo-img * {
-                                    // transform: rotate(15deg);
                                     fill: url(#logo-colors);
                                 }
                             }
@@ -77,6 +111,7 @@ header {
                             position: absolute;
                             right: 35px;
                             color: $link-blue;
+                            transition: right ease 0.5s;
                         }
                     }
                 }
@@ -98,25 +133,61 @@ header {
 
 .auth-header {
     @include splash-navbar();
+    width: 100%;
+    box-shadow: 0 2px 1px rgba($color: $text, $alpha: 0.2);
+    #logo-button {
+        margin: 20px;
+    }
+    .main-header-nav {
+        justify-content: flex-end;
+        color: $lighter-grey-tan;
+        .nav-btns {
+            padding: unset;
+            width: unset;
+            padding-right: 20px;
+            a {
+                margin-right: unset;
+            }
+        }
+        .nav-menu-list {
+            li {
+                padding: 6px 7px 5px;
+            }
+        }
+        li, .signup {
+            margin-left: 9px; 
+            height: unset;
+            width: unset;
+            padding: 6px 7px 5px;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+            vertical-align: middle;
+            &:hover {
+                background: $dark-tan;
+                width: inherit;
+                height: inherit;
+                color: $light-grey-tan;
+                text-shadow: 1px 0 0 rgba($color: $light-grey-tan, $alpha: 0.2);
+            }
+        }
+        .signin {
+            border: 2px solid $light-grey-tan;
+            border-radius: 4px;
+            font-size: 14.5px;
+            height: 38px;
+            width: 75px;
+            margin-left: 17px;
+            font-weight: 600;
+            &:hover {
+                color: $light-grey-tan;
+                border-color: $lightest-text;
+            }
+        }
+    }
 }
 
-#logo-bg {
-    height: 0;
-    width: 0;
-}
 
-
-.btn-purple {
-    @include button($background, $dark-blue)
-}
-
-.btn-white {
-    @include button($dark-blue, $background)
-}
-
-.btn-transp {
-    @include button($background,transparent,$background)
-}
 
 
 .splash {

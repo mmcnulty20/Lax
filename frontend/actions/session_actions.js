@@ -103,3 +103,14 @@ export const logoutUser = () => {
         return dispatch(receiveSessionErrors(errors))
     })
 }
+
+const demo = {
+    email: "demouser@demo.com",
+    password: "nobodyneedstoknowthisonelol"
+}
+
+export const loginDemo = () => {
+    return dispatch => SessionAPIUtil.loginUser(demo).then(res => {
+        return dispatch(receiveCurrentUser(res))
+    })
+}

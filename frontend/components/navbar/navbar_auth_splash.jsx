@@ -21,27 +21,44 @@ export default props => (
         <nav className="main-header-nav">
             <ul className="nav-menu-list">
                 <li>
-                    <Link to="#">Github</Link>
+                    <a href="https://github.com/mmcnulty20/">Github</a>
                 </li>
                 <li>
-                    <Link to="#">LinkedIn</Link>
+                    <a href="#">LinkedIn</a>
                 </li>
             </ul>
             {props.loggedIn ? (
-                <div className="nav-btns">
+                <div className="nav-btns logged-in">
                     <LaunchButton logout={props.logout} />
                 </div>
                 ) : (
-                <div className="nav-btns">
-                    <Link to="/login">Sign in</Link>
-                    <br/>
-                    <Link to="/signup">
-                        <button className="btn-purple">
-                            GET STARTED
-                        </button>
-                    </Link>
-                </div>
-            )}
+                    <div className="nav-btns logged-out">
+                        { props.location === "/welcome" ? (
+                            <>
+                                <Link to="/login">Sign in</Link>
+                                <br/>
+                                <Link to="/signup">
+                                    <button className="btn-blue">
+                                        GET STARTED
+                                    </button>
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/signup">
+                                    <button className="auth signup">
+                                        Create a new account
+                                    </button>
+                                </Link>
+                                <Link to="/login">
+                                    <button className="auth signin">
+                                        Sign in
+                                    </button>
+                                </Link>
+                            </>
+                        )}
+                    </div>
+                )}
             </nav>
     </div>
 )

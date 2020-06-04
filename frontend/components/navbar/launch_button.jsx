@@ -27,9 +27,15 @@ class LaunchButton extends Component {
 
     render () {
         return (
-            <button className="btn-purple launch-btn" onFocus={this.handleClick} onBlur={this.handleLeave}>
-                LAUNCH LAX
-                <FontAwesomeIcon icon="chevron-down" />
+            <button className="btn-blue launch-btn" onFocus={this.handleClick} onBlur={this.handleLeave}>
+                <div className="button-text">
+                    LAUNCH LAX
+                    { this.state.dropped ? (
+                        <FontAwesomeIcon icon="chevron-up" />
+                    ) : (
+                        <FontAwesomeIcon icon="chevron-down" />
+                    )}
+                </div>
                 <div className={`dropdown` + (this.state.dropped ? " reveal" : "") }>
                     <ul className="workspaces">
                         <li>
@@ -60,25 +66,3 @@ class LaunchButton extends Component {
 }
 
 export default LaunchButton;
-
-// class Dropdown extends React.Component {
-//     constructor(props){
-//         this.state = {
-//             drop: false 
-//         }
-//         this.clicker.bind(this)
-//     }
-//     clicker(e) {
-//         this.setState(drop, true)
-//     }
-//     leave(e) {
-//         this.setState(drop, false)
-//     }
-//     render () {
-//         <button onFocus={this.clicker} onBlur={this.leave}> 
-//             <ul className={this.state ? reveal : hide}>
-//                 <li>...
-//             </ul>
-//         </button> 
-//     }
-// }

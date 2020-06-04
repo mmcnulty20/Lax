@@ -11,5 +11,6 @@ User.destroy_all
 users = User.create([
     {username: "test", email: "test@user.com", password: "password"},
     {username: "test2", email: "test2@user.com", password: "password"},
-    {username: "test3", email: "test3@user.com", password: "password"}
+    {username: "test3", email: "test3@user.com", password: "password"},
+    {username: "Demo User", email: "demouser@demo.com", password: "nobodyneedstoknowthisonelol"}
 ])

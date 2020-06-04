@@ -14,7 +14,6 @@
     height: 69px;
     letter-spacing: 1px;
     font-weight: 500;
-    z-index: 1;
     .nav-btns {
         padding: 16px;
         a:first-of-type {
@@ -78,6 +77,17 @@
     width: 100vw;
     margin-left: -50vw;
     position: relative;
-    z-index: -1;
     left: 50%;
+}
+
+@mixin auth-button {
+    margin-top: 16px;
+    width: 375px;
+    height: 44px;
+    border-radius: 4px;
+    background: $dark-blue;
+    color: $background;
+    text-align: center;
+    font-size: 16.5px;
+    font-weight: 700;
 }

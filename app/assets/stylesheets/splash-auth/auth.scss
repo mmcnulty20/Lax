@@ -1,0 +1,98 @@
+.auth-page {
+    @include flex(row);
+    background: $light-tan;
+    border-bottom: 1px solid $dark-tan;
+    font-family: $splash-sans-serif;
+    position: relative;
+    @include flex(column,center, flex-start);
+    .auth-form-container {
+        width: 635px;
+        height: 450px;
+        background: $background;
+        margin: 147px 0 32px 0;
+        border: 1px solid $dark-tan;
+        border-radius: 5px;
+        box-shadow: 0 1px 1px -1px rgba($color: $text, $alpha: 1.0);
+        padding: 32px;
+        padding-top: 31px;
+        position: relative;
+        right: 6px;
+        button {
+            @include auth-button();
+            &.demo {
+                margin-left: 97px;
+            }
+        }
+        .auth-form {
+            @include flex(column);
+            h1 {
+                width: 572px;
+                font-size: 44px;
+                font-weight: 600;
+                margin-bottom: 56px;
+            }
+            h2 {
+                font-size: 26px;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+            }
+            h3 {
+                align-self: flex-start;
+                width: 375px;
+                margin: 0 auto 15px auto;
+                font-size: 15px;
+                strong {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+            h4 {
+                font-size:14px;
+                margin: 1px 0 24px;
+                letter-spacing: 0.5px;
+            }
+            form {
+                label span {
+                    display: block;
+                    font-size: 15px;
+                    font-weight: 600;
+                    margin: 20px 0 8px;
+                }
+                input {
+                    display: block;
+                    height: 50px;
+                    width: 375px;
+                    border: 1px solid $lightest-text;
+                    border-radius: 4px;
+                    margin-bottom: 8px;
+                    padding: 12px;
+                    font-size: 17px;
+                }
+                // button {
+                //     @include auth-button();
+                // }
+            }
+        }
+        &.signup {
+            height: 800px;
+            button {
+                margin-top: 32px
+            }
+        }
+    }
+    & > p {
+        font-size: 15px;
+        align-self: center;
+        padding-bottom: 183px;
+        position: relative;
+        a {
+            color: $link-blue;
+            font-weight: 500;
+            &:hover {
+                color: $link-hover-blue;
+                text-decoration: underline;
+            }
+        }
+    }
+
+}

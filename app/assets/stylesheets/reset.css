@@ -42,3 +42,8 @@ button,
 input[type="submit"] {
   cursor: pointer;
 }
+
+#root {
+    /* z-index: -5; */
+    height: 100%;
+}
