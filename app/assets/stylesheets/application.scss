@@ -12,8 +12,8 @@
  *
  */
 
-@import "./variables.scss";
-@import "./mixins.scss";
-@import "./reset.css";
+@import "./base_styling/reset.css";
+@import "./base_styling/variables.scss";
+@import "./base_styling/mixins.scss";
 @import "./splash-auth/splash.scss";
 @import "./splash-auth/auth.scss";
