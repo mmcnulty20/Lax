@@ -11,7 +11,7 @@ const AuthFooter = props => {
                 </Link>
                 <ul>
                     <li>
-                        <span>Contact Us</span>
+                        <span>Contact Me</span>
                     </li>
                     <li>
                         <a href="https://github.com/mmcnulty20/">
