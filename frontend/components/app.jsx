@@ -1,14 +1,15 @@
 import React from 'react';
 import { AuthRoute, ProtectedRoute } from "../utils/route_utils";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import logoUrl from '../../app/assets/images/patterns/logo.svg'
 
 import LoginFormContainer from './session/login_form_container';
 import SignUpFormContainer from './session/signup_form_container';
 import NavBarContainer from './navbar/navbar_container';
-import Main from "./main";
+import Main from "./main/main";
 import SplashContainer from './splash/splash_container';
+import MainHeader from './main/main_header';
 
 
 const App = () => (
@@ -22,12 +23,18 @@ const App = () => (
                 </defs>
             </svg>
         <header>
-            <NavBarContainer />
+            <Switch>
+                <Route path={["/welcome", "/login"]} component={ NavBarContainer } />
+                <Route path="/signup" render={() => null} />
+                <Route path="/" component={ MainHeader } />
+            </Switch>
         </header>
-        <AuthRoute path="/login" component={LoginFormContainer} />
-        <AuthRoute path="/signup" component={SignUpFormContainer} />
-        <Route exact path="/welcome" component={SplashContainer} />
-        <ProtectedRoute exact path="/" component={Main} />
+        <Switch>
+            <AuthRoute path="/login" component={LoginFormContainer} />
+            <AuthRoute path="/signup" component={SignUpFormContainer} />
+            <Route exact path="/welcome" component={SplashContainer} />
+            <ProtectedRoute path="/" component={ Main } />
+        </Switch>
     </>
 );
 

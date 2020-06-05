@@ -74,7 +74,7 @@ class SplashFooter extends Component {
                             </li>
                         </ul>
                         <ul>
-                            <li>Other Projects</li>
+                            <li>OTHER PROJECTS</li>
                             <li>
                                 <a href="#">
                                     [MERNstack name here]

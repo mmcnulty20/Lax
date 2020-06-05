@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import configureStore from "./store/store";
 import library from "./icons/library"
 import Root from "./components/root";
-import { loginDemo } from "./actions/session_actions";
+import { loginDemo, checkEmail } from "./actions/session_actions";
 // import patterns from "./icons/svg_patterns";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
         delete window.currentUser
     }
     const store = configureStore(preloadedState)
-    window.loginDemo = loginDemo()
+    window.checkEmail = checkEmail
     window.getState = store.getState()
+    window.dispatch = store.dispatch
     ReactDOM.render(<Root store={store} />, root)
 });

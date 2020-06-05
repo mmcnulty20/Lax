@@ -7,12 +7,13 @@ import SplashLowerButtons from "./splash_lower_buttons";
 
 class Splash extends Component {
     render(){
+        const { loggedIn, loginDemo, history } = this.props;
         return(
             <div className="splash">
-                <SplashIntro loginDemo={this.props.loginDemo}/>
+                <SplashIntro loggedIn={loggedIn} loginDemo={loginDemo} history={history} />
                 <SplashBreakdown />
                 <SplashContact />
-                <SplashLowerButtons loginDemo={this.props.loginDemo}/>
+                <SplashLowerButtons loggedIn={loggedIn} loginDemo={loginDemo} history={history} />
                 <SplashFooter />
             </div>
         )

@@ -2,10 +2,16 @@ import { loginDemo } from "../../actions/session_actions"
 import { connect } from "react-redux"
 import Splash from "./splash"
 
-const mapDispatchToProps = dispatch => (
+const mapStateToProps = ({ session: { currentUserId } }) => (
     {
-        loginDemo: () => dispatch(loginDemo())
+        loggedIn: Boolean(currentUserId)
     }
 )
 
-export default connect(null, mapDispatchToProps)(Splash)
+const mapDispatchToProps = dispatch => (
+    {
+        loginDemo: history => dispatch(loginDemo(history))
+    }
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Splash)

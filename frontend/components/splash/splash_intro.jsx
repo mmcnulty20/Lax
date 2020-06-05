@@ -4,6 +4,19 @@ import introImgUrl from "../../../app/assets/images/splash/splash_intro_img.svg"
 
 
 class SplashIntro extends Component {
+    constructor(props) {
+        super(props);
+        this.handleDemo = this.handleDemo.bind(this);
+    }
+
+    handleDemo(e){
+        if (this.props.loggedIn) {
+            this.props.history.push("/")
+        } else {
+            this.props.loginDemo(this.props.history);
+        }
+    }
+
     render(){
         return(
             <div className="splash-intro">
@@ -17,7 +30,8 @@ class SplashIntro extends Component {
                         </button>
                     </Link>
                     <Link to="#">
-                        <button onClick={e => this.props.loginDemo()} className="btn-white">
+                        <button onClick={ this.handleDemo }
+                            className="btn-white">
                             <span>SEE THE DEMO</span>
                         </button>
                     </Link>

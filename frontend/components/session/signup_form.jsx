@@ -13,8 +13,10 @@ class SignupForm extends Component {
     componentWillReceiveProps(newProps) {
         console.log(this.props)
         if (this.props !== newProps) {
+            if ( newProps.user.username.length > 0 &&
+                !this._validName(this.state.username) ) newProps.errors[0]("Mostly, names can’t contain punctuation. (Apostrophes, spaces, and periods are fine.)")
             this.props = newProps;
-            if (newProps.errors) this.errors = this._formatErrors();
+            if (newProps.errors) this.errors = this._formatErrors(newProps);
         }
     }
 
@@ -38,7 +40,10 @@ class SignupForm extends Component {
 
     handleChange(field) {
         return e => { 
+            console.log(e.target.value)
+            console.log(field)
             this.setState({ [field]: e.target.value })
+            if ( field === "email" ) this.props.checkEmail(e.target.value) 
         };
     }
 
@@ -56,21 +61,43 @@ class SignupForm extends Component {
             if (this.errors[field]) {
                 switch (field) {
                     case 0:
-                        if (this._validName(this.state.username)) {
-                            this.errors[0] = null;
-                            this.setState({ check: {...this.state.check, 0: true } })
+                        if ( this.state.username.length > 0 ) {
+                            if (this._validName(this.state.username)) {
+                                this.errors[0] = null;
+                                this.setState({ check: {...this.state.check, 0: true } })
+                            } else {
+                                this.errors[0] = (
+                                    <div className="error-msg">
+                                        <FontAwesomeIcon icon="exclamation-triangle" />
+                                        <p>Mostly, names can’t contain punctuation. (Apostrophes, spaces, and periods are fine.)</p>
+                                    </div>
+                                )
+                                this.setState({ ...this.state })
+                            }
+                            console.log(this.errors)
                         }
                         break;
                     case 1:
                         if (this._validEmail(this.state.email)) {
-                            this.errors[1] = null;
-                            this.setState({ check: {...this.state.check, 1: true } })
+                            if (this.props.emailExists === true) {
+                                this.errors[1] = (
+                                    <div className="error-msg">
+                                        <FontAwesomeIcon icon="exclamation-triangle" />
+                                        <p>That email is already in use.</p>
+                                    </div>
+                                )
+                            //     this.errors[1] = "That email is already in use."
+                                this.setState({ check: { ...this.state.check, 1: false } })
+                            } else {
+                                this.errors[1] = null;
+                                this.setState({ check: {...this.state.check, 1: true } })
+                            }
                         }
                         break;
                     case 2: 
                         if (this.state.password.length > 5) {
                             this.errors[2] = null;
-                            this.setState({ check: {...this.state.check, 0: true } })
+                            this.setState({ check: {...this.state.check, 2: true } })
                         }
                         break;
                     default: 
@@ -100,8 +127,11 @@ class SignupForm extends Component {
         return vaild !== -1;
     }
             
-    _formatErrors(){
+    _formatErrors(newProps){
+        console.log(this.props)
+        console.log(newProps || "nope")
         const authErrs = this.props.errors;
+        console.log(authErrs)
         const errors = [];
         errors.push(authErrs.find(err => err.includes("name")) || null);
         errors.push(authErrs.find(err => err.includes("email")) || 
