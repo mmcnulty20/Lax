@@ -23,9 +23,9 @@ class SignupForm extends Component {
         this.state = {
             ...props.user,
             check: {
-                0: "",
-                1: "",
-                2: "",
+                0: false,
+                1: false,
+                2: false,
             }
         }
         this.errors = [null, null, null]
@@ -47,6 +47,7 @@ class SignupForm extends Component {
         const { username, email, password } = this.state;
         const user = { username, email, password }
         this.props.processForm( user );
+        this.setState({check: { 0: false, 1: false, 2: false }})
     }
 
     handleLeave(field){
@@ -57,19 +58,19 @@ class SignupForm extends Component {
                     case 0:
                         if (this._validName(this.state.username)) {
                             this.errors[0] = null;
-                            this.setState({ check: { 0: true } })
+                            this.setState({ check: {...this.state.check, 0: true } })
                         }
                         break;
                     case 1:
                         if (this._validEmail(this.state.email)) {
                             this.errors[1] = null;
-                            this.setState({ check: { 1: true } });
+                            this.setState({ check: {...this.state.check, 1: true } })
                         }
                         break;
                     case 2: 
                         if (this.state.password.length > 5) {
                             this.errors[2] = null;
-                            this.setState({ check: { 2: true } })
+                            this.setState({ check: {...this.state.check, 0: true } })
                         }
                         break;
                     default: 
@@ -105,7 +106,10 @@ class SignupForm extends Component {
         errors.push(authErrs.find(err => err.includes("name")) || null);
         errors.push(authErrs.find(err => err.includes("email")) || 
             ( this._validEmail(this.state.email) ? null : "It looks like that isn’t a valid email address." ));
-        errors.push(authErrs.find(err => err.includes("password")).slice(9) || null);
+        errors.push(authErrs.find(err => err.includes("password")) || null);
+        if (errors[2] !== null) {
+            errors[2] = errors[2].slice(9);
+        }
         return errors.map(err => !err ? null : (
             <div className="error-msg">
                 <FontAwesomeIcon icon="exclamation-triangle" />
@@ -130,7 +134,7 @@ class SignupForm extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <label htmlFor="fullname">
                                 <span>Name</span>
-                                <div className={this.errors[0] ? "signup-error" : ""}>
+                                <div className={this.errors[0] ? "signup-error" : "no-err"}>
                                     <input type="text"
                                         onFocus={this.handleFocus(0)}
                                         onBlur={this.handleLeave(0)}
@@ -139,11 +143,12 @@ class SignupForm extends Component {
                                         placeholder="Your full name"
                                         onChange={this.handleChange("username")} />
                                     {this.errors[0]}
+                                    {this.state.check[0] ? ( <FontAwesomeIcon icon="check-circle" /> ) : null}
                                 </div>
                             </label>
                             <label htmlFor="email">
                                 <span>Email address</span>
-                                <div className={this.errors[1] ? "signup-error" : ""}>
+                                <div className={this.errors[1] ? "signup-error" : "no-err"}>
                                     <input type="text"
                                         id="email"
                                         value={this.state.email}
@@ -151,13 +156,14 @@ class SignupForm extends Component {
                                         onBlur={this.handleLeave(1)}
                                         placeholder="name@work-email.com"
                                         onChange={this.handleChange("email")} />
-                                        {this.errors[1]}             
+                                        {this.errors[1]}
+                                        {this.state.check[1] ? ( <FontAwesomeIcon icon="check-circle" /> ) : null}           
                                 </div>
                             </label>
 
                             <label htmlFor="password">
                                 <span>Password</span>
-                                <div className={this.errors[2] ? "signup-error" : ""}>
+                                <div className={this.errors[2] ? "signup-error" : "no-err"}>
                                     <input type="password"
                                         id="password"
                                         value={this.state.password}
@@ -166,6 +172,7 @@ class SignupForm extends Component {
                                         placeholder="6 characters or more"
                                         onChange={this.handleChange("password")} />
                                         {this.errors[2]}
+                                        {this.state.check[2] ? ( <FontAwesomeIcon icon="check-circle" /> ) : null}
                                 </div>
                             </label>
                             <button disabled={ this.errors.some(e => e !== null) ? true : false }>Create Account</button>

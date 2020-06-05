@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
     validates :username, presence: { message: "This is required — you’ll need to enter a name." }
     validates :email, presence: { message: "This is required — you’ll need to enter an email." }
-    validates :email, uniqueness: { message: "That email is already in use - use another, or log in instead." }
+    validates :email, uniqueness: { message: "That email is already in use." }
     validates :session_token, presence: true, uniqueness: true
     validates :avatar_image, :password_digest, null: false
     validates :password, presence: { message: "This is required — you’ll need to enter a password." }, on: :create

@@ -49,3 +49,10 @@ export const logoutUser = () => (
         url: `/api/session`,
     })
 )
+
+export const checkEmail = email => (
+    $.ajax({
+        method: "GET",
+        url: `/api/users/email_in_use/?user[email]=${ email }`
+    })
+)

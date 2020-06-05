@@ -134,6 +134,9 @@
                     font-size: 15px;
                     position: relative;
                     z-index: 1;
+                    &.focus-blue {
+                        box-shadow: 0 0 0 4px rgba($color: $link-hover-blue, $alpha: 0.4);
+                    }
                 }
                 button {
                     margin-top: 32px;
@@ -147,11 +150,28 @@
                         width: 400px;
                     }
                 }
+                .no-err {
+                    position: relative;
+                    svg {
+                        color: $dark-blue;
+                        cursor: pointer;
+                        height: 20px;
+                        width: 20px;
+                        position: absolute;
+                        top: 12px;
+                        right: 13px;
+                        z-index: 1;
+                    }
+                }
                 .signup-error {
                     input {
                         border-radius: 4px 4px 0 0;
                         margin-bottom: unset;
                         border: 1px solid $err-light-red;
+                        &.focus-red {
+                            box-shadow: 0 0 0 4px rgba($color: $err-light-red, $alpha: 0.4);
+                            border-radius: 4px;
+                        }
                     }
                     .error-msg {
                         border: 1px solid rgba($color: $err-light-red, $alpha: 0.3);

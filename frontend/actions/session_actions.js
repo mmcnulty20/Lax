@@ -6,7 +6,8 @@ export const REMOVE_USER = "REMOVE_USER";
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
-export const PURGE_ERRORS = "PURGE_ERRORS"
+export const PURGE_ERRORS = "PURGE_ERRORS";
+export const RECEIVE_EMAIL_BOOL = "RECEIVE_EMAIL_BOOL";
 
 
 export const purgeErrors = () => (
@@ -53,6 +54,13 @@ const receiveSessionErrors = ({responseJSON}) => (
     {
         type: RECEIVE_SESSION_ERRORS,
         errors: responseJSON,
+    }
+)
+
+const receiveEmailBool = bool => (
+    {
+        type: RECEIVE_EMAIL_BOOL,
+        bool
     }
 )
 
@@ -119,3 +127,9 @@ const demo = {
 
 export const loginDemo = () => loginUser(demo)
 
+
+export const checkEmail = email => {
+    return dispatch => SessionAPIUtil.checkEmail(email).then(bool => {
+        return dispatch(receiveEmailBool(bool))
+    })
+}
