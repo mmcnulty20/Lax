@@ -2,16 +2,16 @@ import React from "react";
 
 const SignupEmailInput = props => {
     console.log(props)
-    if (error) {
-        console.log(error)
-        console.log(props.format(1,error))
-        let error =  props.error ? (
-            <div className="error-msg">
-                <FontAwesomeIcon icon="exclamation-triangle" />
-                <p>{props.error}</p>
-            </div>
-        ) : null;
-    }
+    // if (error) {
+    //     console.log(error)
+    //     console.log(props.format(1,error))
+    //     let error =  props.error ? (
+    //         <div className="error-msg">
+    //             <FontAwesomeIcon icon="exclamation-triangle" />
+    //             <p>{props.error}</p>
+    //         </div>
+    //     ) : null;
+    // }
 
     let error = props.error ? "there's an error" : null
     console.log(error)

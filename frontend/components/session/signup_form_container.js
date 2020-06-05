@@ -6,9 +6,7 @@ const mapStateToProps = state => {
     //console.log(state)
     const user = { username: "", email: "", password: "" }
     const errors = [].concat(...Object.values(state.errors))
-    const emailExists = state.session.emailExists
     return {
-        emailExists,
         user,
         errors,
         formType: 'Create Account'
