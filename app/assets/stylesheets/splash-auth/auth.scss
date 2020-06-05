@@ -1,5 +1,6 @@
 .auth-page {
     &.signup {
+        height: 100vh;
         #logo-button {
             font-weight: 600;
             text-shadow: 1px 0 0 rgba($color: $text, $alpha: 1);
@@ -21,7 +22,7 @@
     }
     font-family: $splash-sans-serif;
     // padding-bottom: 183px; 
-    height: 100vh;
+
     min-height: 800px;
     position: relative;
     // margin-bottom: 100px;
