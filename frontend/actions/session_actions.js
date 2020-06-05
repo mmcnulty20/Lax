@@ -102,8 +102,8 @@ export const loginUser = (user, history) => {
     }, errors => {
         return dispatch(receiveSessionErrors(errors))
     }).then(() => { if (history) { 
-        console.log("pushing history")
-        console.log(history)
+        //console.log("pushing history")
+        //console.log(history)
         history.push("/") }})
 }
 
@@ -132,7 +132,7 @@ export const loginDemo = history => loginUser(demo,history)
 
 
 export const checkEmail = email => {
-    console.log(email)
+    //console.log(email)
     return dispatch => SessionAPIUtil.checkEmail(email).then( ({ inUse }) => {
         return dispatch(receiveEmailBool(inUse))
     })
