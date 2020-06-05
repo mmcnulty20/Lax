@@ -4,7 +4,7 @@
             font-weight: 600;
             text-shadow: 1px 0 0 rgba($color: $text, $alpha: 1);
             @include logoLink();
-            font-size: 31px;
+            font-size: 32px;
             span {
                 margin-left: 7px;
                 font-size: 32px;
@@ -12,7 +12,7 @@
             }
             height: 127.5px;
             color: $text;
-            padding: 48px 0 40px;
+            padding: 42px 0 38px;
         }
     }
     &.login{
@@ -20,7 +20,9 @@
         border-bottom: 1px solid $dark-tan;
     }
     font-family: $splash-sans-serif;
-    padding-bottom: 183px; 
+    // padding-bottom: 183px; 
+    height: 100vh;
+    min-height: 800px;
     position: relative;
     // margin-bottom: 100px;
     width: 100%;
@@ -31,14 +33,14 @@
             border-radius: 5px;
             box-shadow: 0 1px 1px -1px rgba($color: $text, $alpha: 1.0);
             margin: 147px 0 32px 0;
+            position: relative;
+            right: 6px;
         }
         width: 635px;
         height: 450px;
         background: $background;
         padding: 32px;
         padding-top: 31px;
-        position: relative;
-        right: 6px;
         .signup {
             padding-bottom: 20px;
         }
@@ -56,6 +58,8 @@
                 font-weight: 600;
                 margin-bottom: 32px;
                 height: 56px;
+                position: relative;
+                bottom: 7px;
             }
             h2 {
                 font-size: 26px;
@@ -123,18 +127,58 @@
                 }
             }
             }
-            .auth-form form input {
-                height: 44px;
-                width: 400px;
-            }
-            button {
-                margin-top: 32px;
-                width: 400px;
-                &.demo {
-                    margin-left: unset;
+            .auth-form {
+                input {
+                    height: 44px;
+                    width: 400px;
+                    font-size: 15px;
+                    position: relative;
+                    z-index: 1;
+                }
+                button {
+                    margin-top: 32px;
+                    width: 400px;
+                    &:hover {
+                        background: $hover-light-blue;
+                        box-shadow: 0 0 0 1px $hover-light-blue;
+                    }
+                    &.demo {
+                        margin-left: unset;
+                        width: 400px;
+                    }
+                }
+                .signup-error {
+                    input {
+                        border-radius: 4px 4px 0 0;
+                        margin-bottom: unset;
+                        border: 1px solid $err-light-red;
+                    }
+                    .error-msg {
+                        border: 1px solid rgba($color: $err-light-red, $alpha: 0.3);
+                        border-top: none;
+                        background: rgba($color: $err-light-red, $alpha: 0.15);
+                        width: 400px;
+                        border-radius: 0 0 4px 4px;
+                        // height: 37px;
+                        @include flex(row,center,flex-start);
+                        height: 37px;
+                        padding: 8px 12px 10px;
+                        p {
+                            height: 100%;
+                            font-size: 12px;
+                            margin-top: unset;
+                            text-align: start;
+                        }
+                        svg {
+                            color: rgba($color: $err-light-red, $alpha: 0.8);
+                            height: 16px;
+                            width: 16px;
+                            margin-right: 8px;
+                        }
+                    }
                 }
             }
-        }
+        }   
     }
     & > p {
         font-size: 15px;
@@ -165,7 +209,7 @@
         @include flex(row,center,flex-start);
         svg {
             margin-left: 14px;
-            color: rgb(209, 21, 21);
+            color: $err-red;
             font-size: 18px;
         }
         p {
@@ -235,7 +279,7 @@
     @include flex (row);
     color: $light-grey-tan;
     width: 100%;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     li {
         height: 22px;
@@ -253,3 +297,4 @@
         }
     }
 }
+

@@ -14,9 +14,19 @@
 class User < ApplicationRecord
     before_validation :ensure_session_token
 
-    validates :username, :email, :session_token, presence: true, uniqueness: true
+    validates :username, presence: { message: "This is required — you’ll need to enter a name." }
+    validates :email, presence: { message: "This is required — you’ll need to enter an email." }
+    validates :email, uniqueness: { message: "That email is already in use - use another, or log in instead." }
+    validates :session_token, presence: true, uniqueness: true
     validates :avatar_image, :password_digest, null: false
-    validates :password, length: {minimum: 6, allow_nil: true }
+    validates :password, presence: { message: "This is required — you’ll need to enter a password." }, on: :create
+    validates :password, length: {
+        minimum: 6,
+        maximum: 72,
+        allow_nil: true,
+        too_short: "Your password must be at least 6 characters long.",
+        too_long: "Your password can’t be more than 72 characters long."
+    }
 
     attr_reader :password
 
