@@ -26,3 +26,15 @@ less -> hamburger, flex items stacked
 fetch 20 at a time
 
 mailing bonus feature
+
+
+- [x] Add homepage image? 
+- [x] Add space between `contact me` and your links - about 1 more centimeter 
+- [~] get rid of the "footer +" with all the links we will not user like `for developers`, etc. 
+- [~] Get rid of options on very bottom footer - have the social media links in the far right go to your social media (linked in, github, angellist, etc.) 
+- [~] Sign in should turn blue and be underlined on hover 
+- [ ] Lax should redirect you to the channel skeleton, so that you can use the account drop down to "sign out of workspace" (i.e. logout) 
+- [ ] The signup page is all one color on slach - and does not have a header or footer 
+- [ ] Have the errors on the signup page match slack 
+
+- [~] Excellent job so far!! :) I love the beach theme

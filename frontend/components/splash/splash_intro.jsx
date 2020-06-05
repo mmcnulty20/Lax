@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import introImgUrl from "../../../app/assets/images/splash/splash_intro_img.svg"
 
 
 class SplashIntro extends Component {
@@ -22,7 +23,7 @@ class SplashIntro extends Component {
                     </Link>
                 </section>
                 <figure className="intro-img">
-                    <div></div>
+                    <img src={introImgUrl} alt=""/>
                 </figure>
             </div>
         )

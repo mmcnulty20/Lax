@@ -8,7 +8,7 @@ class NavBar extends Component {
         return(
             <nav>
                 <Switch>
-                    <Route path={["/welcome","/login", "/signup"]} render={props => <ExternalNavBar {...this.props} />} />
+                    <Route path={["/welcome","/login"]} render={props => <ExternalNavBar {...this.props} />} />
                 </Switch>                   
             </nav>
         )

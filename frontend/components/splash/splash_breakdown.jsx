@@ -22,7 +22,7 @@ class SplashBreakdown extends Component {
                         <li>
                             <FontAwesomeIcon icon="couch" />
                             <h3>Give chill a chance</h3>
-                            <p>Email and text chains can be hard to follow. With Lax, you can choose which conversations can be put off, leaving more time for relaxing.</p>
+                            <p>Email and text chains can get out of hand. With Lax, you can choose which conversations can be put off, leaving more time for relaxing.</p>
                         </li>
                     </ul>
                 </section>

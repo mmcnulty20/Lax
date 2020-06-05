@@ -19,6 +19,7 @@ header {
 #logo-bg {
     height: 0;
     width: 0;
+    position: absolute;
 }
 
 
@@ -51,6 +52,10 @@ header {
     .nav-btns {
         &.logged-in{
             padding: unset;
+        }
+        &.logged-out a:not(:last-of-type):hover {
+            color: $link-hover-blue;
+            text-decoration: underline;
         }
         .launch-btn {
             height: unset;
@@ -249,11 +254,10 @@ header {
                 margin-right: 8px;
             }
         }
-        .intro-img div {
+        .intro-img img {
             margin-left: 64px;
             width: 675px;
             height: 100%;
-            background: #fffaf0;
         }
     }
     .splash-breakdown-underline {
@@ -307,7 +311,7 @@ header {
         @include flex(column);
         align-items: center;
         justify-content: center;
-        line-height: 0.8em;
+        // line-height: 0.8em;
         nav {
             @include flex(row);
             justify-content: space-around;
@@ -365,11 +369,19 @@ header {
                         padding: 9px;
                         letter-spacing: 0.5px;
                         width: 100%;
+                        cursor: default;
+                        a:hover {
+                            color: $link-hover-blue;
+                            cursor: pointer;
+                        }
                     }
                     li:first-of-type {
                         font-weight: 600;
                         letter-spacing: 0.8px;
                         color: $lighter-text;
+                        strong {
+                            text-shadow: 1px 0 0 rgba($color: $lightest-text, $alpha: 1);
+                        }
                     }
                 }
             }
@@ -390,7 +402,8 @@ header {
                 ul {
                     @include flex(row);
                     svg {
-                        font-size: 20px;
+                        width: 20px;
+                        height: 20px;
                         vertical-align: middle;
                     }
                     &:first-of-type svg {
@@ -398,6 +411,9 @@ header {
                     }
                     li {
                         margin-right: 16px;
+                        &:hover {
+                            color: $link-hover-blue
+                        }
                     }
                 }
             }

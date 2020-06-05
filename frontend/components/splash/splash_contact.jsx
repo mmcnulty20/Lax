@@ -6,7 +6,7 @@ class SplashContact extends Component {
     render(){
         return(
             <section className="splash-contact">
-                <h1>Contact Me</h1>
+                <h1>Find Me On</h1>
                 <nav>
                     <a href="https://github.com/mmcnulty20/">
                         <button>

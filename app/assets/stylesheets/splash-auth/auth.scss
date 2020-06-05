@@ -1,25 +1,47 @@
 .auth-page {
-    @include flex(row);
-    background: $light-tan;
-    border-bottom: 1px solid $dark-tan;
+    &.signup {
+        #logo-button {
+            font-weight: 600;
+            text-shadow: 1px 0 0 rgba($color: $text, $alpha: 1);
+            @include logoLink();
+            font-size: 31px;
+            span {
+                margin-left: 7px;
+                font-size: 32px;
+                letter-spacing: 0.75px;
+            }
+            height: 127.5px;
+            color: $text;
+            padding: 48px 0 40px;
+        }
+    }
+    &.login{
+        background: $light-tan;
+        border-bottom: 1px solid $dark-tan;
+    }
     font-family: $splash-sans-serif;
+    padding-bottom: 183px; 
     position: relative;
-    padding-bottom: 183px;
     // margin-bottom: 100px;
     width: 100%;
     @include flex(column,center, flex-start);
     .auth-form-container {
+        &.login {
+            border: 1px solid $dark-tan;
+            border-radius: 5px;
+            box-shadow: 0 1px 1px -1px rgba($color: $text, $alpha: 1.0);
+            margin: 147px 0 32px 0;
+        }
         width: 635px;
         height: 450px;
         background: $background;
-        margin: 147px 0 32px 0;
-        border: 1px solid $dark-tan;
-        border-radius: 5px;
-        box-shadow: 0 1px 1px -1px rgba($color: $text, $alpha: 1.0);
         padding: 32px;
         padding-top: 31px;
         position: relative;
         right: 6px;
+        .signup {
+            padding-bottom: 20px;
+        }
         button {
             @include auth-button();
             &.demo {
@@ -32,7 +54,8 @@
                 width: 572px;
                 font-size: 44px;
                 font-weight: 600;
-                margin-bottom: 56px;
+                margin-bottom: 32px;
+                height: 56px;
             }
             h2 {
                 font-size: 26px;
@@ -57,9 +80,10 @@
             form {
                 label span {
                     display: block;
-                    font-size: 15px;
+                    font-size: 14px;
                     font-weight: 600;
                     margin: 20px 0 8px;
+                    height: 22px;
                 }
                 input {
                     display: block;
@@ -82,16 +106,39 @@
             }
         }
         &.signup {
-            height: 800px;
+            height: 615px;
+            padding-top: 0px;
+            margin: 0 0 20px;
+            p {
+                font-size: 15px;
+                align-self: center;
+                margin-top: 20px;
+                text-align: center;
+            a {
+                color: $link-blue;
+                font-weight: 500;
+                &:hover {
+                    color: $link-hover-blue;
+                    text-decoration: underline;
+                }
+            }
+            }
+            .auth-form form input {
+                height: 44px;
+                width: 400px;
+            }
             button {
-                margin-top: 32px
+                margin-top: 32px;
+                width: 400px;
+                &.demo {
+                    margin-left: unset;
+                }
             }
         }
     }
     & > p {
         font-size: 15px;
         align-self: center;
-        // padding-bottom: 183px;
         position: relative;
         a {
             color: $link-blue;
@@ -180,4 +227,29 @@
         }
     }
 }
+}
+
+.signup-footer-container {
+    height: 26px;
+    margin: 32px 0;
+    @include flex (row);
+    color: $light-grey-tan;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    li {
+        height: 22px;
+        font-size: 14px;
+        margin-right: 16px;
+        text-align: center;
+        a {
+            height: 100%;
+            letter-spacing: 0.5px;
+            &:hover {
+                color: $link-hover-blue;
+                text-decoration: underline;
+                margin-bottom: 4px;
+            }
+        }
+    }
 }

@@ -14,62 +14,135 @@ class SplashFooter extends Component {
                     <nav>
                         <ul>
                             <li>
-                                PRODUCT
+                                PROFICIENCIES
                             </li>
                             <li>
-                                Features
+                                Ruby
                             </li>
                             <li>
-                                Enterprise
+                                Ruby on Rails
+                            </li>
+                            <li>
+                                JavaScript
+                            </li>
+                            <li>
+                                React/Redux
+                            </li>
+                            <li>
+                                SQL ( PostgreSQL )
+                            </li>
+                            <li>
+                                HTML
+                            </li>
+                            <li>
+                                CSS/SCSS
                             </li>
                         </ul>
                         <ul>
-                            <li>LAX FOR TEAMS</li>
-                            <li>Engineering</li>
-                            <li>Financial Services</li>
-                            <li>Sales</li>
-                            <li>IT</li>
-                            <li>Marketing</li>
-                            <li>Customer Support</li>
-                            <li>Human Resources</li>
-                            <li>Project Management</li>
-                            <li>Media</li>
+                            <li>
+                                HOW I RE<strong>LAX</strong>
+                            </li>
+                            <li>
+                                Dungeons and Dragons
+                            </li>
+                            <li>
+                                Theater
+                            </li>
+                            <li>
+                                Disney
+                            </li>
+                            <li>
+                                Sketching
+                            </li>
+                            <li>
+                                Eating
+                            </li>
+                            <li>
+                                Candy Making
+                            </li>
+                            <li>
+                                Singing Poorly
+                            </li>
+                            <li>
+                                Camping
+                            </li>
+                            <li>
+                                Beer & Wine Tasting
+                            </li>
+                            <li>
+                                Video Games
+                            </li>
                         </ul>
                         <ul>
-                            <li>RESOURCES</li>
-                            <li>Resources Library</li>
-                            <li>Lax Tips</li>
+                            <li>Other Projects</li>
+                            <li>
+                                <a href="#">
+                                    [MERNstack name here]
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    [Javascript Game here]
+                                </a>
+                            </li>
                         </ul>
                         <ul>
                             <li>
-                                COMPANY
+                                REACH OUT
                             </li>
-                            <li>About Us</li>
+                            <li>
+                                Megan McNulty
+                            </li>
+                            <li>
+                                (408) 656 5702
+                            </li>
+                            <li>
+                                <a href="mailto:megan@mcnulty.com" >
+                                    Email me
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    [angellist]
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </section>
                 <section className="footer-nav">
                     <nav>
                         <ul>
-                            <li>Status</li>
-                            <li>Privacy & Terms</li>
-                            <li>Contact Us</li>
-                            <li><FontAwesomeIcon icon="globe" /> Change Region <FontAwesomeIcon icon="chevron-down"/></li>
+                            <li>
+                                <a href="https://slack.com/">
+                                    Slack
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://slack.com/">
+                                    Lax is a Slack Clone
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://slack.com/">
+                                    Site for Skill Demonstration Only
+                                </a>
+                            </li>
+                            {/* <li><FontAwesomeIcon icon="globe" /> Change Region <FontAwesomeIcon icon="chevron-down"/></li> */}
                         </ul>
                         <ul>
-                            <li>
+                            {/* <li>
                                 <a href="#">
                                     <FontAwesomeIcon icon={["fab", "twitter"]} />
                                 </a>
-                            </li>
+                            </li> */}
                             <li>
-                                <a href="#">
-                                    <FontAwesomeIcon icon={["fab", "facebook"]} />
+                                <a href="https://github.com/mmcnulty20/">
+                                    <FontAwesomeIcon icon={["fab", "github"]} />
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <FontAwesomeIcon icon={["fab", "youtube"]} />
+                                    <FontAwesomeIcon icon={["fab", "angellist"]} />
                                 </a>
                             </li>
                             <li>
