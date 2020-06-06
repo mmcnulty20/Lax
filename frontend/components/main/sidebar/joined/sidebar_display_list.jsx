@@ -1,8 +1,6 @@
-import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ComposeButton from "./compose_button";
+import { Component } from "react";
 
-class SidebarHeader extends Component {
+class ChannelIndex extends Component {
     render(){
         console.log(this.props)
         return (
@@ -22,4 +20,4 @@ class SidebarHeader extends Component {
     }
 }
 
-export default SidebarHeader;
+export default ChannelIndex;

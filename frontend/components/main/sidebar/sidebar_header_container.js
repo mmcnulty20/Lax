@@ -1,4 +1,11 @@
 import { connect } from "react-redux";
 import SidebarHeader from "./sidebar_header";
 
-export default connect(null,null)(SidebarHeader);
+const mapStateToProps = ({ entities: { users }, session: { currentUserId } }) => {
+    const currentUser = users[currentUserId]
+    return {
+        currentUser,
+    }
+}
+
+export default connect(mapStateToProps,null)(SidebarHeader);
