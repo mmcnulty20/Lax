@@ -5,10 +5,10 @@ import SearchHeaderContainer from "./search/search_header_container";
 
 
 const MainHeader = props => (
-    <>
+    <div className="mainpage-head">
         <SearchHeaderContainer />
         <SubHeaderContainer />
-    </>
+    </div>
 )
 
 

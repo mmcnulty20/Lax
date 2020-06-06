@@ -3,7 +3,11 @@ import React, { Component } from "react";
 class Searchbar extends Component {
     render(){
         return (
-            <div>Totally a searchbar</div>
+            <div className="header-searchbar">
+                <span>
+                    Totally a searchbar
+                </span>
+            </div>
         )
     }
 }

@@ -1,0 +1,40 @@
+body {
+    font-family: $splash-sans-serif;
+}
+.mainpage-head {
+    width: 100%;
+    .search-header {
+        height: 38px;
+        background: $dark-blue;
+        color: $background;
+        width: 100%;
+        @include flex(row, center, unset);
+        .header-searchbar {
+            margin: 0 auto;
+            width: 500px;
+            height: 24px;
+            border: 1px solid rgba($color: $background, $alpha: 0.25);
+            background: rgba($color: $background, $alpha: 0.05);
+            border-radius: 6px;
+            padding: 0 8px;
+            span {
+                display: block;
+                font-size: 12px;
+                margin-top: 2px;
+            }
+            &:hover {
+                border-color: rgba($color: $background, $alpha: 0.5);
+                cursor: pointer;
+            }
+        }
+        button {
+            margin-right: 16px;
+            height: 26px;
+            width: 26px;
+            svg {
+                height: 20px;
+                width: 20px;
+            }
+        }
+    }
+}

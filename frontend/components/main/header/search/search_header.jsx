@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import Searchbar from "./searchbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import InfoDropdown from "./info_dropdown";
 
 class SearchHeader extends Component {
     render(){
         return (
-            <div>
-                Totally the searchHeader
+            <div className="search-header">
                 <Searchbar />
-                <FontAwesomeIcon icon={["far", "question-circle"]} />
+                <InfoDropdown />
             </div>
         )
     }
