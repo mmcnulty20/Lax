@@ -99,6 +99,13 @@
                     margin-bottom: 8px;
                     padding: 12px;
                     font-size: 17px;
+                    &:-webkit-autofill,
+                    &:-webkit-autofill:hover,
+                    &:-webkit-autofill:focus,
+                    &:-webkit-autofill:active {
+                        transition: background-color 5000s ease-in-out 0s;
+                    }
+                    background-color: white; 
                 }
                 // button {
                 //     @include auth-button();
@@ -187,9 +194,7 @@
                         background: rgba($color: $err-light-red, $alpha: 0.15);
                         width: 400px;
                         border-radius: 0 0 4px 4px;
-                        // height: 37px;
                         @include flex(row,flex-start,flex-start);
-                        // height: 37px;
                         padding: 8px 12px 10px;
                         p {
                             height: 100%;
@@ -203,14 +208,6 @@
                             width: 16px;
                             margin-right: 8px;
                         }
-                    }
-                }
-                .no-err, .signup-error {
-                    input:-webkit-autofill,
-                    input:-webkit-autofill:hover,
-                    input:-webkit-autofill:focus,
-                    input:-webkit-autofill:active {
-                        box-shadow: 0 0 0 1000px inset white;
                     }
                 }
             }
@@ -272,7 +269,6 @@
     width: 100%;
     bottom: 0;
     margin-top: 100px;
-    // flex-shrink: 0;
     background: $light-tan;
     div {
         height: 100%;

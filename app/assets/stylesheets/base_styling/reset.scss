@@ -41,6 +41,12 @@ button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+      box-shadow: 0 0 0 1000px inset inherit;
+  }
 }
 
 button,

@@ -9,34 +9,13 @@ class SignupForm extends Component {
         }
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.props !== newProps) {
-            if ( newProps.user.username.length > 0 &&
-                !this._validName(this.state.username) ) newProps.errors[0] = "Mostly, names can’t contain punctuation. (Apostrophes, spaces, and periods are fine.)";
+    shouldComponentUpdate(newProps) {
+        if ( this.props.errors.length !== newProps.errors.length || this.props.emailExists !== newProps.emailExists) {
             this.props = newProps;
             this.errors = (this.state.submitted) ? this.errors.map ( (err,i) => this._formatStateErrors( i ) ) : this.errors
         }
+        return true
     }
-
-    // componentDidUpdate (prevProps) {
-    //     const propErrs = this._formatErrorProps(this.props.errors);
-    //     const oldErrs = this.errors;
-    //     const newErrs = this.errors.map(( err, i ) => this._formatStateErrors( i ))
-    //     this.errors = newErrs.map( (err,i) => err ? err : oldErrs[i] )
-    //     if (this.props.emailExists !== prevProps.emailExists) this.setState = ({ rerender: true })
-        // if ( this.props.errors !== prevProps.errors ) {
-        //     // const newErrs = this.errors.map(( err, i ) => this._formatStateErrors( i ) )
-        //     // prevProps.errors.forEach( (err,i) => {
-        //         //     if () same = false
-        //         // } );
-        //     let newErrs = this._formatErrorProps(this.props.errors)
-        //     this.errors = newErrs.map( (err,i) => this.errors[i] ? this.errors[i] : err )
-
-        //     if ( prevProps.emailExists !== this.props.emailExists ) {
-        //         this.setState = ({ ...this.state })
-        //     }
-
-    // }
 
     constructor(props) {
         super(props);
@@ -97,16 +76,15 @@ class SignupForm extends Component {
                         }
                         break;
                     case 1:
-                        if ( !this.emailExists && this._validEmail( val ) ) {
-                            this.errors[1] = null;
-                            this.setState({ check: { ...this.state.check, 1: true } });
-                        } else {
-                            this.props.checkEmail( val ).then( bool => {
-                                this.setState({ check: { ...this.state.check, 1: false }, emailExists: bool });
+                        this.props.checkEmail( this.state.email ).then( () => {
+                            if ( !this.props.emailExists && this._validEmail( val ) ) {
+                                this.errors[1] = null;
+                                this.setState({ check: { ...this.state.check, 1: true } });
+                            } else {
+                                this.setState({ check: { ...this.state.check, 1: false } });
                                 this.errors[1] = this._formatStateErrors( 1 );
-
-                            });
-                        }
+                            }
+                        });
                         break;
                     case 2: 
                         const pwlength = this.state.password.length
