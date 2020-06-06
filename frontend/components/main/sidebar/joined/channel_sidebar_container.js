@@ -28,7 +28,7 @@ const mapStateToProps = ({ entities: { channels } }) => {
 
 const mapDispatchToProps = dispatch => (
     {
-        fetchIndex: () => console.log("fetching channels"),
+        fetchIndex: () => null,
     }
 )
 

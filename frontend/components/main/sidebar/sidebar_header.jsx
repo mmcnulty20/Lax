@@ -4,7 +4,6 @@ import ComposeButton from "./compose_button";
 
 class SidebarHeader extends Component {
     render(){
-        console.log(this.props)
         return (
             <div className="sidebar-head">
                 <div>

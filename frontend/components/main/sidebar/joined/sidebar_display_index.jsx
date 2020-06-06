@@ -19,9 +19,7 @@ class DisplayIndex extends Component {
             <section className={ `sidebar-section ${this.props.type === "Channels" ? "c" : "dm"} ${ this.state.open ? "open" : "closed" }`} >
                 <div className="section-head"
                     onClick={ () => { 
-                        console.log(`Old Open: ${this.state.open}`)
                         this.setState({ open: !this.state.open }) 
-                        console.log(`New Open: ${this.state.open}`)
                     } } >
                     { this.state.open ? (
                         <FontAwesomeIcon icon="caret-down" />
