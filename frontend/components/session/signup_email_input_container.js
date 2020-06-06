@@ -3,8 +3,7 @@ import SignupEmailInput from './signup_email_input';
 import { connect } from 'react-redux';
 
 const mapStateToProps = ({ errors, session: { emailExists } }) => {
-    console.log(typeof emailExists)
-    let stateErr = errors.session.find(err => err.slice(0,6) === "Email ")
+    let stateErr = errors.session.find(err => err.includes("email"))
     stateErr = stateErr === -1 ? null : stateErr
     const unique = !(emailExists === true)
     return {

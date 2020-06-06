@@ -38,3 +38,6 @@ mailing bonus feature
 - [ ] Have the errors on the signup page match slack 
 
 - [~] Excellent job so far!! :) I love the beach theme
+
+        // errors.push(authErrs.find(err => err.includes("email")) || 
+        //     ( this._validEmail(this.state.email) ? null : "It looks like that isn’t a valid email address." ));

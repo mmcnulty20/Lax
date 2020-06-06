@@ -12,8 +12,32 @@ class SignupForm extends Component {
         }
     }
 
+    // static getDerivedStateFromProps(newProps) {
+    //     console.log(newProps)
+    //     console.log(this)
+    //     if (this.errors !== newProps.errors) {
+    //         let newErrs = this._formatErrorProps(newProps.errors)
+    //         newErrs = newErrs.map( (err,i) => this.errors === null ? newErrs : this.errors );
+    //         this.errors = newErrs;
+
+    //     }
+    //     // const oldErrs = this.errors;
+    //     // const newErrs = this._formatErrorProps(this.props.errors);
+    //     // newErrs.forEach( (err,i) => this.errors[i] = ( err === null ? this.errors[i] : err ) )
+    //     // this.setState({ ...this.state })
+    //     // }
+    // }
+    componentWillReceiveProps(newProps) {
+        console.log(this.props)
+        if (this.props !== newProps) {
+            this.props = newProps;
+            if (newProps.errors) this.errors = this._formatErrorProps(newProps.errors);
+        }
+    }
+
     constructor(props) {
         super(props);
+        this.errors = [null,null,null]
         this.state = {
             ...props.user,
             check: {
@@ -22,23 +46,19 @@ class SignupForm extends Component {
                 2: false,
             },
         }
-        this.errors = props.errors
+        // this._formatErrorProps( this.state.errors )
+        window.errors = () => this.errors
+        this.errors = [null, null, null]
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleLeave = this.handleLeave.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
 
-        this._secondaryErrFormat =  this._secondaryErrFormat.bind(this);
+        this._formatStateErrors =  this._formatStateErrors.bind(this);
+        this._formatErrorProps = this._formatErrorProps.bind(this);
+        this._createErrorHolder = this._createErrorHolder.bind(this)
 
-    }
-
-    handleChange(field,backupTarget) {
-        return e => { 
-            console.log(e)
-            console.log(backupTarget)
-            this.setState({ [field]: e.target.value })
-        };
     }
 
     handleSubmit(e){
@@ -46,36 +66,49 @@ class SignupForm extends Component {
         const { username, email, password } = this.state;
         const user = { username, email, password }
         this.props.processForm( user );
+        // this._formatErrorProps(this.props.errors)
+        // debugger
         this.setState({check: { 0: false, 1: false, 2: false }})
+    }
+
+    handleChange(field) {
+        return e => { 
+            this.setState({ [field]: e.target.value })
+        }
     }
 
     handleLeave(field){
         return e => {
             e.target.className = ""
+            const val = e.target.value;
             if ( this.errors[field] ) {
                 switch (field) {
                     case 0:
-                        const username = this.state.username
-                        if (this._validName(username)) {
+                        if ( this._validName(this.state.username) === true ) {
                             this.errors[0] = null;
-                            this.setState({ check: {...this.state.check, 0: true } })
-                        } else if ( username.length > 0 ) {
-                            this.errors[0] = (
-                                <div className="error-msg">
-                                    <FontAwesomeIcon icon="exclamation-triangle" />
-                                    <p>Mostly, names can’t contain punctuation. (Apostrophes, spaces, and periods are fine.)</p>
-                                </div>
-                            )
-                            this.setState( { ...this.state } )
+                            this.setState({ check: { ...this.state.check, 0: true } });
                         } else {
+                            this.errors[0] = this._formatStateErrors( 0 )
+                            this.setState({ check: { ...this.state.check, 0: false } });
                         }
                         break;
                     case 1:
+                        if ( !this.emailExists && this._validEmail( this.state.email ) ) {
+                            this.errors[1] = null;
+                            this.setState({ check: { ...this.state.check, 1: true } });
+                        } else {
+                            this.errors[1] = this._formatStateErrors( 1 );
+                            this.setState({ check: { ...this.state.check, 1: false } });
+                        }
                         break;
                     case 2: 
-                        if (this.state.password.length > 5) {
+                        const pwlength = this.state.password.length
+                        if ( pwlength > 5 && pwlength < 73 ) {
                             this.errors[2] = null;
-                            this.setState({ check: {...this.state.check, 2: true } })
+                            this.setState({ check: { ...this.state.check, 2: true } });
+                        } else {
+                            this.setState({ check: { ...this.state.check, 1: false }, password: e.target.value });
+                            this.errors[2] = this._formatStateErrors( 2 );
                         }
                         break;
                     default: 
@@ -87,8 +120,6 @@ class SignupForm extends Component {
 
     handleFocus(field) {
         return e => {
-            console.log(e.target)
-            if ( field === 1 ) 
             if (this.errors[field]) {
                 e.target.className = "focus-red"
             } else {
@@ -107,39 +138,48 @@ class SignupForm extends Component {
         return vaild !== -1;
     }
             
-    _formatErrors(props = []){
-        const authErrs = props.errors;
+    _formatErrorProps(props = []){
+        const authErrs = props;
         const errors = [];
         errors.push(authErrs.find(err => err.includes("name")) || null);
         if (errors[0] !== null) {
             errors[0] = errors[0].slice(9)
         }
-        errors.push(null)
-        // errors.push(authErrs.find(err => err.includes("email")) || 
-        //     ( this._validEmail(this.state.email) ? null : "It looks like that isn’t a valid email address." ));
+        errors.push(authErrs.find(err => err.includes("email")) || null);
+        if (this.emailExists) errors[1] = "That email is already in use."
         errors.push(authErrs.find(err => err.includes("password")) || null);
         if (errors[2] !== null) {
             errors[2] = errors[2].slice(9);
         }
-        return errors.map( (err, i) => {
-            i !== 1 ? this._secondaryErrFormat(i) : err
-        })
+        return errors.map( (err, i) => i !== 1 ? this._createErrorHolder(i, err) : err )
     }
 
-    _secondaryErrFormat( i, msg ) {
-        let errMsg = msg;
+    _formatStateErrors( i ) {
+        let errMsg;
         switch (i) {
             case 0:
                 const username = this.state.username;
-                if ( this.state.username.length > 0 && !this._validName(this.state.username ) ) {
+                if ( username.length > 0 && !this._validName(username ) ) {
                     errMsg = "Mostly, names can’t contain punctuation. (Apostrophes, spaces, and periods are fine.)";
+                } else if (username.length === 0) {
+                    errMsg = "This is required — you’ll need to enter a name.";
                 }
                 break;
             case 1: 
+                const email = this.state.email;
+                if ( email.length === 0 ) {
+                    errMsg = "This is required — you’ll need to enter an email."
+                } else if ( this.emailExists ) {
+                    errMsg = "That email is already in use."
+                } else if (!this._validEmail(email)) {
+                    errMsg = "It looks like that isn’t a valid email address."
+                }
                 break;
             case 2:
                 const pwlength = this.state.password.length;
-                if ( pwlength > 0 && pwlength < 6 ) {
+                if (pwlength === 0 ) {
+                    errMsg = "This is required — you’ll need to enter a password."
+                } else if ( pwlength > 0 && pwlength < 6 ) {
                     errMsg = "Your password must be at least 6 characters long."
                 } else if ( pwlength > 72 ) {
                     errMsg = "Your password can’t be more than 72 characters long."
@@ -148,11 +188,18 @@ class SignupForm extends Component {
             default:
                 break;
         }
-        if ( this.errors[i] && errMsg ) {
+        return this._createErrorHolder(i, errMsg)
+    }
+
+    _createErrorHolder(i, msg){
+        console.log(this.errors)
+        console.log(this.errors[i])
+        let test;
+        if ( typeof msg === "string" ) {
             return (
-                <div className="error-msg">
+                <div key={i} className="error-msg">
                     <FontAwesomeIcon icon="exclamation-triangle" />
-                    <p>{errMsg}</p>
+                    <p>{ msg }</p>
                 </div>
             )
         } else if ( this.errors[i] ) {
@@ -164,7 +211,6 @@ class SignupForm extends Component {
     
 
     render() {
-        // console.log(this.errors)
         return (
             <div className="auth-page signup">
                 <figure id="logo-button">
@@ -192,14 +238,18 @@ class SignupForm extends Component {
                                 </div>
                             </label>
                             
-                            <SignupEmailInputContainer 
-                                // emailExists={this.emailExists}
-                                // handleChange={this.handleChange}
-                                handleFocus={this.handleFocus}
-                                handleLeave={this.handleLeave}
-                                email={this.state.email}
-                                format={this._secondaryErrFormat}
-                                check={this.state.check[1]} />
+                            <label htmlFor="email">
+                                <span>Email address</span>
+                                <div className={ this.props.errors[1] ? "signup-error" : "no-err"}>
+                                    <SignupEmailInput 
+                                        handleFocus={this.handleFocus}
+                                        handleLeave={this.handleLeave} />
+                                    { this.state.error }
+                                    { this.state.check ? (
+                                        <FontAwesomeIcon icon="check-circle" />
+                                        ) : null }
+                                </div>
+                            </label>
 
                             <label htmlFor="password">
                                 <span>Password</span>

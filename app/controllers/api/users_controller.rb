@@ -38,8 +38,7 @@ class Api::UsersController < ApplicationController
 
     def email_in_use
         @user = User.find_by(email: user_params[:email])
-        in_use = @user ? true : user_params[:email]
-        render json: { "inUse": in_use }
+        render json: { "inUse": !!@user }
     end
 
     private
