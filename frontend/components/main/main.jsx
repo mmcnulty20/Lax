@@ -1,5 +1,8 @@
 import React from "react";
+import Sidebar from "./sidebar/sidebar";
 
 export default () => (
-    <h1>This is where the logged-in only stuff goes</h1>
+    <>
+        <Sidebar />
+    </>
 )

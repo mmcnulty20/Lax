@@ -9,7 +9,7 @@ import SignUpFormContainer from './session/signup_form_container';
 import NavBarContainer from './navbar/navbar_container';
 import Main from "./main/main";
 import SplashContainer from './splash/splash_container';
-import MainHeader from './main/main_header';
+import MainHeader from './main/header/main_header';
 
 
 const App = () => (
