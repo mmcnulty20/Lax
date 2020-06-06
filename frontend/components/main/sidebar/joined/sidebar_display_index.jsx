@@ -16,7 +16,7 @@ class DisplayIndex extends Component {
 
     render(){
         return (
-            <section className={ `sidebar-section ${ this.state.open ? "open" : "closed" }`} >
+            <section className={ `sidebar-section ${this.props.type === "Channels" ? "c" : "dm"} ${ this.state.open ? "open" : "closed" }`} >
                 <div className="section-head"
                     onClick={ () => { 
                         console.log(`Old Open: ${this.state.open}`)

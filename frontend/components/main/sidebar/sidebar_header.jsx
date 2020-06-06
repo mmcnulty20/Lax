@@ -9,7 +9,9 @@ class SidebarHeader extends Component {
             <div className="sidebar-head">
                 <div>
                     <span>
-                        Lax
+                        <span>
+                            Lax
+                        </span>
                         <FontAwesomeIcon icon="chevron-down" />
                     </span>
                     <span>

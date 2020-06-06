@@ -16,10 +16,25 @@
         position: fixed;
         top: 39px;
         height: 63px;
-        @include flex(row);
+        @include flex(row,center,flex-start);
         padding: 0 54px 0 16px;
-        div span {
-            display: block;
+        // margin-right: auto;
+        div {
+            // display: block;
+            & > span {
+                &:first-of-type {
+                    display: block;
+                    span {
+                        margin-right: 5px;
+                    }
+                    svg {
+                        font-size: 10px;
+                    }
+                }
+                &:last-of-type {
+                    font-size: 12px;
+                }
+            }
         }
         button {
             position: absolute;
@@ -44,6 +59,25 @@
     .sidebar-section {
         padding: 0 16px;
         margin-top: 16px;
+        ul li * {
+            margin-right: 5px;
+        }
+        &.dm {
+            ul li {
+                @include flex(row,flex-start,space-between);
+                // width: 228px;
+                & * {
+                    // margin-right: 5px;
+                    // width: 100%;
+                    .fa-times {
+                        margin-left: 130px;
+                        &:first-of-type {
+                            margin-left: 130px;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
