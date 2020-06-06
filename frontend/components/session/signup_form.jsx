@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import SignupEmailInput from "./signup_email_input";
-import SignupEmailInputContainer from "./signup_email_input_container";
-
 class SignupForm extends Component {
     componentWillUnmount(){
         if (this.props.errors.length > 0) {
@@ -12,41 +9,47 @@ class SignupForm extends Component {
         }
     }
 
-    // static getDerivedStateFromProps(newProps) {
-    //     console.log(newProps)
-    //     console.log(this)
-    //     if (this.errors !== newProps.errors) {
-    //         let newErrs = this._formatErrorProps(newProps.errors)
-    //         newErrs = newErrs.map( (err,i) => this.errors === null ? newErrs : this.errors );
-    //         this.errors = newErrs;
-
-    //     }
-    //     // const oldErrs = this.errors;
-    //     // const newErrs = this._formatErrorProps(this.props.errors);
-    //     // newErrs.forEach( (err,i) => this.errors[i] = ( err === null ? this.errors[i] : err ) )
-    //     // this.setState({ ...this.state })
-    //     // }
-    // }
     componentWillReceiveProps(newProps) {
-        console.log(this.props)
         if (this.props !== newProps) {
+            if ( newProps.user.username.length > 0 &&
+                !this._validName(this.state.username) ) newProps.errors[0] = "Mostly, names can’t contain punctuation. (Apostrophes, spaces, and periods are fine.)";
             this.props = newProps;
-            if (newProps.errors) this.errors = this._formatErrorProps(newProps.errors);
+            this.errors = (this.state.submitted) ? this.errors.map ( (err,i) => this._formatStateErrors( i ) ) : this.errors
         }
     }
+
+    // componentDidUpdate (prevProps) {
+    //     const propErrs = this._formatErrorProps(this.props.errors);
+    //     const oldErrs = this.errors;
+    //     const newErrs = this.errors.map(( err, i ) => this._formatStateErrors( i ))
+    //     this.errors = newErrs.map( (err,i) => err ? err : oldErrs[i] )
+    //     if (this.props.emailExists !== prevProps.emailExists) this.setState = ({ rerender: true })
+        // if ( this.props.errors !== prevProps.errors ) {
+        //     // const newErrs = this.errors.map(( err, i ) => this._formatStateErrors( i ) )
+        //     // prevProps.errors.forEach( (err,i) => {
+        //         //     if () same = false
+        //         // } );
+        //     let newErrs = this._formatErrorProps(this.props.errors)
+        //     this.errors = newErrs.map( (err,i) => this.errors[i] ? this.errors[i] : err )
+
+        //     if ( prevProps.emailExists !== this.props.emailExists ) {
+        //         this.setState = ({ ...this.state })
+        //     }
+
+    // }
 
     constructor(props) {
         super(props);
         this.errors = [null,null,null]
         this.state = {
             ...props.user,
+            submitted: false,
             check: {
                 0: false,
                 1: false,
                 2: false,
             },
         }
-        // this._formatErrorProps( this.state.errors )
         window.errors = () => this.errors
         this.errors = [null, null, null]
 
@@ -65,10 +68,8 @@ class SignupForm extends Component {
         e.preventDefault();
         const { username, email, password } = this.state;
         const user = { username, email, password }
-        this.props.processForm( user );
-        // this._formatErrorProps(this.props.errors)
-        // debugger
-        this.setState({check: { 0: false, 1: false, 2: false }})
+        this.props.processForm( user )
+        this.setState({ submitted: true, check: { 0: false, 1: false, 2: false }})
     }
 
     handleChange(field) {
@@ -79,12 +80,15 @@ class SignupForm extends Component {
 
     handleLeave(field){
         return e => {
-            e.target.className = ""
             const val = e.target.value;
-            if ( this.errors[field] ) {
+            if ( field === 1 ) {
+                this.props.checkEmail( this.state.email )
+            }
+            e.target.className = ""
+            if ( this.props.errors.find( err => err !== null )) {
                 switch (field) {
                     case 0:
-                        if ( this._validName(this.state.username) === true ) {
+                        if ( this._validName(val) === true ) {
                             this.errors[0] = null;
                             this.setState({ check: { ...this.state.check, 0: true } });
                         } else {
@@ -93,12 +97,15 @@ class SignupForm extends Component {
                         }
                         break;
                     case 1:
-                        if ( !this.emailExists && this._validEmail( this.state.email ) ) {
+                        if ( !this.emailExists && this._validEmail( val ) ) {
                             this.errors[1] = null;
                             this.setState({ check: { ...this.state.check, 1: true } });
                         } else {
-                            this.errors[1] = this._formatStateErrors( 1 );
-                            this.setState({ check: { ...this.state.check, 1: false } });
+                            this.props.checkEmail( val ).then( bool => {
+                                this.setState({ check: { ...this.state.check, 1: false }, emailExists: bool });
+                                this.errors[1] = this._formatStateErrors( 1 );
+
+                            });
                         }
                         break;
                     case 2: 
@@ -107,7 +114,7 @@ class SignupForm extends Component {
                             this.errors[2] = null;
                             this.setState({ check: { ...this.state.check, 2: true } });
                         } else {
-                            this.setState({ check: { ...this.state.check, 1: false }, password: e.target.value });
+                            this.setState({ check: { ...this.state.check, 2: false } });
                             this.errors[2] = this._formatStateErrors( 2 );
                         }
                         break;
@@ -145,8 +152,8 @@ class SignupForm extends Component {
         if (errors[0] !== null) {
             errors[0] = errors[0].slice(9)
         }
-        errors.push(authErrs.find(err => err.includes("email")) || null);
-        if (this.emailExists) errors[1] = "That email is already in use."
+        errors.push(authErrs.find(err => err.includes("email")) || 
+            ( this._validEmail(this.state.email) ? ( this.props.emailExists ? "That email is already in use." : null ) : "It looks like that isn't a valid email address." ));
         errors.push(authErrs.find(err => err.includes("password")) || null);
         if (errors[2] !== null) {
             errors[2] = errors[2].slice(9);
@@ -169,7 +176,7 @@ class SignupForm extends Component {
                 const email = this.state.email;
                 if ( email.length === 0 ) {
                     errMsg = "This is required — you’ll need to enter an email."
-                } else if ( this.emailExists ) {
+                } else if ( this.props.emailExists ) {
                     errMsg = "That email is already in use."
                 } else if (!this._validEmail(email)) {
                     errMsg = "It looks like that isn’t a valid email address."
@@ -192,16 +199,14 @@ class SignupForm extends Component {
     }
 
     _createErrorHolder(i, msg){
-        console.log(this.errors)
-        console.log(this.errors[i])
-        let test;
         if ( typeof msg === "string" ) {
-            return (
+            const result = (
                 <div key={i} className="error-msg">
                     <FontAwesomeIcon icon="exclamation-triangle" />
                     <p>{ msg }</p>
                 </div>
             )
+            return result
         } else if ( this.errors[i] ) {
             return this.errors[i];
         }  else {
@@ -211,6 +216,7 @@ class SignupForm extends Component {
     
 
     render() {
+        this.errors = this.errors.map( (err, i) => (typeof err === "string" ) ? this._formatStateErrors( i ) : err )
         return (
             <div className="auth-page signup">
                 <figure id="logo-button">
@@ -223,6 +229,7 @@ class SignupForm extends Component {
                     <section className="auth-form">
                         <h1>First, create your account</h1>
                         <form onSubmit={this.handleSubmit}>
+
                             <label htmlFor="fullname">
                                 <span>Name</span>
                                 <div className={this.errors[0] ? "signup-error" : "no-err"}>
@@ -233,21 +240,23 @@ class SignupForm extends Component {
                                         value={this.state.username}
                                         placeholder="Your full name"
                                         onChange={this.handleChange("username")} />
-                                    {this.errors[0]}
+                                    { this.errors[0] }
                                     {this.state.check[0] ? ( <FontAwesomeIcon icon="check-circle" /> ) : null}
                                 </div>
                             </label>
-                            
+
                             <label htmlFor="email">
                                 <span>Email address</span>
-                                <div className={ this.props.errors[1] ? "signup-error" : "no-err"}>
-                                    <SignupEmailInput 
-                                        handleFocus={this.handleFocus}
-                                        handleLeave={this.handleLeave} />
-                                    { this.state.error }
-                                    { this.state.check ? (
-                                        <FontAwesomeIcon icon="check-circle" />
-                                        ) : null }
+                                <div className={this.errors[1] ? "signup-error" : "no-err"}>
+                                    <input type="text"
+                                        id="email"
+                                        value={this.state.email}
+                                        onFocus={this.handleFocus(1)}
+                                        onBlur={this.handleLeave(1)}
+                                        placeholder="name@work-email.com"
+                                        onChange={this.handleChange("email")} />
+                                        {this.errors[1]}
+                                        {this.state.check[1] && !this.props.emailExists ? ( <FontAwesomeIcon icon="check-circle" /> ) : null}
                                 </div>
                             </label>
 

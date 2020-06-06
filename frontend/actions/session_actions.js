@@ -137,3 +137,10 @@ export const checkEmail = email => {
         return dispatch(receiveEmailBool(inUse))
     })
 }
+
+
+// export const checkEmail = email => {
+//     return dispatch => SessionAPIUtil.checkEmail(email).then( ({ inUse }) => {
+//         return inUse;
+//     }) 
+// }

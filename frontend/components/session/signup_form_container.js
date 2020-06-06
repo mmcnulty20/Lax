@@ -15,6 +15,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        checkEmail: email => dispatch(checkEmail(email)),
         processForm: user => dispatch(signupUser(user)),
         loginDemo: () => dispatch(loginDemo()),
         purgeErrors: () => dispatch(purgeErrors()),

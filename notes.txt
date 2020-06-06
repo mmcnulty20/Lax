@@ -41,3 +41,27 @@ mailing bonus feature
 
         // errors.push(authErrs.find(err => err.includes("email")) || 
         //     ( this._validEmail(this.state.email) ? null : "It looks like that isn’t a valid email address." ));
+
+                                // const username = this.state.username
+                        // if (this._validName(username)) {
+                        //     this.errors[0] = null;
+                        //     this.setState({ check: {...this.state.check, 0: true } })
+                        // } else if ( username.length > 0 ) {
+                        //     this.errors[0] = (
+                        //         <div className="error-msg">
+                        //             <FontAwesomeIcon icon="exclamation-triangle" />
+                        //             <p>Mostly, names can’t contain punctuation. (Apostrophes, spaces, and periods are fine.)</p>
+                        //         </div>
+                        //     )
+                        //     this.setState( { ...this.state } )
+                        // } else {
+                        // }
+
+
+                        // if (this.state.password.length > 5) {
+                        //     this.errors[2] = null;
+                        //     this.setState({ check: {...this.state.check, 2: true } })
+                        // }
+
+
+

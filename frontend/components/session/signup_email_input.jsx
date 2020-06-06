@@ -3,7 +3,7 @@ import React, { Component } from "react";
 // class SignupEmailInput extends PureComponent {
 //     constructor(props) {
 //         super(props)
-//         // console.log(props)
+
 
 //         this.state = {
 //             email: props.email,
@@ -92,6 +92,7 @@ class SignupEmailInput extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
     }
 
     handleChange(e){
@@ -100,8 +101,13 @@ class SignupEmailInput extends Component {
 
     handleBlur(e) {
         if ( e.target.value.length > 0 ) this.props.checkEmail(this.state);
-        e = e.persist()
-        this.props.handleLeave(1)(e)
+        e.persist();
+        this.props.handleLeave(1)(e);
+    }
+
+    handleFocus(e) {
+        e.persist();
+        this.props.handleFocus(1)(e)
     }
 
     render () {
