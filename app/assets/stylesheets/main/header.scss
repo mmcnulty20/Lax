@@ -3,11 +3,14 @@ body {
 }
 .mainpage-head {
     width: 100%;
+    position: fixed;
+    z-index: 2;
     .search-header {
-        height: 38px;
-        background: $dark-blue;
+        height: 39px;
+        background: mix($dark-blue, $hover-dark-blue, $weight: 50%);
         color: $background;
         width: 100%;
+        border-bottom: 1px solid rgba($color: $background, $alpha: 0.2);
         @include flex(row, center, unset);
         .header-searchbar {
             margin: 0 auto;
@@ -17,10 +20,12 @@ body {
             background: rgba($color: $background, $alpha: 0.05);
             border-radius: 6px;
             padding: 0 8px;
-            span {
-                display: block;
-                font-size: 12px;
-                margin-top: 2px;
+            font-size: 12px;
+            @include flex(row, center, space-between);
+            svg {
+                font-size: 14px;
+                margin-right: 2px;
+
             }
             &:hover {
                 border-color: rgba($color: $background, $alpha: 0.5);
@@ -37,4 +42,32 @@ body {
             }
         }
     }
+    .sub-header {
+        height: 63px;
+        width: calc(100% - 260px);
+        margin-left: auto;
+        padding: 0 20px 0 16px;
+        font-size: 14px;
+        @include flex(row,center,space-between);
+        border-bottom: 1px solid $dark-tan;
+        .location-details {
+            @include flex(row, center, space-between);
+            width: 84px;
+            height: 36px;
+            padding: 8px;
+            border-radius: 4px;
+            vertical-align: center;
+            font-size: 12px;
+            color: $light-grey-tan;
+            &:hover {
+                background: $light-tan;
+                color: $lighter-text;
+            }
+            svg {
+                font-size: 20px;
+                margin-right: 8px;
+            }
+        }
+    }
+
 }

@@ -6,12 +6,13 @@ import DMSidebarContainer from "./joined/dm_sidebar_container";
 class Sidebar extends Component {
     render(){
         return (
-            <>
-                <div>Totally a sidebar</div>
+            <div className="sidebar">
                 <SidebarHeaderContainer />
-                <ChannelSidebarContainer />
-                <DMSidebarContainer />
-            </>
+                <div className="sidebar-content">
+                    <ChannelSidebarContainer />
+                    <DMSidebarContainer />
+                </div>
+            </div>
         )
     }
 }

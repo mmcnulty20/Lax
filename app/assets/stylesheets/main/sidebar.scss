@@ -1,0 +1,53 @@
+.sidebar {
+    // position: relative;
+    position: fixed;
+    top: 39px;
+    z-index: 1;
+    background: $dark-blue;
+    height: calc(100vh - 39px);
+    width: 260px;
+    color: $background;
+    font-weight: 400;
+    & > * {
+        width: 260px;
+    }
+    .sidebar-head {
+        border-bottom: 1px solid rgba($color: $background, $alpha: 0.2);
+        position: fixed;
+        top: 39px;
+        height: 63px;
+        @include flex(row);
+        padding: 0 54px 0 16px;
+        div span {
+            display: block;
+        }
+        button {
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            border-radius: 50px;
+            background: $background;
+            @include flex(row);
+            right: 16px;
+            svg {
+                width: 16px;
+                height: 16px;
+                color: $dark-blue;
+            }
+        }
+    }
+    & > div {
+        font-weight: 300;
+        position: relative;
+        top: 63px;
+    }
+    .sidebar-section {
+        padding: 0 16px;
+        margin-top: 16px;
+    }
+}
+
+// .sidebar-head {
+//     position: fixed;
+//     top: 102px;
+// }

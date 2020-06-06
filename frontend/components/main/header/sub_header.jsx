@@ -9,10 +9,7 @@ class SubHeader extends Component {
                 <div>
                     Location Info Here
                 </div>
-                <div onClick={(e) => console.log(e.target)}>
-                    Larger Button Test
-                    <LocationDetailsButton />
-                </div>
+                <LocationDetailsButton />
             </div>
         )
     }

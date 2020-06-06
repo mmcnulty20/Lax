@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Searchbar extends Component {
     render(){
@@ -7,6 +8,7 @@ class Searchbar extends Component {
                 <span>
                     Totally a searchbar
                 </span>
+                <FontAwesomeIcon icon="search" />
             </div>
         )
     }

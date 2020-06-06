@@ -16,7 +16,8 @@ import { faBars,
         faCaretRight,
         faLock,
         faHashtag,
-        faTimes } from '@fortawesome/free-solid-svg-icons';
+        faTimes,
+        faSearch } from '@fortawesome/free-solid-svg-icons';
 import { 
     faQuestionCircle,
     faCircle,
@@ -32,4 +33,4 @@ export default library.add(
     faExclamationTriangle, faCheckCircle,
     faQuestionCircle, faInfoCircle, faTimes,
     faFeatherAlt, faCaretDown, faCaretRight,
-    faCircle, faLock, faHashtag)
+    faCircle, faLock, faHashtag, faSearch)
