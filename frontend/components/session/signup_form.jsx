@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SignupEmailInput from "./signup_email_input";
+import SignupEmailInputContainer from "./signup_email_input_container";
 
 class SignupForm extends Component {
     componentWillUnmount(){
@@ -10,8 +11,6 @@ class SignupForm extends Component {
             this.props.purgeErrors();
         }
     }
-
-    componentWillUpdate()
 
     constructor(props) {
         super(props);
@@ -23,21 +22,22 @@ class SignupForm extends Component {
                 2: false,
             },
         }
-        this.errors = [null, null, null]
+        this.errors = props.errors
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleLeave = this.handleLeave.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
 
+        this._secondaryErrFormat =  this._secondaryErrFormat.bind(this);
+
     }
 
-    handleChange(field) {
+    handleChange(field,backupTarget) {
         return e => { 
-            console.log(this)
-            console.log(e.target)
+            console.log(e)
+            console.log(backupTarget)
             this.setState({ [field]: e.target.value })
-                this.props.checkEmail(e.target.value) 
         };
     }
 
@@ -52,7 +52,7 @@ class SignupForm extends Component {
     handleLeave(field){
         return e => {
             e.target.className = ""
-            if ( this.errors[field] || this.emailRerender ) {
+            if ( this.errors[field] ) {
                 switch (field) {
                     case 0:
                         const username = this.state.username
@@ -87,6 +87,7 @@ class SignupForm extends Component {
 
     handleFocus(field) {
         return e => {
+            console.log(e.target)
             if ( field === 1 ) 
             if (this.errors[field]) {
                 e.target.className = "focus-red"
@@ -163,7 +164,7 @@ class SignupForm extends Component {
     
 
     render() {
-        console.log(this.errors)
+        // console.log(this.errors)
         return (
             <div className="auth-page signup">
                 <figure id="logo-button">
@@ -191,13 +192,12 @@ class SignupForm extends Component {
                                 </div>
                             </label>
                             
-                            <SignupEmailInput 
-                                emailExists={this.emailExists}
-                                handleChange={this.handleChange}
+                            <SignupEmailInputContainer 
+                                // emailExists={this.emailExists}
+                                // handleChange={this.handleChange}
                                 handleFocus={this.handleFocus}
                                 handleLeave={this.handleLeave}
                                 email={this.state.email}
-                                error={this.errors[1]}
                                 format={this._secondaryErrFormat}
                                 check={this.state.check[1]} />
 

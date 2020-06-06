@@ -1,36 +1,48 @@
-import React from "react";
+import React, { Component } from "react";
 
-const SignupEmailInput = props => {
-    console.log(props)
-    // if (error) {
-    //     console.log(error)
-    //     console.log(props.format(1,error))
-    //     let error =  props.error ? (
-    //         <div className="error-msg">
-    //             <FontAwesomeIcon icon="exclamation-triangle" />
-    //             <p>{props.error}</p>
-    //         </div>
-    //     ) : null;
-    // }
+class SignupEmailInput extends Component {
+    constructor(props) {
+        super(props)
+        console.log(props)
 
-    let error = props.error ? "there's an error" : null
-    console.log(error)
-    return (
-        <label htmlFor="email">
-            <span>Email address</span>
-            <div className={ props.error ? "signup-error" : "no-err"}>
-                <input type="text"
-                    id="email"
-                    value={props.email}
-                    onFocus={props.handleFocus(1)}
-                    onBlur={props.handleLeave(1)}
-                    placeholder="name@work-email.com"
-                    onChange={props.handleChange("email")} />
-                    {error}
-                    {props.check ? ( <FontAwesomeIcon icon="check-circle" /> ) : null}           
-            </div>
-        </label>
-    )
-}
+        this.state = {
+            email: props.email,
+            error: props.stateErr? props.format(1,props.stateErr) : null,
+            check: props.check,
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange(e) {
+        console.log("here")
+        console.log(e)
+        // this.setState({ email: e.target.value });
+        this.props.handleChange(email,e)
+    }
+    
+    handleBlur () {
+        this.props.checkEmail(e.target.value);        
+    }
+
+    render () {
+        console.log(this)
+        return (
+            <label htmlFor="email">
+                <span>Email address</span>
+                <div className={ this.props.error ? "signup-error" : "no-err"}>
+                    <input type="text"
+                        id="email"
+                        value={this.state.email}
+                        onFocus={this.props.handleFocus(1)}
+                        onBlur={this.props.handleLeave(1)}
+                        placeholder="name@work-email.com"
+                        onChange={this.handleChange } />
+                        { this.state.error }
+                        {this.state.check ? ( <FontAwesomeIcon icon="check-circle" /> ) : null}           
+                </div>
+            </label>
+        )
+}}
 
 export default SignupEmailInput;
