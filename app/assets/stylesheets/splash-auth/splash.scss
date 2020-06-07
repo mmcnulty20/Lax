@@ -13,7 +13,6 @@ header {
     position: fixed;
     top: 0;
     background: $background;
-    z-index: 6;
 }
 
 #logo-bg {
@@ -48,6 +47,7 @@ header {
 }
 
 .splash-header {
+    z-index: 6;
     @include splash-navbar();
     .nav-btns {
         &.logged-in{
@@ -150,6 +150,7 @@ header {
 }
 
 .auth-header {
+    z-index: 6;
     @include splash-navbar();
     width: 100%;
     box-shadow: 0 2px 1px rgba($color: $text, $alpha: 0.2);

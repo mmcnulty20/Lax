@@ -17,16 +17,25 @@ class DisplayIndex extends Component {
     render(){
         return (
             <section className={ `sidebar-section ${this.props.type === "Channels" ? "c" : "dm"} ${ this.state.open ? "open" : "closed" }`} >
-                <div className="section-head"
+                <div className="section-head-container"
                     onClick={ () => { 
                         this.setState({ open: !this.state.open }) 
                     } } >
-                    { this.state.open ? (
-                        <FontAwesomeIcon icon="caret-down" />
-                    ) : (
-                        <FontAwesomeIcon icon="caret-right" />
-                    ) }
-                    { this.props.type }
+                    <div className="section-head" >
+                        { this.state.open ? (
+                            <FontAwesomeIcon icon="caret-down" />
+                        ) : (
+                            <FontAwesomeIcon icon="caret-right" />
+                        ) }
+                        { this.props.type }
+                    </div>
+                    <figure>
+                        <div className="plus">
+                            <span>
+                                +
+                            </span>
+                        </div>
+                    </figure>
                 </div>
                 {/* Add BROWSE functionality later */}
                 <DisplayList

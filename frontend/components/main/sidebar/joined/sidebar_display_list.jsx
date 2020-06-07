@@ -21,9 +21,12 @@ class DisplayList extends Component {
 
     _contentList(){
         return this.props.content.map( item => {
-            const icon = this.props.type === "Channels" ? ( item.isPrivate ? "lock" : "hashtag" ) : ["far", "circle"]
+            const icon = this.props.type === "Channels" ? ( item.isPrivate ? "lock" : "hashtag" ) : "circle"
+            // ["far", "circle"]
             return (
                 <ListItem
+                    id={ item.id }
+                    owner={ item.owner }
                     key={ item.id }
                     name={ item.name }
                     icon={ icon }
@@ -38,6 +41,7 @@ class DisplayList extends Component {
         return (
             <ul className={ this.props.open ? "" : "hide"}>
                 { this.props.open ? ( this._contentList() ) : null }
+                {/* { this.props.type === "Channels" ? null : ( this._contentList() )} */}
             </ul>
         )
     }

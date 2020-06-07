@@ -7,16 +7,19 @@ const mapStateToProps = ({ entities: { channels } }) => {
             id: 1,
             name: "test1",
             isPrivate: false,
+            owner: true,
         },
         2: {
             id: 2,
             name: "test2",
             isPrivate: false,
+            owner: false,
         },
         3: {
             id: 3,
             name: "test3",
             isPrivate: true,
+            owner: true,
         }
     }
     channels = Object.values(channels)

@@ -1,13 +1,24 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ComposeButton from "./compose_button";
+import SidebarHeaderDropdown from "./sidebar-header-dropdown";
 
 class SidebarHeader extends Component {
+    constructor(props) {
+        super(props) 
+        this.state = {
+            open: false,
+        }
+    }
+
     render(){
         return (
-            <div className="sidebar-head">
+            <div className="sidebar-head" 
+                tabIndex="0"
+                onClick={ () => this.setState({ open: !this.state.open }) } 
+                onBlur={ () => this.setState({ open: false }) }>
                 <div>
-                    <span>
+                    <span className="lax-title">
                         <span>
                             Lax
                         </span>
@@ -18,6 +29,12 @@ class SidebarHeader extends Component {
                     </span>
                 </div>
                 <ComposeButton />
+                { this.state.open ? (
+                    <SidebarHeaderDropdown
+                        logout={ this.props.logout }
+                        open={ this.state.open }
+                        user={ this.props.currentUser } />
+                ) : null }
             </div>
         )
     }

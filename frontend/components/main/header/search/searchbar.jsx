@@ -6,7 +6,7 @@ class Searchbar extends Component {
         return (
             <div className="header-searchbar">
                 <span>
-                    Totally a searchbar
+                    Searchbar coming soon
                 </span>
                 <FontAwesomeIcon icon="search" />
             </div>
