@@ -3,9 +3,9 @@ body {
 }
 .mainpage-head {
     width: 100%;
-    position: fixed;
-    z-index: 2;
     .search-header {
+        position: fixed;
+        z-index: 2;
         height: 39px;
         background: mix($dark-blue, $hover-dark-blue, $weight: 50%);
         color: $background;
@@ -43,9 +43,13 @@ body {
         }
     }
     .sub-header {
+        position: fixed;
+        top: 39px;
+        left: 260px;
+        z-index: 2;
         height: 63px;
         width: calc(100% - 260px);
-        margin-left: auto;
+        // margin-left: auto;
         padding: 0 20px 0 16px;
         font-size: 14px;
         @include flex(row,center,space-between);

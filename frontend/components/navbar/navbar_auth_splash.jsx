@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import LaunchButton from "./launch_button";
 
-export default props => (
+export default props => {
+    console.log(arguments)
+    return (
     <div className={props.location === "/welcome" ? "splash-header" : "auth-header"}>
         <figure id="logo-button">
             <Link to="/welcome">
@@ -20,7 +22,7 @@ export default props => (
             </ul>
             {props.loggedIn ? (
                 <div className="nav-btns logged-in">
-                    <LaunchButton logout={props.logout} />
+                    <LaunchButton history={useHistory()} logout={props.logout} />
                 </div>
                 ) : (
                     <div className="nav-btns logged-out">
@@ -52,4 +54,4 @@ export default props => (
                 )}
             </nav>
     </div>
-)
+)}

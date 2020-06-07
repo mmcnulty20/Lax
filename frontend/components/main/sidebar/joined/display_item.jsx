@@ -1,22 +1,25 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ListItem = ({ name, id, handleDelete, handleClick, icon, type }) => (
+const ListItem = ({ name, id, handleDelete, handleClick, icon, owner }) => (
     <li onClick={ e => {
         e.persist;
         handleClick(e)
     }}>
-        <FontAwesomeIcon icon={icon} />
+        <figure className="icon">
+            <FontAwesomeIcon icon={icon} />
+        </figure>
         <span>
-            { name }
-            { id }
+            { name } 
         </span>
-        { type === "Direct messages" ? (
+        { owner === true ? (
             <div onClick={ (e) => { 
                 e.persist();
                 handleDelete(id);
              } }>
-                <FontAwesomeIcon icon="times" />
+                <figure className="x">
+                    X
+                </figure>
             </div>
             ): null }
     </li>

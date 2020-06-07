@@ -8,7 +8,7 @@ class SidebarHeader extends Component {
         return (
             <div className="sidebar-head">
                 <div>
-                    <span>
+                    <span className="lax-title">
                         <span>
                             Lax
                         </span>

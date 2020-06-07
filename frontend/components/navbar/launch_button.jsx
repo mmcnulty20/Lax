@@ -32,7 +32,7 @@ class LaunchButton extends Component {
                 </div>
                 <div className={`dropdown` + (this.state.dropped ? " reveal" : "") }>
                     <ul className="workspaces">
-                        <li>
+                        <li onClick={e => this.props.history.push("/")}>
                             <div>
                                 <figure>
                                     <FontAwesomeIcon id="logo-img" icon="umbrella-beach" flip="horizontal"/>
