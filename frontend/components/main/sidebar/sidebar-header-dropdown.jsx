@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 class SidebarHeaderDropdown extends Component {
     render () {
         return (
-            <aside className="dropdown">
+            <aside className={`dropdown${ this.props.open ? "" : " hide" }`}>
                 <section className="user">
                     <DefaultAvatarIcon username={ this.props.user.username } />
                     <p>
@@ -20,29 +20,34 @@ class SidebarHeaderDropdown extends Component {
 
                 <section className="options">
                     <ul>
-                        <li>
+                        <li onClick={ this.renderProfile }>
                             View Profile
                         </li>
                     </ul>
                 </section>
-                <section className="workspace-info">
-                    <figure>
-                        <FontAwesomeIcon id="logo-img" icon="umbrella-beach" flip="horizontal"/>
+
+                <section className="workspace-info-container">
+                    <section className="workspace-info">
+                        <section>
+                            <figure>
+                                <FontAwesomeIcon id="logo-img" icon="umbrella-beach" flip="horizontal"/>
+                            </figure>
+                            <p>
+                                <span>
+                                    Lax Chat
+                                </span>
+                                <span>
+                                    lax-chat.herokuapp.com
+                                </span>
+                            </p>
+                        </section>
                         <p>
-                            <span>
-                                Lax Chat
-                            </span>
-                            <span>
-                                https://lax-chat.herokuapp.com/
-                            </span>
+                            Lax is still in development. It is a clone of the communication app <a href="https://slack.com/">Slack</a>
                         </p>
-                    </figure>
-                    <p>
-                        Lax is still in development. It is a clone of the communication app <a href="https://slack.com/">Slack</a>
-                    </p>
+                    </section>
                 </section>
                 <ul>
-                    <li>
+                    <li onClick={ () => this.props.logout() }>
                         Sign out of Lax
                     </li>
                 </ul>

@@ -7,14 +7,16 @@ class SidebarHeader extends Component {
     constructor(props) {
         super(props) 
         this.state = {
-            open: true,
+            open: false,
         }
     }
 
     render(){
-        console.log(this.props)
         return (
-            <div className="sidebar-head">
+            <div className="sidebar-head" 
+                tabIndex="0"
+                onFocus={ () => this.setState({ open: !this.state.open }) } 
+                onBlur={ () => this.setState({ open: false }) }>
                 <div>
                     <span className="lax-title">
                         <span>
@@ -29,6 +31,8 @@ class SidebarHeader extends Component {
                 <ComposeButton />
                 { this.state.open ? (
                     <SidebarHeaderDropdown
+                        logout={ this.props.logout }
+                        open={ this.state.open }
                         user={ this.props.currentUser } />
                 ) : null }
             </div>

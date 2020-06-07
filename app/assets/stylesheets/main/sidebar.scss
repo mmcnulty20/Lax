@@ -1,5 +1,4 @@
 .sidebar {
-    // position: relative;
     position: fixed;
     top: 39px;
     z-index: 1;
@@ -22,9 +21,7 @@
         &:hover {
             cursor: pointer;
         }
-        // margin-right: auto;
         div {
-            // display: block;
             & > span {
                 &:first-of-type {
                     display: block;
@@ -63,24 +60,146 @@
 
         aside.dropdown {
             display: block;
+            &.hide {
+                display: none;
+            }
             background: $background;
             box-shadow: 0 8px 32px rgba($color: $text, $alpha: 0.2);
-            padding: 16px 12px 16px 24px;
             width: 300px;
             position: absolute;
             z-index: 4;
             top: 58px;
-            border: 1px solid rgba($color: black, $alpha: 0.15);
+            border: 1px solid rgba($color: black, $alpha: 0.18);
             border-radius: 6px;
             cursor: default;
-            color: $text;
+            color: $lighter-text;
+            font-weight: 400;
+            padding-bottom: 12px;
+            & > * {
+                position: relative;
+            }
             .user {
+                @include flex(row, center, flex-start);
+                height: 55px;
+                padding: 28px 12px 16px 24px;
                 .avatar {
                     height: 36px;
                     width: 36px;
                     background-color: rgba($color: $link-blue, $alpha: 0.2);
                     border-radius: 4px;
                     overflow: none;
+                }
+                p {
+                    @include flex(column, flex-start, flex-end);
+                    position: relative;
+                    top: 3px;
+                    height: 36px;
+                    line-height: 18px;
+                    span {
+                        margin-left: 8px;
+                        &:first-of-type {
+                            font-weight: 700;
+                            font-size: 15px;
+                            color: $text;
+                        }
+                        &:last-of-type {
+                            font-size: 13px;
+                            color: $light-grey-tan;
+                        }
+                    }
+                }
+            }
+            ul { 
+                left: -1px;
+                width: 299px;
+                // margin-bottom: 8px;
+                margin-top: 12px;
+                font-size: 15px;
+                li {
+                    padding: 1px 12px 0 24px;
+                    height: 28px;
+                    &:hover {
+                        background: $link-blue;
+                        color: $background;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .options {
+                left: -1px;
+                width: 299px;
+                margin-bottom: 8px;
+                margin-top: 12px;
+                ul {
+                    font-size: 15px;
+                    li {
+                        height: 28px;
+                        padding: 2px 24px 0 24px;
+                        &:hover {
+                            background: $link-blue;
+                            color: $background;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            .workspace-info-container {
+                border-top: 1px solid $dark-tan;
+                border-bottom: 1px solid $dark-tan;
+                padding: 17px 12px 17px 24px;
+                .workspace-info {
+                    color: text;
+                    > p {
+                        font-size: 12px;
+                        margin: 12px 28px 0 0;
+                        a {
+                            color: $link-blue;
+                            font-weight: 600;
+                            &:hover {
+                                color: $link-hover-blue;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                    section {
+                        width: 100%;
+                        @include flex(row, flex-start, flex-start);
+                        p {
+                            @include flex(column, flex-start, flex-start);
+                            span {
+                                line-height: 18px;
+                                &:first-of-type {
+                                    font-size: 14px;
+                                    font-weight: 700;
+                                }
+                                &:last-of-type {
+                                    font-size: 12px;
+                                    color: $light-grey-tan;
+                                }
+                            }
+                        }
+                        figure {
+                            border: 1px solid $dark-tan;
+                            border-radius: 4px;
+                            height: 36px;
+                            width: 36px;
+                            background-color: $pale-blue;
+                            font-size: 33px;
+                            transform: scale(-1, 1);
+                            overflow: hidden;
+                            margin-right: 12px;
+                            #logo-img {
+                                position: relative;
+                                top: -6px;
+                                right: 3px;
+                                // height: 36px;
+                                // width: 36px;
+                                * {
+                                    fill: url(#logo-colors);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

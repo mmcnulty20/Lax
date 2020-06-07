@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import SidebarHeader from "./sidebar_header";
+import { logoutUser } from "../../../actions/session_actions";
 
 const mapStateToProps = ({ entities: { users }, session: { currentUserId } }) => {
     const currentUser = users[currentUserId]
@@ -8,4 +9,10 @@ const mapStateToProps = ({ entities: { users }, session: { currentUserId } }) =>
     }
 }
 
-export default connect(mapStateToProps,null)(SidebarHeader);
+const mapDispatchToProps = dispatch => (
+    {
+        logout: () => dispatch(logoutUser()),
+    }
+)
+
+export default connect(mapStateToProps,mapDispatchToProps)(SidebarHeader);
