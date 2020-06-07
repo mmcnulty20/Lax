@@ -15,7 +15,7 @@ class SidebarHeader extends Component {
         return (
             <div className="sidebar-head" 
                 tabIndex="0"
-                onFocus={ () => this.setState({ open: !this.state.open }) } 
+                onClick={ () => this.setState({ open: !this.state.open }) } 
                 onBlur={ () => this.setState({ open: false }) }>
                 <div>
                     <span className="lax-title">

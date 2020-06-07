@@ -46,9 +46,11 @@ class LaunchButton extends Component {
                         <li>
                             <div onClick={e => {
                                 e.preventDefault();
-                                this.props.logout();
+                                this.props.logout().then(() => {
+                                    this.props.history.push("/login")
+                                } );
                             }}>
-                                Sign out
+                                Sign in to a different account
                             </div>
                         </li>
                     </ul>
