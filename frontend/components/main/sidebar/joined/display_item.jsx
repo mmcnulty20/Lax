@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ListItem = ({ name, id, handleDelete, handleClick, icon, owner }) => (
     <li onClick={ e => {
         e.persist;
-        handleClick(e)
+        // handleClick(e)
     }}>
         <figure className="icon">
             <FontAwesomeIcon icon={icon} />
