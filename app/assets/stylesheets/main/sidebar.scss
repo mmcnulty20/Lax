@@ -287,6 +287,11 @@
                             padding: 4px 12px 4px 14px;
                             font-size: 16px;
                             font-weight: 400;
+                            transition: .1s;
+                            &.focus-blue {
+                                border-color: transparent;
+                                box-shadow: 0 0 0 1px $link-hover-blue, 0 0 0 5px rgba($color: $light-teal, $alpha: 0.7);
+                            }
                         }
                         .opt {
                             font-weight: 400;
@@ -314,13 +319,69 @@
                                 }
                             }
                             .slide-box {
-                                height: 30px; 
-                                width: 54px;
                                 position: relative;
-                                input {
-                                    width: 0;
+                                display: inline-block;
+                                width: 54px;
+                                height: 30px;
+                                right: -104px;
+                                top: 19px;
+                                input { 
                                     opacity: 0;
+                                    width: 0;
                                     height: 0;
+                                    &:checked + .slider {
+                                        background-color: $green;
+                                        &:before {
+                                            font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f00c";
+                                            position: absolute;
+                                            top: 7px;
+                                            left: 6.5px;
+                                            display: block;
+                                            color: $background;
+                                            font-size: 14px;
+                                            transform: scale(0.8,1);
+                                        }
+                                        &:after {
+                                            -webkit-transform: translateX(22px);
+                                            -ms-transform: translateX(22px);
+                                            transform: translateX(22px);
+                                            background: $background;
+
+                                        }
+                                    }
+                                    &:focus + .slider {
+                                        box-shadow: 0 0 0 1px $link-hover-blue, 0 0 0 5px rgba($color: $light-teal, $alpha: 0.5);
+                                        border-color: transparent;
+                                    }
+                                }
+                                .slider {
+                                    position: absolute;
+                                    cursor: pointer;
+                                    top: 0;
+                                    left: 0;
+                                    right: 0;
+                                    bottom: 0;
+                                    
+                                    -webkit-transition: .4s;
+                                    transition: .4s;
+                                    border-radius: 18px;
+                                    border: 1px solid $light-grey-tan;
+                                    &:after {
+                                        position: absolute;
+                                        border-radius: 50%;
+                                        content: "";
+                                        height: 20px;
+                                        width: 20px;
+                                        left: 5px;
+                                        top: 4px;
+                                        background-color: white;
+                                        -webkit-transition: .4s;
+                                        transition: .4s;
+                                        background: $lightest-text;
+                                    }
+                                    &:focus {
+                                        box-shadow: 0 0 3px 3px blue;
+                                    }
                                 }
                             }
                         }
@@ -331,9 +392,9 @@
                         bottom: 24px;
                         font-size: 14px;
                         font-weight: 600;
-                        height: 35px;
+                        height: 36px;
                         width: 80px;
-                        padding: 0 13px;
+                        padding: 1px 13px 0;
                         text-align: center;
                         color: $lighter-text;
                         border-radius: 4px;

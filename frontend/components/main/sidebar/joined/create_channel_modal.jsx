@@ -29,8 +29,11 @@ class CreateChannelModal extends Component {
 
     handleBlur(field) {
         return e => {
-            e.target.className = e.target.className.newClass.split(" ").filter( c => c !== "focus-blue" ).join(" ")
-
+            console.log(e)
+            console.log(e.target)
+            console.log(field)
+            console.log(e.target.className)
+            e.target.className = e.target.className.split(" ").filter( c => c !== "focus-blue" ).join(" ")
         }
     }
 
@@ -80,10 +83,10 @@ class CreateChannelModal extends Component {
                                 </>
                              )}
                         </p>
-                        <figure className="slide-box">
+                        <label className="slide-box">
                             <input type="checkbox" id="private"/>
                             <span className="slider"></span>
-                        </figure>
+                        </label>
                     </label>
 
 
