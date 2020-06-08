@@ -37,31 +37,40 @@ class CreateChannelModal extends Component {
     render(){
         return (
             <figure className="create-channel-modal">
-                <h2>Create a{this.state.private ? " private" : ""} channel</h2>
-                <figure className="x" onClick={ this.handleClose }>
-                    x
-                </figure>
+                <section className="head">
+                    <h2>Create a{this.state.private ? " private" : ""} channel</h2>
+                    <button onClick={ this.handleClose } >
+                        <figure className="x" >
+                            <span>
+                                x
+                            </span>
+                        </figure>
+                    </button>
+                </section>
                 <p>
-                    Channels are how you can communicate with friends or groups. Seperate channels might cover different topics or interests.
+                    Channels are how you communicate with friends or groups. Seperate channels cover different interests - like #d&d.
                 </p>
                 <form onSubmit={ this.handleSubmit }>
 
-                    <label htmlFor="name">Name
+                    <label htmlFor="name">Name <br/>
                         <input type="text" id="name"
                             onFocus={ this.handleFocus } 
-                            onBlur={ this.handleBlur("name") } />
+                            onBlur={ this.handleBlur("name") }
+                            placeholder="# &nbsp; e.g. beach-trip" />
                     </label>
 
-                    <label htmlFor="description">Description <span>(optional)</span>
+                    <label htmlFor="description">Description <span className="opt">(optional)</span> <br/>
                         <input type="text" id="description"
                             onFocus={ this.handleFocus }
                             onBlur={ this.handleBlur("description") } />
+                            <br/>
+                            <span className="subline">What's this channel about?</span>
                     </label>
 
                     <label htmlFor="private" className="private">
                         <p>
-                            <strong>Make Private</strong>
-                            { this.state.private ? (
+                            <strong>Make private</strong> <br/>
+                            { !this.state.private ? (
                                 <>
                                     When a channel is set to private, it can only be viewed or joined by invitation.
                                 </>
@@ -71,8 +80,10 @@ class CreateChannelModal extends Component {
                                 </>
                              )}
                         </p>
-                        <input type="checkbox" id="private"/>
-                        <span className="slider"></span>
+                        <figure className="slide-box">
+                            <input type="checkbox" id="private"/>
+                            <span className="slider"></span>
+                        </figure>
                     </label>
 
 

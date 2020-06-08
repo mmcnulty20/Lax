@@ -12,7 +12,8 @@ class DisplayIndex extends Component {
         super(props)
         this.state = {
             open: true,
-            modal: this.props.modal,
+            // modal: this.props.modal,
+            modal: true,
         }
         this.showAddChannel = this.showAddChannel.bind(this)
     }
@@ -23,40 +24,44 @@ class DisplayIndex extends Component {
 
     render(){
         return (
-            <section className={ `sidebar-section ${this.props.type === "Channels" ? "c" : "dm"} ${ this.state.open ? "open" : "closed" }`} >
-                <div className="section-head-container"
-                    onClick={ () => { 
-                        this.setState({ open: !this.state.open }) 
-                    } } >
-                    <div className="section-head" >
-                        { this.state.open ? (
-                            <FontAwesomeIcon icon="caret-down" />
-                        ) : (
-                            <FontAwesomeIcon icon="caret-right" />
-                        ) }
-                        { this.props.type }
-                    </div>
-                    <figure>
-                        <div className="plus" onClick={ this.showAddChannel }>
-                            <span>
-                                +
-                            </span>
+            <>
+                <section className={ `sidebar-section ${this.props.type === "Channels" ? "c" : "dm"} ${ this.state.open ? "open" : "closed" }`} >
+                    <div className="section-head-container"
+                        onClick={ () => { 
+                            this.setState({ open: !this.state.open }) 
+                        } } >
+                        <div className="section-head" >
+                            { this.state.open ? (
+                                <FontAwesomeIcon icon="caret-down" />
+                            ) : (
+                                <FontAwesomeIcon icon="caret-right" />
+                            ) }
+                            { this.props.type }
                         </div>
-                    </figure>
-                    {/* { this.state.modal ? (
+                        <figure>
+                            <div className="plus" onClick={ this.showAddChannel }>
+                                <span>
+                                    +
+                                </span>
+                            </div>
+                        </figure>
+                    </div>
+                    {/* Add BROWSE functionality later */}
+                    <DisplayList
+                        type={ this.props.type } 
+                        content={ this.props.content }
+                        open={ this.state.open }
+                        deleteDM={ this.props.deleteDM } />
+                </section>
+                { this.state.modal ? (
+                    <aside className="modal-container">
                         <CreateChannelModal 
                             close={ this.props.closeModal } />
-                    ) : null } */}
-                </div>
-                {/* Add BROWSE functionality later */}
-                <DisplayList
-                    type={ this.props.type } 
-                    content={ this.props.content }
-                    open={ this.state.open }
-                    deleteDM={ this.props.deleteDM } />
-            </section>
+                    </aside>
+                ) : null }
+            </>
         )
     }
-}
+}   
 
 export default DisplayIndex;
