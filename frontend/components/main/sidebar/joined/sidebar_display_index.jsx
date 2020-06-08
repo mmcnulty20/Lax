@@ -1,17 +1,24 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DisplayList from "./sidebar_display_list";
+import CreateChannelModal from "./create_channel_modal";
 
 class DisplayIndex extends Component {
     componentDidMount(){
-        this.props.fetchIndex();
+        this.props.fetchIndex(this.props.currentUserId);
     }
 
     constructor(props) {
         super(props)
         this.state = {
             open: true,
+            modal: this.props.modal,
         }
+        this.showAddChannel = this.showAddChannel.bind(this)
+    }
+
+    showAddChannel(e){
+        this.setState({ ...this.state, modal: true })
     }
 
     render(){
@@ -30,12 +37,16 @@ class DisplayIndex extends Component {
                         { this.props.type }
                     </div>
                     <figure>
-                        <div className="plus">
+                        <div className="plus" onClick={ this.showAddChannel }>
                             <span>
                                 +
                             </span>
                         </div>
                     </figure>
+                    {/* { this.state.modal ? (
+                        <CreateChannelModal 
+                            close={ this.props.closeModal } />
+                    ) : null } */}
                 </div>
                 {/* Add BROWSE functionality later */}
                 <DisplayList
