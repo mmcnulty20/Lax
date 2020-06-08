@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_035507) do
+ActiveRecord::Schema.define(version: 2020_06_08_201019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "channels", force: :cascade do |t|
     t.string "name", null: false
-    t.string "topic", null: false
+    t.string "topic", default: "Add a topic", null: false
     t.integer "admin_id", null: false
     t.boolean "is_private", default: false, null: false
     t.datetime "created_at", null: false

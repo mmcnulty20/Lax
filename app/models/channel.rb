@@ -13,6 +13,7 @@
 class Channel < ApplicationRecord
     validates :name, uniqueness: true
     validates :topic, :name, :admin_id, presence: true
+    before_validation :ensure_topic
     
     has_many :memberships,
         as: :joinable
@@ -24,4 +25,9 @@ class Channel < ApplicationRecord
     has_many :members,
         through: :memberships,
         source: :user
+    
+    private
+    def ensure_topic
+        self.topic ||= "Add a topic."
+    end
 end

@@ -18,18 +18,18 @@ users = User.create([
 ])
 
 channels = Channel.create!([
-    { name: "test channel 1",
+    { name: "test-channel-1",
         topic: "This is only temporary, but more info when I'm more creative",
         admin_id: users[2].id },
-    { name: "test channel 2",
+    { name: "test-channel-2",
         topic: "This is only temporary, but more info when I'm more creative",
         admin_id: users[0].id,
         is_private: false },
-    { name: "dungeons and dragons",
+    { name: "dungeons-and-dragons",
         topic: "Talk about and plan your newest adventures",
         admin_id: users[1].id,
         is_private: false },
-    { name: "dms only",
+    { name: "dms-only",
         topic: "Only dungeon masters here, laugh about your players!",
         admin_id: users[1].id,
         is_private: true },

@@ -218,13 +218,16 @@
             width: 100vw;
             z-index: 2;
             top: 0;
-            // margin-left: -50vh;
             left: 0;
             background: rgba($color: #000000, $alpha: 0.45);
             @include flex(row);
             .create-channel-modal {
+                box-shadow: 0 18px 48px 0 rgba($color: #000000, $alpha: 0.2);
                 position: relative;
                 height: 516px;
+                &.tall {
+                    height: 560px;
+                }
                 width: 520px;
                 background: $background;
                 color: $text;
@@ -275,22 +278,61 @@
                 form {
                     @include flex(column, flex-start, flex-start);
                     label {
+                        position: relative;
                         font-size: 14.5px;
                         font-weight: 600;
                         padding-top: 4px;
+                        svg {
+                            position: absolute;
+                            font-size: 13px;
+                            bottom: 34px;
+                            left: 15px;
+                            color: $light-grey-tan;
+                        }
                         input[type="text"] {
                             margin: 7px 0 18px 0;
                             height: 44px;
                             width: 464px;
                             border: 1px solid $lighter-grey-tan;
                             border-radius: 4px;
-                            padding: 4px 12px 4px 14px;
+                            padding: 7px 12px 4px 36px;
                             font-size: 16px;
                             font-weight: 400;
                             transition: .1s;
+                            &:-webkit-autofill,
+                            &:-webkit-autofill:hover,
+                            &:-webkit-autofill:focus,
+                            &:-webkit-autofill:active {
+                                transition: background-color 5000s ease-in-out 0s;
+                            }
                             &.focus-blue {
                                 border-color: transparent;
                                 box-shadow: 0 0 0 1px $link-hover-blue, 0 0 0 5px rgba($color: $light-teal, $alpha: 0.7);
+                                & + .counter {
+                                    display: block;
+                                }
+                            }
+                            &#topic {
+                                padding-left: 12px;
+                            }
+                        }
+                        .counter {
+                            position: absolute;
+                            right: 14.5px;
+                            bottom: 28px;
+                            font-size: 17px;
+                            color: $light-grey-tan;
+                            font-weight: 400;
+                            display: none;
+                        }
+                        .error {
+                            color: $err-light-red;
+                            font-weight: 500;
+                            font-size: 13.5px;
+                            &.empty {
+                                position: absolute;
+                                top: 4px;
+                                left: 54px;
                             }
                         }
                         .opt {
@@ -362,8 +404,8 @@
                                     right: 0;
                                     bottom: 0;
                                     
-                                    -webkit-transition: .4s;
-                                    transition: .4s;
+                                    -webkit-transition: .2s;
+                                    transition: .2s;
                                     border-radius: 18px;
                                     border: 1px solid $light-grey-tan;
                                     &:after {
@@ -375,13 +417,13 @@
                                         left: 5px;
                                         top: 4px;
                                         background-color: white;
-                                        -webkit-transition: .4s;
-                                        transition: .4s;
+                                        -webkit-transition: .2s;
+                                        transition: .2s;
                                         background: $lightest-text;
                                     }
-                                    &:focus {
-                                        box-shadow: 0 0 3px 3px blue;
-                                    }
+                                    // &:focus {
+                                    //     box-shadow: 0 0 3px 3px blue;
+                                    // }
                                 }
                             }
                         }
@@ -403,6 +445,9 @@
                             &:hover {
                                 cursor: default;
                             }
+                        }
+                        &.valid {
+                            background: $light-teal;
                         }
                     }
 

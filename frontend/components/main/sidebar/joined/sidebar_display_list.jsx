@@ -6,6 +6,7 @@ class DisplayList extends Component {
         super(props);
 
         this.handleClick = this.handleClick.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     handleClick(e){
@@ -14,8 +15,10 @@ class DisplayList extends Component {
     }
 
     handleDelete(id) {
-        if ( Number(isInteger(id)) ) {
-            this.props.deleteDM(id);
+        return e => {
+            if ( Number.isInteger(id) ) {
+                this.props.delete(id);
+            }
         }
     }
 
@@ -26,7 +29,7 @@ class DisplayList extends Component {
             return (
                 <ListItem
                     id={ item.id }
-                    owner={ item.owner }
+                    owner={ item.owner || item.admin }
                     key={ item.id }
                     name={ item.name }
                     icon={ icon }

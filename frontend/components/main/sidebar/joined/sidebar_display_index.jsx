@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DisplayList from "./sidebar_display_list";
-import CreateChannelModal from "./create_channel_modal";
+import CreateChannelModalContainer from "./channel_modal_container";
 
 class DisplayIndex extends Component {
     componentDidMount(){
@@ -12,14 +12,12 @@ class DisplayIndex extends Component {
         super(props)
         this.state = {
             open: true,
-            // modal: this.props.modal,
-            modal: true,
         }
-        this.showAddChannel = this.showAddChannel.bind(this)
+        this.showAddChannel = this.showAddChannel.bind(this);
     }
 
     showAddChannel(e){
-        this.setState({ ...this.state, modal: true })
+        this.props.openModal();
     }
 
     render(){
@@ -27,9 +25,9 @@ class DisplayIndex extends Component {
             <>
                 <section className={ `sidebar-section ${this.props.type === "Channels" ? "c" : "dm"} ${ this.state.open ? "open" : "closed" }`} >
                     <div className="section-head-container"
-                        onClick={ () => { 
-                            this.setState({ open: !this.state.open }) 
-                        } } >
+                        onClick={ e => {
+                                if ( e.target.className === "section-head" ) this.setState({ open: !this.state.open })
+                            } } >
                         <div className="section-head" >
                             { this.state.open ? (
                                 <FontAwesomeIcon icon="caret-down" />
@@ -51,12 +49,12 @@ class DisplayIndex extends Component {
                         type={ this.props.type } 
                         content={ this.props.content }
                         open={ this.state.open }
-                        deleteDM={ this.props.deleteDM } />
+                        delete={ this.props.delete } />
                 </section>
-                { this.state.modal ? (
+                { this.props.modal ? (
                     <aside className="modal-container">
-                        <CreateChannelModal 
-                            close={ this.props.closeModal } />
+                        <CreateChannelModalContainer
+                            closeModal={ this.props.closeModal } />
                     </aside>
                 ) : null }
             </>

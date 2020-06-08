@@ -14,8 +14,7 @@ const ListItem = ({ name, id, handleDelete, handleClick, icon, owner }) => (
         </span>
         { owner === true ? (
             <div onClick={ (e) => { 
-                e.persist();
-                handleDelete(id);
+                handleDelete(id)(e);
              } }>
                 <figure className="x">
                     X

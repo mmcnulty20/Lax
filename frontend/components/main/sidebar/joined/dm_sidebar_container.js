@@ -29,7 +29,7 @@ const mapStateToProps = ({ entities: { dms } }) => {
 const mapDispatchToProps = dispatch => (
     {
         fetchIndex: () => null,
-        deleteDM: id => null,
+        delete: id => null,
     }
 )
 

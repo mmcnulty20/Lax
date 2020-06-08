@@ -49,7 +49,7 @@ button {
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
-      box-shadow: 0 0 0 1000px inset inherit;
+      transition: background-color 5000s ease-in-out 0s;
   }
 }
 
