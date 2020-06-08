@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_045500) do
+ActiveRecord::Schema.define(version: 2020_06_08_035507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channels", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "topic", null: false
+    t.integer "admin_id", null: false
+    t.boolean "is_private", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_channels_on_admin_id"
+    t.index ["name"], name: "index_channels_on_name", unique: true
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "joinable_type", null: false
+    t.bigint "joinable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["joinable_type", "joinable_id"], name: "index_memberships_on_joinable_type_and_joinable_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false

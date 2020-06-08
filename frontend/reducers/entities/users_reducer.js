@@ -2,8 +2,10 @@ import { RECEIVE_ALL_USERS,
             RECEIVE_CURRENT_USER, 
             RECEIVE_USER_DETAILS,
             REMOVE_USER} from "../../actions/session_actions";
+import { RECEIVE_CHANNEL } from "../../actions/channel_actions";
 
 const usersReducer = (state = {}, action) => {
+    debugger
     Object.freeze(state);
     let newState = {...state}
     switch (action.type) {
@@ -18,6 +20,9 @@ const usersReducer = (state = {}, action) => {
         case RECEIVE_CURRENT_USER:
             newState[action.user.id] = action.user;
             return newState;
+        case RECEIVE_CHANNEL: {
+            return { ...state, ...action.channel.users }
+        }
         default:
             return state;
     }
