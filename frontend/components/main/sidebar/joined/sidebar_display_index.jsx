@@ -1,17 +1,24 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DisplayList from "./sidebar_display_list";
+import CreateChannelModal from "./create_channel_modal";
 
 class DisplayIndex extends Component {
     componentDidMount(){
-        this.props.fetchIndex();
+        this.props.fetchIndex(this.props.currentUserId);
     }
 
     constructor(props) {
         super(props)
         this.state = {
             open: true,
+            modal: this.props.modal,
         }
+        this.showAddChannel = this.showAddChannel.bind(this)
+    }
+
+    showAddChannel(e){
+        this.setState({ ...this.state, modal: true })
     }
 
     render(){
@@ -19,9 +26,9 @@ class DisplayIndex extends Component {
             <section className={ `sidebar-section ${this.props.type === "Channels" ? "c" : "dm"} ${ this.state.open ? "open" : "closed" }`} >
                 <div className="section-head-container"
                     onClick={ () => { 
-                        console.log(`Old Open: ${this.state.open}`)
+                        //console.log(`Old Open: ${this.state.open}`)
                         this.setState({ open: !this.state.open }) 
-                        console.log(`New Open: ${this.state.open}`)
+                        //console.log(`New Open: ${this.state.open}`)
                     } } >
                     <div className="section-head" >
                         { this.state.open ? (
@@ -32,12 +39,16 @@ class DisplayIndex extends Component {
                         { this.props.type }
                     </div>
                     <figure>
-                        <div className="plus">
+                        <div className="plus" onClick={ this.showAddChannel }>
                             <span>
                                 +
                             </span>
                         </div>
                     </figure>
+                    {/* { this.state.modal ? (
+                        <CreateChannelModal 
+                            close={ this.props.closeModal } />
+                    ) : null } */}
                 </div>
                 {/* Add BROWSE functionality later */}
                 <DisplayList

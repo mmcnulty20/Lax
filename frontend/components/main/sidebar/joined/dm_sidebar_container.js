@@ -28,8 +28,8 @@ const mapStateToProps = ({ entities: { dms } }) => {
 
 const mapDispatchToProps = dispatch => (
     {
-        fetchIndex: () => console.log("fetching DMs"),
-        deleteDM: id => console.log(`Deleting DM ${id}`),
+        fetchIndex: () => "fetching DMs",
+        deleteDM: id => `Deleting DM ${id}`
     }
 )
 
