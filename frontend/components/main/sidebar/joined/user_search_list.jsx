@@ -1,20 +1,26 @@
 import React from "react";
 import DefaultAvatarIcon from "../../avatar_icon";
 
-const UserSearchList = ({ members, inputValue, onInputChange, filtered, focus, blur, focused,height }) => (
-    <label htmlFor="user-search" >
-        <div className="search-bar-container">
-        { members }
-        <input type="text"
-            className={ focused === "search-text" ? "focus-blue" : "" }
-            id="search-text"
-            value={ inputValue }
-            placeholder={ members ? "" : "Figaro, name@example.com" }
-            onChange={ e => onInputChange(e) }
-            autoComplete="off"
-            onBlur={ e => blur(e) }
-            onFocus={ e => focus(e) } />
-        </div>
+const UserSearchList = ({ members, inputValue, onInputChange, filtered, focus, blur, focused,height }) => {
+    return (
+    <label htmlFor="user-search" className="user-search" >
+        {/* <div className="search-bar-container"> */}
+            <ul className="members-selected">
+        { [ ...members, (
+            <li key="input" className="input">
+                <input type="text"
+                    className={ focused === "search-text" ? "focus-blue" : "" }
+                    id="search-text"
+                    value={ inputValue }
+                    placeholder={ members.length !== 0 ? "" : "Figaro, name@example.com" }
+                    onChange={ e => onInputChange(e) }
+                    autoComplete="off"
+                    onBlur={ e => blur(e) }
+                    onFocus={ e => focus(e) } />
+            </li>
+            ) ] }
+            </ul>
+        {/* </div> */}
         <ul className={ `search-results${ 
             ( focused === "search-text" ||
                 typeof focused === "number" ) &&
@@ -35,6 +41,6 @@ const UserSearchList = ({ members, inputValue, onInputChange, filtered, focus, b
         </ul>
 
     </label>
-)
+)}
 
 export default UserSearchList;

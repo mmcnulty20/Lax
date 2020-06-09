@@ -43,7 +43,7 @@ class AddUsersToChannelModal extends Component {
 
     _switchSelected(all){
         if ( all === false ) {
-            this.setState({ all: false, skip: this.state.members.length === 0 })
+            this.setState({ all: false, skip: size(this.state.members) === 0 })
         } else {
             this.setState({ all: true, skip: false, members: {} })
         }
@@ -51,8 +51,8 @@ class AddUsersToChannelModal extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // console.log(e.target)
-        // console.log("hello from submit")
+        console.log(this.state.members)
+        console.log("hello from submit")
         // this.props.addMembers(this.state.members).then( () => this.props.closeModal() );
     }
 
@@ -137,7 +137,7 @@ class AddUsersToChannelModal extends Component {
 
                     <label htmlFor="names">
                         <UserSearchContainer
-                            members={ size( this.state.members ) > 0 ? ( <ul className="members-selected">{ members }</ul> ) : null }
+                            members={ size( this.state.members ) > 0 ? members : [] }
                             // height={ Math.floor(members.length / 2) + 1 }
                             users={ Object.values( this.props.users ) }
                             focus={ this.handleFocus } />

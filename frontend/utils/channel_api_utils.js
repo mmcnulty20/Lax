@@ -48,3 +48,11 @@ export const checkName = name => (
         url: `/api/channels/already_taken/?channel[name]=${ name }`,
     })
 )
+
+export const addChannelMembers = (channelId, user_ids) => (
+    $.ajax({
+        method: "POST",
+        url: `/api/channels/${channelId}/memberships`,
+        data: { members: { user_ids } }
+    })
+)

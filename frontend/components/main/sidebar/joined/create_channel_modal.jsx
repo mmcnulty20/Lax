@@ -22,7 +22,7 @@ class CreateChannelModal extends Component {
             nameError: "",
             remainingChars: 80,
             extraHeight: false,
-            addUsers: true,
+            addUsers: false,
         }
         this.nameExists = this.props.nameExists
         this.mounted = true;

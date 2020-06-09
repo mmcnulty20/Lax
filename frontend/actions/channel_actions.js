@@ -88,3 +88,9 @@ export const checkName = name => {
         return dispatch(receiveNameBool(inUse))
     })
 }
+
+export const addChannelMembers = userIds => {
+    return dispatch => ChannelAPIUtil.addChannelMembers(userIds).then(
+        res => dispatch(receiveChannel(res))
+    )
+}

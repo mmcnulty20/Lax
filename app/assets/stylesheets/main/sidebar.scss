@@ -524,30 +524,26 @@
                             position: relative;
                             top: 2px;
                         }
-                        .search-bar-container {
+                        .members-selected {
                             @include flex(row, flex-start, flex-start);
                             flex-wrap: wrap;
                             min-height: 44px;
                             position: relative;
-                            // display: block;
-                            // overflow: auto;
                             margin: 13px 0 18px 0;
                             border: 1px solid $lighter-grey-tan;
                             border-radius: 4px;
                             background: white;
                             height: 100%;
                             width: 464px;
+                            padding-top: 2px;
+                            li.input {
+                                width: 125px;
+                            }
                             input[type="text"] {
-                                padding: 7px 12px 4px 12px;
-                                display: inline-block;
+                                padding: 3px 12px 4px 12px;
                                 border: none;
-                                height: 100%;
-                                min-width: 125px;
-                                // width: 125px;
-                                max-width: 100%;
-                                // min-height: 44px;
+                                height: 44px;
                                 background: transparent;
-                                // min-width: 464px;
                                 font-size: 16px;
                                 font-weight: 400;
                                 transition: .1s;
@@ -562,19 +558,19 @@
                                         border-color: transparent;
                                         box-shadow: 0 0 0 1px $link-hover-blue, 0 0 0 5px rgba($color: $light-teal, $alpha: 0.7);
                                     }
-                            .members-selected {
-                                // position: relative;
-                                // top: -20px;
-                                @include flex(row, flex-start, flex-start);
-                                flex-wrap: wrap;
-                                max-width: 320px;
+                            // .members-selected {
+                            //     // position: relative;
+                            //     // top: -20px;
+                            //     @include flex(row, flex-start, flex-start);
+                            //     flex-wrap: wrap;
+                            //     max-width: 320px;
                     
-                                li {
+                                li:not(.input) {
                                     position: relative;
                                     @include flex(row, center, flex-start);
                                     height: 32px;
                                     padding: 0 30px 0 38px;
-                                    margin: 5px;
+                                    margin: 5px 5px 0;
                                     background: $light-blue-grey;
                                     border-radius: 3px;
                                     overflow: none;
@@ -624,9 +620,14 @@
                                             }
                                         }
                                     }
-                                }
+                                // }
                             }
 
+                        }
+                        .user-search {
+                            position: absolute;
+                            min-height: 44px;
+                            // top: 100%;
                         }
                         ul.search-results {
                             max-height: 264px;
@@ -636,10 +637,10 @@
                             background: $background;
                             position: absolute;
                             z-index: 2;
-                            top: 182px;
-                            left: 18px;
+                            top: calc(100% - 24px);
+                            left: -11px;
                             padding: 12px 0;
-                            overflow-y: scroll;
+                            overflow-y: auto;
                             display: none;
                             &.open {
                                 display: block;
