@@ -228,6 +228,9 @@
                 &.tall {
                     height: 560px;
                 }
+                &.mid {
+                    height: 538px
+                }
                 width: 520px;
                 background: $background;
                 color: $text;
@@ -451,6 +454,165 @@
                         }
                     }
 
+                }
+            }
+            .add-users-new-channel {
+                box-shadow: 0 18px 48px 0 rgba($color: #000000, $alpha: 0.2);
+                position: relative;
+                height: 386px;
+                width: 520px;
+                background: $background;
+                color: $text;
+                border-radius: 8px;
+                .head {
+                    @include flex(column, flex-start, flex-start);
+                    padding: 12px 28px;
+                    height: 70px;
+                    h2 {
+                        font-size: 18px;
+                        font-weight: 700;
+                        letter-spacing: -1px;
+                    }
+                    .channel-name {
+                        padding-left: 9px;
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: $lighter-grey-tan;
+                        svg {
+                            font-size: 8px;
+                            position: absolute;
+                            left: 29px;
+                            top: 44px;
+                        }
+                    }
+                    button {
+                        height: 36px;
+                        width: 36px;
+                        position: absolute;
+                        right: 21px;
+                        top: 20px;
+                        padding: 8px;
+                        color: $light-grey-tan;
+                        border-radius: 4px;
+                        &:hover {
+                            background: rgba($color: $light-tan, $alpha: 0.75);
+                            color: $text;
+                        }
+                        .x {
+                            display: block;
+                            position: relative;
+                            right: -7px;
+                            bottom: 6.5px;
+                            height: 17.69px;
+                            width: 11.4px;
+                            font-size: 18px;
+                            transform: scale(1.75,1.13);
+                        }
+                    }
+                }
+                form {
+                    padding: 6px 28px;
+                    @include flex(column, flex-start, flex-start);
+                    label {
+                        font-size: 15px;
+                        font-weight: 400;
+                        letter-spacing: -0.3px;
+                        margin: 1px 12px 3px 0;
+                        line-height: 22px;
+                        strong {
+                            font-weight: 500;
+                        }
+                        input[type="radio"] {
+                            margin: -2px 12px 0 0;
+                            position: relative;
+                            top: 2px;
+                        }
+                        input[type="text"] {
+                            margin: 13px 0 18px 0;
+                            height: 44px;
+                            width: 464px;
+                            border: 1px solid $lighter-grey-tan;
+                            border-radius: 4px;
+                            padding: 7px 12px 4px 12px;
+                            font-size: 16px;
+                            font-weight: 400;
+                            transition: .1s;
+                            &:-webkit-autofill,
+                            &:-webkit-autofill:hover,
+                            &:-webkit-autofill:focus,
+                            &:-webkit-autofill:active {
+                                transition: background-color 5000s ease-in-out 0s;
+                            }
+                            &.focus-blue {
+                                border-color: transparent;
+                                box-shadow: 0 0 0 1px $link-hover-blue, 0 0 0 5px rgba($color: $light-teal, $alpha: 0.7);
+                            }
+                        }
+                        ul.search-results {
+                            max-height: 264px;
+                            width: 486px;
+                            border: 1px solid $dark-tan;
+                            border-radius: 5px;
+                            background: $background;
+                            position: absolute;
+                            z-index: 2;
+                            top: 182px;
+                            left: 18px;
+                            padding: 12px 0;
+                            overflow-y: scroll;
+                            display: none;
+                            &.open {
+                                display: block;
+                            }
+                            li {
+                                height: 32px;
+                                width: 100%;
+                                padding: 6px 21px;
+                                font-size: 14px;
+                                @include flex(row, flex-start, flex-start);
+                                font-weight: 500;
+                                &:hover {
+                                    background: $link-blue;
+                                    color: $background;
+                                    cursor: pointer;
+                                }
+                                .avatar {
+                                    height: 20px;
+                                    width: 20px;
+                                    background: $light-blue-grey;
+                                    border-radius: 4px;
+                                    overflow: none;
+                                    margin-right: 8px;
+                                }
+                            }
+                        }
+                    }
+
+
+                    button {
+                        position: absolute;
+                        right: 28px;
+                        bottom: 24px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        height: 36px;
+                        text-align: center;
+                        border-radius: 4px;
+                        padding: 2px 11px 0;
+                        &:not(.skip) {
+                            width: 80px;
+                            color: $background;
+                            background: $green;
+                        }
+                        &.skip {
+                            border: 1px solid rgba($color: $lighter-grey-tan, $alpha: 0.5);
+                            width: 110px;
+                            &:hover {
+                                cursor: pointer;
+                                background: rgba($color: $lighter-grey-tan, $alpha: .1);
+                            }
+                        }
+                    }
                 }
             }
         }

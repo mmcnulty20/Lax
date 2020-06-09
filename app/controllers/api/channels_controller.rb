@@ -47,6 +47,7 @@ class Api::ChannelsController < ApplicationController
 
     def already_taken
         existing = Channel.find_by(name: channel_params[:name]) || User.find_by(username: channel_params[:name])
+        render json: { "inUse": !!existing }
     end
 
     private

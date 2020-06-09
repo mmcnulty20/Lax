@@ -10,7 +10,7 @@ const ListItem = ({ name, id, handleDelete, handleClick, icon, owner }) => (
             <FontAwesomeIcon icon={icon} />
         </figure>
         <span>
-            { name } 
+            { name.length > 22 ? name.slice(0,20)+"..." : name } 
         </span>
         { owner === true ? (
             <div onClick={ (e) => { 

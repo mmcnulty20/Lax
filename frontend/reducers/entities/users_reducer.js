@@ -5,7 +5,6 @@ import { RECEIVE_ALL_USERS,
 import { RECEIVE_CHANNEL } from "../../actions/channel_actions";
 
 const usersReducer = (state = {}, action) => {
-    debugger
     Object.freeze(state);
     let newState = {...state}
     switch (action.type) {

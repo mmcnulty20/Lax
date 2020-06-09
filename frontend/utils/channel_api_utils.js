@@ -41,3 +41,10 @@ export const deleteChannel = id => (
         url: `/api/channels/${id}`
     })
 )
+
+export const checkName = name => (
+    $.ajax({
+        method: "GET",
+        url: `/api/channels/already_taken/?channel[name]=${ name }`,
+    })
+)

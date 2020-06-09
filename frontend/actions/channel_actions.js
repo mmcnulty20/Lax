@@ -4,6 +4,7 @@ export const RECEIVE_CHANNELS = "RECEIVE_CHANNELS";
 export const RECEIVE_CHANNEL = "RECEIVE_CHANNEL";
 export const REMOVE_CHANNEL = "REMOVE_CHANNEL";
 export const RECEIVE_CHANNEL_ERRORS = "RECEIVE_CHANNEL_ERRORS"
+export const RECEIVE_NAME_BOOL = "RECEIVE_NAME_BOOL";
 
 const receiveChannels = channels => (
     {
@@ -30,6 +31,13 @@ const receiveChannelErrors = ({ responseJSON }) => (
     {
         type: RECEIVE_CHANNEL_ERRORS,
         errors: responseJSON,
+    }
+)
+
+const receiveNameBool = bool => (
+    {
+        type: RECEIVE_NAME_BOOL,
+        bool
     }
 )
 
@@ -73,4 +81,10 @@ export const deleteChannel = id => {
         () => dispatch(removeChannel(id)),
         res => receiveChannelErrors(res)
     )
+}
+
+export const checkName = name => {
+    return dispatch => ChannelAPIUtil.checkName(name).then( ({ inUse }) => {
+        return dispatch(receiveNameBool(inUse))
+    })
 }

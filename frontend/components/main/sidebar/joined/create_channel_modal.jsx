@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import debounce from "lodash/debounce"
+import AddUsersModalContainer from "./add_users_modal_container";
 
 class CreateChannelModal extends Component {
     componentWillUnmount(){
         this.mounted = false;
+    }
+
+    shouldComponentUpdate({ nameExists }) {
+        if ( nameExists !== undefined ) this.nameExists = nameExists;
+        return true;
     }
 
     constructor(props) {
@@ -16,7 +22,9 @@ class CreateChannelModal extends Component {
             nameError: "",
             remainingChars: 80,
             extraHeight: false,
+            addUsers: true,
         }
+        this.nameExists = this.props.nameExists
         this.mounted = true;
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +47,13 @@ class CreateChannelModal extends Component {
         if (id === "name") {
             if (!this.debounce) {
                 this.debounce = debounce( () => {
-                    this.checkNameErrs()
+                    if ( this.mounted ) {
+                        this.props.checkName(this.state.name).then( () => {
+                            console.log("name checked!")
+                            this.checkNameErrs()
+                        }
+                        )
+                    }
                 }, 700 );
             }
             val = val.toLowerCase();
@@ -53,12 +67,16 @@ class CreateChannelModal extends Component {
         if ( this.mounted ) {
             name = name || this.state.name;
             let err;
-            let height = false;
+            let height = "";
+            console.log(this.nameExists)
             if ( name.length === 0 ) {
                 err = "Don’t forget to name your channel.";
+            } else if ( this.props.nameExists ) {
+                err = "That name is already taken by a channel or user."
+                height = "mid"
             } else if ( !this.validName(name) ) {
                 err = "Channel names can’t contain spaces, periods, or most punctuation. Try again?";
-                height = true
+                height = "tall"
             } else { err = "" };
             err = err ? ( <span className={`error ${ name.length === 0 ? "empty" : "symbol"}`}>{err}</span> ) : "";
             this.setState({ nameError: err, extraHeight: height });
@@ -74,7 +92,7 @@ class CreateChannelModal extends Component {
         e.preventDefault();
         const { name, topic, isPrivate } = this.state;
         const channel = { name, topic, isPrivate }
-        this.props.create(channel).then( () => this.closeModal() );
+        this.props.create(channel).then( () => this.setState({ addUsers: true }) );
     }
 
     handleFocus(e) {
@@ -87,7 +105,8 @@ class CreateChannelModal extends Component {
 
     render(){
         return (
-            <figure className={`create-channel-modal${ this.state.extraHeight ? " tall" : "" }`}>
+            <> { !this.state.addUsers ? (
+            <figure className={`create-channel-modal ${ this.state.extraHeight }`}>
                 <section className="head">
                     <h2>Create a{this.state.isPrivate ? " private" : ""} channel</h2>
                     <button onClick={ () => this.props.closeModal() } >
@@ -150,9 +169,20 @@ class CreateChannelModal extends Component {
                     </label>
 
 
-                    <button className={ this.state.nameError || this.state.name.length === 0 ? "not-valid" : "valid"} >Create</button>
+                    <button 
+                        disabled={ !!this.state.nameError || this.state.name.length === 0 }
+                        className={ this.state.nameError || this.state.name.length === 0 ? "not-valid" : "valid"} >
+                        Create
+                    </button>
                 </form>
             </figure>
+            ) : (
+                <AddUsersModalContainer
+                    icon={ this.state.private ? "lock" : "hashtag" }
+                    name={ this.state.name }
+                     />
+            ) }
+            </>
         )
     }
 }
