@@ -56,7 +56,7 @@ body {
         border-bottom: 1px solid $dark-tan;
         .location-info {
             height: 40px;
-            width: 386px;
+            min-width: 386px;
             position: relative;
             h2 {
                 font-size: 13.5px;
@@ -72,6 +72,10 @@ body {
                     color: black;
                     top: 6px;
                     left: 0;
+                    &.fa-lock {
+                        width: 8.5px;
+                        height: 12px;
+                    }
                 }
             }
             ul {
@@ -82,8 +86,9 @@ body {
                     min-width: 36px;
                     padding: 0 6px;
                     height: 18px;
-                    margin-top: -3px;
+                    margin-top: -1px;
                     &:first-of-type {
+                        margin-top: -3px;
                         font-size: 14px;
                         letter-spacing: 1.4px;
                         margin-left: -6px;
@@ -95,14 +100,17 @@ body {
                         position: relative;
                         top: -1px;
                     }
-                    &:not(:last-of-type):after {
+                    &:nth-of-type(2) {
                         // border-right: 1px solid $dark-tan;
-                        content: " ";
+                        // content: " ";
                         height: 12px;
+                        padding: unset;
+                        min-width: unset;
                         width: 2px;
-                        background: $dark-tan;
+                        margin: unset;
+                        background: $light-tan;
                         position: relative;
-                        bottom: 2px;
+                        bottom: -1.5px;
                     }
                 }
             }

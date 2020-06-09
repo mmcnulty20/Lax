@@ -42,6 +42,9 @@ const SubHeader = ({ fetchDetails, locationDetails, path }) => {
                                 { locationDetails.members.length }
                             </li>
                             <li>
+                                
+                            </li>
+                            <li>
                                 { locationDetails.topic }
                             </li>
                     </ul>
