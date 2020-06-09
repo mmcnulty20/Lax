@@ -11,7 +11,6 @@ class Api::MembershipsController < ApplicationController
                         joinable_type: joined.is_a?(Channel) ? "Channel" : "DM"
                     } : nil
             end
-            debugger
             Membership.create!(new_members)
             if joined.is_a?(Channel)
                 @channel = joined

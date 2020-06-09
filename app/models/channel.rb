@@ -16,7 +16,8 @@ class Channel < ApplicationRecord
     before_validation :ensure_topic
     
     has_many :memberships,
-        as: :joinable
+        as: :joinable,
+        dependent: :destroy
 
     belongs_to :admin,
         class_name: :User,

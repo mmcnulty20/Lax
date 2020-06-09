@@ -3,6 +3,7 @@ import AddUsersToChannelModal from "./add_users_to_channel_modal"
 import { closeModal } from "../../../../actions/ui_actions"
 import { retrieveAllUsers } from "../../../../actions/session_actions"
 import { addChannelMembers } from "../../../../actions/channel_actions"
+import { withRouter } from "react-router-dom"
 
 const mapStateToProps = ({entities: { users } }) => (
     {
@@ -14,8 +15,8 @@ const mapDispatchToProps = dispatch => (
     {
         closeModal: () => dispatch(closeModal()),
         retrieveAllUsers: () => dispatch(retrieveAllUsers()),
-        addMembers: userIds => dispatch(addChannelMembers(userIds)),
+        addMembers: (channelId, userIds) => dispatch(addChannelMembers(channelId, userIds)),
     }
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddUsersToChannelModal)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddUsersToChannelModal))

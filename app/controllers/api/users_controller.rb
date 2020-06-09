@@ -10,6 +10,7 @@ class Api::UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+            Membership.create({ user_id: @user.id, joinable_id: Channel.first.id, joinable_type: "Channel" })
             login!(@user)
             render :user_stub
         else

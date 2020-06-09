@@ -34,7 +34,8 @@ class User < ApplicationRecord
         class_name: :Channel,
         foreign_key: :admin_id
 
-    has_many :memberships
+    has_many :memberships,
+        dependent: :destroy
 
     has_many :joined_channels,
         through: :memberships,

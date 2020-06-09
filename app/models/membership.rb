@@ -11,6 +11,7 @@
 #
 class Membership < ApplicationRecord
     validates :user_id, :joinable_type, :joinable_id, presence: true
+    validates :user_id, uniqueness: { scope: [:joinable_type, :joinable_id] }
 
     belongs_to :user
 

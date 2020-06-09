@@ -53,7 +53,16 @@ class AddUsersToChannelModal extends Component {
         e.preventDefault();
         console.log(this.state.members)
         console.log("hello from submit")
-        // this.props.addMembers(this.state.members).then( () => this.props.closeModal() );
+        const members = this.state.members;
+        const newMembers = size(members) > 0 ? Object.keys(members) : 
+            this.state.all ? Object.keys(this.props.users) : null
+            this.history.push(`/c/${ this.props.channelId }`)
+        if (newMembers !== null ) {
+            this.props.addMembers(this.props.channelId, newMembers).then( () => this.props.closeModal() )
+            this.history.push(`/c/${ this.props.channelId }`)
+        } else {
+            this.props.closeModal();
+        }
     }
 
     handleFocus(e) {

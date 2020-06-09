@@ -89,8 +89,10 @@ export const checkName = name => {
     })
 }
 
-export const addChannelMembers = userIds => {
-    return dispatch => ChannelAPIUtil.addChannelMembers(userIds).then(
+export const addChannelMembers = (channel, userIds) => {
+    console.log(channel)
+    console.log(userIds)
+    return dispatch => ChannelAPIUtil.addChannelMembers(channel, userIds).then(
         res => dispatch(receiveChannel(res))
     )
 }

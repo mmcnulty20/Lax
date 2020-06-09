@@ -18,6 +18,9 @@ users = User.create([
 ])
 
 channels = Channel.create!([
+    { name: "welcome",
+    topic: "Welcome to Lax! Feel free to have a look around.",
+    admin_id: users[2].id },
     { name: "test-channel-1",
         topic: "This is only temporary, but more info when I'm more creative",
         admin_id: users[2].id },
@@ -40,12 +43,16 @@ memberships = Membership.create([
     { user_id: users[1].id, joinable_id: channels[0].id, joinable_type: "Channel" },
     { user_id: users[2].id, joinable_id: channels[0].id, joinable_type: "Channel" },
     { user_id: users[3].id, joinable_id: channels[0].id, joinable_type: "Channel" },
+    { user_id: users[1].id, joinable_id: channels[1].id, joinable_type: "Channel" },
     { user_id: users[0].id, joinable_id: channels[1].id, joinable_type: "Channel" },
     { user_id: users[2].id, joinable_id: channels[1].id, joinable_type: "Channel" },
+    { user_id: users[3].id, joinable_id: channels[1].id, joinable_type: "Channel" },
     { user_id: users[0].id, joinable_id: channels[2].id, joinable_type: "Channel" },
-    { user_id: users[1].id, joinable_id: channels[2].id, joinable_type: "Channel" },
     { user_id: users[2].id, joinable_id: channels[2].id, joinable_type: "Channel" },
-    { user_id: users[3].id, joinable_id: channels[2].id, joinable_type: "Channel" },
+    { user_id: users[0].id, joinable_id: channels[3].id, joinable_type: "Channel" },
     { user_id: users[1].id, joinable_id: channels[3].id, joinable_type: "Channel" },
     { user_id: users[2].id, joinable_id: channels[3].id, joinable_type: "Channel" },
+    { user_id: users[3].id, joinable_id: channels[3].id, joinable_type: "Channel" },
+    { user_id: users[1].id, joinable_id: channels[4].id, joinable_type: "Channel" },
+    { user_id: users[2].id, joinable_id: channels[4].id, joinable_type: "Channel" },
 ])

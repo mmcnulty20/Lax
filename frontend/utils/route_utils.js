@@ -5,9 +5,10 @@ import { Route,
 import { connect } from "react-redux";
 import { purgeErrors } from "./function_helpers";
 
-const mapStateToProps = ({session}) => {
+const mapStateToProps = ({ entities: { channels }, session: { currentUserId } }) => {
     return {
-        loggedIn: Boolean(session.currentUserId),
+        loggedIn: Boolean(currentUserId),
+        mainChannel: Object.keys(channels)[0]
     }
 }
 
@@ -19,6 +20,7 @@ const Auth = ({path, onLeave, loggedIn, exact, component: Component}) => {
             exact={exact}
             render={props => 
                 loggedIn ? <Redirect to="/" />: <Component {...props} />
+                // loggedIn ? <Redirect to={`/c/${mainChannel}`} />: <Component {...props} />
             }
         />
     )
