@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import debounce from "lodash/debounce"
 import UserSearchContainer from "./user_search_container";
+import DefaultAvatarIcon from "../../avatar_icon";
+import size from "lodash/size";
 
 class AddUsersToChannelModal extends Component {
     componentWillUnmount(){
         this.mounted = false;
     }
 
-    shouldComponentUpdate({ nameExists }) {
-        if ( nameExists !== undefined ) this.nameExists = nameExists;
-        return true;
+    componentDidMount(){
+        this.props.retrieveAllUsers();
     }
 
     constructor(props) {
@@ -18,13 +18,14 @@ class AddUsersToChannelModal extends Component {
         this.state = {
             all: true,
             skip: false,
-            members: [],
+            open: false,
+            members: {},
         }
 
         this.handleRadio = this.handleRadio.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
-        // this.handleBlur = this.handleBlur.bind(this);
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSearchClick = this.handleSearchClick.bind(this);
 
@@ -42,29 +43,57 @@ class AddUsersToChannelModal extends Component {
 
     _switchSelected(all){
         if ( all === false ) {
-            this.setState({ all: false, skip: true })
+            this.setState({ all: false, skip: this.state.members.length === 0 })
         } else {
-            this.setState({ all: true, skip: false, members: [] })
+            this.setState({ all: true, skip: false, members: {} })
         }
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(e.target)
-        console.log("hello from submit")
+        // console.log(e.target)
+        // console.log("hello from submit")
         // this.props.addMembers(this.state.members).then( () => this.props.closeModal() );
     }
 
     handleFocus(e) {
-        e.target.className += " focus-blue";
+        if ( e.target.id.slice(0,2) === "s-" ) {
+            this.handleSearchClick(e.target.id.slice(2))
+        }
         this._switchSelected(false)
     }
 
-    handleSearchClick(e) {
-        console.log(e.target);
+    handleSearchClick(id) {
+        const newState = { ...this.state.members, [id]: this.props.users[id] }
+        this.setState({ members: newState }, () => this._switchSelected(false) )
+    }
+
+    formatMembers(){
+        return Object.values(this.state.members).map( user => {
+            this.props.users[user.id].selected = true;
+            return (
+                <li key={user.id}> 
+                    <DefaultAvatarIcon username={ user.username } />
+                    { user.username }
+                    <button className="remove-member"
+                        onClick={ e => {
+                            const newState = { ...this.state.members }
+                            delete newState[e.target.id]
+                            this.setState({ members: newState })
+                        }} >
+                        <figure className="x" >
+                            <span id={ user.id }>
+                                x
+                            </span>
+                        </figure>
+                    </button>
+                </li>
+            )
+        } )
     }
 
     render(){
+        const members = this.formatMembers()
         return (
             <figure className="add-users-new-channel">
                 <section className="head">
@@ -92,7 +121,7 @@ class AddUsersToChannelModal extends Component {
                             onChange={ this.handleRadio }
                             checked={ this.state.all }
                              />
-                        Add all { this.props.users.length } members of <strong>Lax</strong>
+                        Add all { size(this.props.users) } members of <strong>Lax</strong>
                     </label>
 
                     <label htmlFor="add-specific">
@@ -106,11 +135,11 @@ class AddUsersToChannelModal extends Component {
 
                     <label htmlFor="names">
                         <UserSearchContainer
-                            users={ this.props.users }
-                            handleClick={ this.handleSearchClick }
-                            blur={ this.handleBlur }
+                            users={ Object.values( this.props.users ) }
                             focus={ this.handleFocus } />
                     </label>
+
+                    { size( this.state.members ) > 0 ? ( <ul className="members-selected">{ members }</ul> ) : null }
 
                     <button
                         className={ this.state.skip ? "skip" : "" } >

@@ -6,7 +6,7 @@ import Root from "./components/root";
 import { loginDemo, checkEmail } from "./actions/session_actions";
 import { fetchAllChannels, fetchChannel, fetchUserChannels } from "./actions/channel_actions";
 // import patterns from "./icons/svg_patterns";
-
+import size from "lodash/size";
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById("root");
     let preloadedState;
@@ -24,8 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
         delete window.currentUser
     }
     const store = configureStore(preloadedState)
-    window.userChannels = fetchUserChannels
-    window.getChannel = fetchChannel
+    window.size = size
+    // window.userChannels = fetchUserChannels
+    // window.getChannel = fetchChannel
     // window.checkEmail = checkEmail
     window.getState = store.getState()
     window.dispatch = store.dispatch

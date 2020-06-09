@@ -424,9 +424,6 @@
                                         transition: .2s;
                                         background: $lightest-text;
                                     }
-                                    // &:focus {
-                                    //     box-shadow: 0 0 3px 3px blue;
-                                    // }
                                 }
                             }
                         }
@@ -589,7 +586,7 @@
                     }
 
 
-                    button {
+                    button:not(.remove-member) {
                         position: absolute;
                         right: 28px;
                         bottom: 24px;

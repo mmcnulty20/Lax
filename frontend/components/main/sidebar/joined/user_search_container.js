@@ -9,4 +9,4 @@ const mapStateToProps = (state) => (
 
 
 
-export default connect(mapStateToProps,null)(UserSearch)
+export default connect(null,null)(UserSearch)
