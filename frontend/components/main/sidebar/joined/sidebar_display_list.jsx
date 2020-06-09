@@ -9,15 +9,20 @@ class DisplayList extends Component {
         this.handleDelete = this.handleDelete.bind(this);
     }
 
-    handleClick(e){
-        e.preventDefault;
-        //console.log(e.target);
+    handleClick(path){
+        return e => {
+            if ( e.target.className !== "x" ) {
+                e.preventDefault;
+                this.props.history.push(path);
+            }
+        }
     }
 
     handleDelete(id) {
         return e => {
             if ( Number.isInteger(id) ) {
                 this.props.delete(id);
+                this.props.history.push("/c/12")
             }
         }
     }
@@ -25,7 +30,6 @@ class DisplayList extends Component {
     _contentList(){
         return this.props.content.map( item => {
             const icon = this.props.type === "Channels" ? ( item.isPrivate ? "lock" : "hashtag" ) : "circle"
-            // ["far", "circle"]
             return (
                 <ListItem
                     id={ item.id }
@@ -33,7 +37,7 @@ class DisplayList extends Component {
                     key={ item.id }
                     name={ item.name }
                     icon={ icon }
-                    onClick={ this.handleClick }
+                    handleClick={ this.handleClick }
                     handleDelete={ this.handleDelete }
                     type={ this.props.type } />
             )

@@ -1,10 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ListItem = ({ name, id, handleDelete, handleClick, icon, owner }) => (
+const ListItem = ({ type, name, id, handleDelete, handleClick, icon, owner }) => (
     <li onClick={ e => {
         e.persist;
-        // handleClick(e)
+        const newPath = type === "Channels" ? `/c/${id}` : `/d/${id}`
+        handleClick(newPath)(e)
     }}>
         <figure className="icon">
             <FontAwesomeIcon icon={icon} />

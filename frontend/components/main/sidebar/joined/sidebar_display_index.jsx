@@ -46,6 +46,7 @@ class DisplayIndex extends Component {
                     </div>
                     {/* Add BROWSE functionality later */}
                     <DisplayList
+                        history={ this.props.history }
                         type={ this.props.type } 
                         content={ this.props.content }
                         open={ this.state.open }

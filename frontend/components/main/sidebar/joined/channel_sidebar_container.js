@@ -4,6 +4,7 @@ import { fetchUserChannels,
             fetchAllChannels,
             deleteChannel } from "../../../../actions/channel_actions"
 import { openModal } from "../../../../actions/ui_actions"
+import { withRouter } from "react-router-dom"
 
 const mapStateToProps = ({ entities: { channels }, session: { currentUserId }, ui: { modal } }) => {
     channels = Object.values(channels)
@@ -24,4 +25,4 @@ const mapDispatchToProps = dispatch => (
     }
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayIndex)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DisplayIndex))

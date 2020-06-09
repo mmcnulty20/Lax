@@ -23,7 +23,7 @@ import { faBars,
         faCheck } from '@fortawesome/free-solid-svg-icons';
 import { 
     faQuestionCircle,
-    // faCircle,
+    faUser,
 } from "@fortawesome/free-regular-svg-icons"
 import {
     fab,
@@ -37,4 +37,4 @@ export default library.add(
     faQuestionCircle, faInfoCircle, faTimes,
     faFeatherAlt, faCaretDown, faCaretRight,
     faCircle, faLock, faHashtag, faSearch,
-    faPlus, faCheck)
+    faPlus, faCheck, faUser)

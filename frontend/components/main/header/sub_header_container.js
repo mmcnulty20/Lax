@@ -1,10 +1,20 @@
 import { connect } from "react-redux";
 import SubHeader from "./sub_header";
+import { fetchChannel } from "../../../actions/channel_actions";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ entities }, { path }) => {
+    const locationDetails = path.slice(0,3) === "/c/" ? 
+        entities.channels[path.slice(3)] : ""
     return {
-        
+        path,
+        locationDetails,
     }
 }
 
-export default connect(null,null)(SubHeader);
+const mapDispatchToProps = dispatch => (
+    {
+        fetchDetails: id => dispatch(fetchChannel(id))
+    }
+)
+
+export default connect(mapStateToProps,mapDispatchToProps)(SubHeader);
