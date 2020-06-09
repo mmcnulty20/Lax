@@ -9,8 +9,6 @@ const usersReducer = (state = {}, action) => {
     let newState = {...state}
     switch (action.type) {
         case RECEIVE_ALL_USERS:
-            console.log(action.users)
-            // debugger
             return {...action.users, ...newState}
         case RECEIVE_USER_DETAILS:
             newState[action.user.id] = action.user;

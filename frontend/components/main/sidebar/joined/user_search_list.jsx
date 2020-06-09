@@ -1,19 +1,20 @@
 import React from "react";
 import DefaultAvatarIcon from "../../avatar_icon";
 
-const UserSearchList = ({ inputValue, onInputChange, filtered, focus, blur, focused }) => (
+const UserSearchList = ({ members, inputValue, onInputChange, filtered, focus, blur, focused,height }) => (
     <label htmlFor="user-search" >
-
+        <div className="search-bar-container">
+        { members }
         <input type="text"
             className={ focused === "search-text" ? "focus-blue" : "" }
             id="search-text"
             value={ inputValue }
-            placeholder="Figaro, name@example.com"
+            placeholder={ members ? "" : "Figaro, name@example.com" }
             onChange={ e => onInputChange(e) }
             autoComplete="off"
             onBlur={ e => blur(e) }
             onFocus={ e => focus(e) } />
-            
+        </div>
         <ul className={ `search-results${ 
             ( focused === "search-text" ||
                 typeof focused === "number" ) &&

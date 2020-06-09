@@ -524,26 +524,109 @@
                             position: relative;
                             top: 2px;
                         }
-                        input[type="text"] {
+                        .search-bar-container {
+                            @include flex(row, flex-start, flex-start);
+                            flex-wrap: wrap;
+                            min-height: 44px;
+                            position: relative;
+                            // display: block;
+                            // overflow: auto;
                             margin: 13px 0 18px 0;
-                            height: 44px;
-                            width: 464px;
                             border: 1px solid $lighter-grey-tan;
                             border-radius: 4px;
-                            padding: 7px 12px 4px 12px;
-                            font-size: 16px;
-                            font-weight: 400;
-                            transition: .1s;
-                            &:-webkit-autofill,
-                            &:-webkit-autofill:hover,
-                            &:-webkit-autofill:focus,
-                            &:-webkit-autofill:active {
-                                transition: background-color 5000s ease-in-out 0s;
+                            background: white;
+                            height: 100%;
+                            width: 464px;
+                            input[type="text"] {
+                                padding: 7px 12px 4px 12px;
+                                display: inline-block;
+                                border: none;
+                                height: 100%;
+                                min-width: 125px;
+                                // width: 125px;
+                                max-width: 100%;
+                                // min-height: 44px;
+                                background: transparent;
+                                // min-width: 464px;
+                                font-size: 16px;
+                                font-weight: 400;
+                                transition: .1s;
+                                &:-webkit-autofill,
+                                &:-webkit-autofill:hover,
+                                &:-webkit-autofill:focus,
+                                &:-webkit-autofill:active {
+                                    transition: background-color 5000s ease-in-out 0s;
+                                }
                             }
-                            &.focus-blue {
-                                border-color: transparent;
-                                box-shadow: 0 0 0 1px $link-hover-blue, 0 0 0 5px rgba($color: $light-teal, $alpha: 0.7);
+                                    &.focus-blue {
+                                        border-color: transparent;
+                                        box-shadow: 0 0 0 1px $link-hover-blue, 0 0 0 5px rgba($color: $light-teal, $alpha: 0.7);
+                                    }
+                            .members-selected {
+                                // position: relative;
+                                // top: -20px;
+                                @include flex(row, flex-start, flex-start);
+                                flex-wrap: wrap;
+                                max-width: 320px;
+                    
+                                li {
+                                    position: relative;
+                                    @include flex(row, center, flex-start);
+                                    height: 32px;
+                                    padding: 0 30px 0 38px;
+                                    margin: 5px;
+                                    background: $light-blue-grey;
+                                    border-radius: 3px;
+                                    overflow: none;
+                                    > span {
+                                        font-size: 17px;
+                                        font-weight: 600;
+                                    }
+                                    &:hover {
+                                        box-shadow: 0 0 0 1px rgba($color: $dark-tan, $alpha: 0.5),
+                                    }
+                                    .avatar {
+                                        width: 32px;
+                                        height: 32px;
+                                        position: absolute;
+                                        border-radius: 2px;
+                                        overflow: none;
+                                        border: 1px solid $dark-tan;
+                                        // background: rgba($color: $light-blue-grey, $alpha: 0.3);
+                                        background: mix($color1: $light-blue-grey, $color2: $background, $weight: 30%);
+                                        left: 0px;
+                                        bottom: 0px;
+                                    }
+                                    .remove-member {
+                                        height: 20px;
+                                        width: 20px;
+                                        position: absolute;
+                                        right: 4px;
+                                        bottom: 6px;
+                                        border-radius: 3px;
+                                        @include flex(row);
+                                        color: $lightest-text;
+                                        &:hover {
+                                            color: $text;
+                                            background: rgba($color: $light-grey-tan, $alpha: 0.15);
+                                        }
+                                        .x {
+                                            font-size: 14px;
+                                            transform: scale(1.7,1.13);
+                                            line-height: 12.3px;
+                                            span {
+                                                position: relative;
+                                                bottom: 0.8px;
+                                                left: 0.5px;
+                                                display: block;
+                                                height: 12.39px;
+                                                width: 8.24px;
+                                            }
+                                        }
+                                    }
+                                }
                             }
+
                         }
                         ul.search-results {
                             max-height: 264px;

@@ -51,6 +51,8 @@ class UserSearch extends Component {
     render(){
         return(
             <UserSearchList
+                members={ this.props.members }
+                height={ this.props.height }
                 focused={ this.state.focused  }
                 focus={ this.handleFocus }
                 blur={ this.handleBlur }

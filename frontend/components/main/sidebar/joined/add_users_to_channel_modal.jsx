@@ -74,7 +74,9 @@ class AddUsersToChannelModal extends Component {
             return (
                 <li key={user.id}> 
                     <DefaultAvatarIcon username={ user.username } />
-                    { user.username }
+                    <span>
+                        { user.username }
+                    </span>
                     <button className="remove-member"
                         onClick={ e => {
                             const newState = { ...this.state.members }
@@ -135,11 +137,11 @@ class AddUsersToChannelModal extends Component {
 
                     <label htmlFor="names">
                         <UserSearchContainer
+                            members={ size( this.state.members ) > 0 ? ( <ul className="members-selected">{ members }</ul> ) : null }
+                            // height={ Math.floor(members.length / 2) + 1 }
                             users={ Object.values( this.props.users ) }
                             focus={ this.handleFocus } />
-                    </label>
-
-                    { size( this.state.members ) > 0 ? ( <ul className="members-selected">{ members }</ul> ) : null }
+                    </label>                    
 
                     <button
                         className={ this.state.skip ? "skip" : "" } >
@@ -147,6 +149,7 @@ class AddUsersToChannelModal extends Component {
                     </button>
 
                 </form>
+
             </figure>
         )
     }
