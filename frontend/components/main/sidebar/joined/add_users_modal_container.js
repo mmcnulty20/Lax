@@ -5,11 +5,13 @@ import { retrieveAllUsers } from "../../../../actions/session_actions"
 import { addChannelMembers } from "../../../../actions/channel_actions"
 import { withRouter } from "react-router-dom"
 
-const mapStateToProps = ({entities: { users } }) => (
-    {
+const mapStateToProps = ({entities: { users }, session: { currentUserId } }) => {
+    users = { ...users }
+    delete users[currentUserId]
+    return {
         users,
     }
-)
+}
 
 const mapDispatchToProps = dispatch => (
     {

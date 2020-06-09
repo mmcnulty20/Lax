@@ -1,37 +1,43 @@
-import React from "react";
+import React, { useRef } from "react";
 import DefaultAvatarIcon from "../../avatar_icon";
 
-const UserSearchList = ({ members, inputValue, onInputChange, filtered, focus, blur, focused,height }) => {
+const UserSearchList = ({ members, inputValue, onInputChange, filtered, focus, blur, focused }) => {
+    const autoFocusEl = useRef(null)
     return (
     <label htmlFor="user-search" className="user-search" >
-        {/* <div className="search-bar-container"> */}
-            <ul className="members-selected">
-        { [ ...members, (
-            <li key="input" className="input">
-                <input type="text"
-                    className={ focused === "search-text" ? "focus-blue" : "" }
-                    id="search-text"
-                    value={ inputValue }
-                    placeholder={ members.length !== 0 ? "" : "Figaro, name@example.com" }
-                    onChange={ e => onInputChange(e) }
-                    autoComplete="off"
-                    onBlur={ e => blur(e) }
-                    onFocus={ e => focus(e) } />
-            </li>
+        <ul id="search-text" tabIndex="0"
+            onClick={ () => autoFocusEl.current.focus() }
+            className={ `members-selected${ 
+                focused === "search-text" ?
+                " focus-blue" : "" }` }>
+            
+            { [ ...members, (
+                <li key="input" className="input">
+                    <input type="text"
+                        ref={ autoFocusEl }
+                        id="search-text"
+                        value={ inputValue }
+                        placeholder={ members.length !== 0 ? "" : "Figaro, name@example.com" }
+                        onChange={ e => onInputChange(e) }
+                        autoComplete="off"
+                        onBlur={ e => blur(e) }
+                        onFocus={ e => focus(e) } />
+                </li>
             ) ] }
-            </ul>
-        {/* </div> */}
+        </ul>
+
         <ul className={ `search-results${ 
             ( focused === "search-text" ||
                 typeof focused === "number" ) &&
                 inputValue.length > 0 ? " open" : "" }`}>
             { filtered.length === 0 ? (
                 <li>
-                    No one found matching <strong> {inputValue}</strong>
+                    No one found matching <strong> {inputValue} </strong>
                 </li>
                 ) : filtered.map( user => (
                     <li key={user.id} id={ `s-${user.id}` }
-                        tabIndex="0"
+                        className={ user.selected ? "selected" : "" }
+                        tabIndex="1"
                         onFocus={ e => focus(e) }
                         onBlur={ e => blur(e) } >
                         <DefaultAvatarIcon username={ user.username } />

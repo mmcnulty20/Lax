@@ -30,6 +30,7 @@ class AddUsersToChannelModal extends Component {
         this.handleSearchClick = this.handleSearchClick.bind(this);
 
         this._switchSelected = this._switchSelected.bind(this);
+        this.handleMemberRemove = this.handleMemberRemove.bind(this);
     }
 
     handleClose(e) {
@@ -51,8 +52,6 @@ class AddUsersToChannelModal extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state.members)
-        console.log("hello from submit")
         const members = this.state.members;
         const newMembers = size(members) > 0 ? Object.keys(members) : 
             this.state.all ? Object.keys(this.props.users) : null
@@ -77,6 +76,13 @@ class AddUsersToChannelModal extends Component {
         this.setState({ members: newState }, () => this._switchSelected(false) )
     }
 
+    handleMemberRemove(e){
+        const newState = { ...this.state.members }
+        newState[e.target.id].selected = false
+        delete newState[e.target.id]
+        this.setState({ members: newState }, () => this._switchSelected(false))
+    }
+
     formatMembers(){
         return Object.values(this.state.members).map( user => {
             this.props.users[user.id].selected = true;
@@ -87,11 +93,7 @@ class AddUsersToChannelModal extends Component {
                         { user.username }
                     </span>
                     <button className="remove-member"
-                        onClick={ e => {
-                            const newState = { ...this.state.members }
-                            delete newState[e.target.id]
-                            this.setState({ members: newState })
-                        }} >
+                        onClick={ this.handleMemberRemove } >
                         <figure className="x" >
                             <span id={ user.id }>
                                 x

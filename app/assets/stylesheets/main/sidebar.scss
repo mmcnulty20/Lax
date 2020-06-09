@@ -554,80 +554,70 @@
                                     transition: background-color 5000s ease-in-out 0s;
                                 }
                             }
-                                    &.focus-blue {
-                                        border-color: transparent;
-                                        box-shadow: 0 0 0 1px $link-hover-blue, 0 0 0 5px rgba($color: $light-teal, $alpha: 0.7);
-                                    }
-                            // .members-selected {
-                            //     // position: relative;
-                            //     // top: -20px;
-                            //     @include flex(row, flex-start, flex-start);
-                            //     flex-wrap: wrap;
-                            //     max-width: 320px;
-                    
-                                li:not(.input) {
-                                    position: relative;
-                                    @include flex(row, center, flex-start);
+                            &.focus-blue {
+                                border-color: transparent;
+                                box-shadow: 0 0 0 1px $link-hover-blue, 0 0 0 5px rgba($color: $light-teal, $alpha: 0.7);
+                            }
+                            li:not(.input) {
+                                position: relative;
+                                @include flex(row, center, flex-start);
+                                height: 32px;
+                                padding: 0 30px 0 38px;
+                                margin: 5px 5px 0;
+                                background: $light-blue-grey;
+                                border-radius: 3px;
+                                overflow: none;
+                                > span {
+                                    font-size: 17px;
+                                    font-weight: 600;
+                                }
+                                &:hover {
+                                    box-shadow: 0 0 0 1px rgba($color: $dark-tan, $alpha: 0.5),
+                                }
+                                .avatar {
+                                    width: 32px;
                                     height: 32px;
-                                    padding: 0 30px 0 38px;
-                                    margin: 5px 5px 0;
-                                    background: $light-blue-grey;
-                                    border-radius: 3px;
+                                    position: absolute;
+                                    border-radius: 2px;
                                     overflow: none;
-                                    > span {
-                                        font-size: 17px;
-                                        font-weight: 600;
-                                    }
+                                    border: 1px solid $dark-tan;
+                                    background: mix($color1: $light-blue-grey, $color2: $background, $weight: 30%);
+                                    left: 0px;
+                                    bottom: 0px;
+                                }
+                                .remove-member {
+                                    height: 20px;
+                                    width: 20px;
+                                    position: absolute;
+                                    right: 4px;
+                                    bottom: 6px;
+                                    border-radius: 3px;
+                                    @include flex(row);
+                                    color: $lightest-text;
                                     &:hover {
-                                        box-shadow: 0 0 0 1px rgba($color: $dark-tan, $alpha: 0.5),
+                                        color: $text;
+                                        background: rgba($color: $light-grey-tan, $alpha: 0.15);
                                     }
-                                    .avatar {
-                                        width: 32px;
-                                        height: 32px;
-                                        position: absolute;
-                                        border-radius: 2px;
-                                        overflow: none;
-                                        border: 1px solid $dark-tan;
-                                        // background: rgba($color: $light-blue-grey, $alpha: 0.3);
-                                        background: mix($color1: $light-blue-grey, $color2: $background, $weight: 30%);
-                                        left: 0px;
-                                        bottom: 0px;
-                                    }
-                                    .remove-member {
-                                        height: 20px;
-                                        width: 20px;
-                                        position: absolute;
-                                        right: 4px;
-                                        bottom: 6px;
-                                        border-radius: 3px;
-                                        @include flex(row);
-                                        color: $lightest-text;
-                                        &:hover {
-                                            color: $text;
-                                            background: rgba($color: $light-grey-tan, $alpha: 0.15);
-                                        }
-                                        .x {
-                                            font-size: 14px;
-                                            transform: scale(1.7,1.13);
-                                            line-height: 12.3px;
-                                            span {
-                                                position: relative;
-                                                bottom: 0.8px;
-                                                left: 0.5px;
-                                                display: block;
-                                                height: 12.39px;
-                                                width: 8.24px;
-                                            }
+                                    .x {
+                                        font-size: 14px;
+                                        transform: scale(1.7,1.13);
+                                        line-height: 12.3px;
+                                        span {
+                                            position: relative;
+                                            bottom: 0.8px;
+                                            left: 0.5px;
+                                            display: block;
+                                            height: 12.39px;
+                                            width: 8.24px;
                                         }
                                     }
-                                // }
+                                }
                             }
 
                         }
                         .user-search {
                             position: absolute;
                             min-height: 44px;
-                            // top: 100%;
                         }
                         ul.search-results {
                             max-height: 264px;
@@ -650,6 +640,7 @@
                                 width: 100%;
                                 padding: 6px 21px;
                                 font-size: 14px;
+                                position: relative;
                                 @include flex(row, flex-start, flex-start);
                                 font-weight: 500;
                                 &:hover {
@@ -664,6 +655,18 @@
                                     border-radius: 4px;
                                     overflow: none;
                                     margin-right: 8px;
+                                }
+                                &.selected {
+                                    color: $link-blue;
+                                    &::before {
+                                        font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f00c";
+                                        position: absolute;
+                                        top: 7px;
+                                        left: 8.5px;
+                                        display: block;
+                                        font-size: 9.5px;
+                                        transform: scale(0.8,1);
+                                    }
                                 }
                             }
                         }
