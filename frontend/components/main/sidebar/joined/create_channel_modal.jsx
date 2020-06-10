@@ -49,7 +49,6 @@ class CreateChannelModal extends Component {
                 this.debounce = debounce( () => {
                     if ( this.mounted ) {
                         this.props.checkName(this.state.name).then( () => {
-                            console.log("name checked!")
                             this.checkNameErrs()
                         }
                         )
@@ -68,7 +67,6 @@ class CreateChannelModal extends Component {
             name = name || this.state.name;
             let err;
             let height = "";
-            console.log(this.nameExists)
             if ( name.length === 0 ) {
                 err = "Don’t forget to name your channel.";
             } else if ( this.props.nameExists ) {

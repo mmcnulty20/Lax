@@ -7,7 +7,7 @@ import { Redirect } from "react-router-dom";
 
 const MainHeader = props => (
     <div className="mainpage-head">
-        <SearchHeaderContainer />
+        <SearchHeaderContainer path={ props.location.pathname } />
         <SubHeaderContainer path={ props.location.pathname }/>
     </div>
 )

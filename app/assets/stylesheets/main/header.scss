@@ -37,20 +37,21 @@ body {
                 background: $background;
                 position: absolute;
                 top: 4px;
-                // z-index: 2;
+                z-index: 2;
+                max-height: 460px;
                 border: 1px solid $dark-tan;
                 border-radius: 8px;
                 left: calc(50% - 400px);
                 color: $text;
-                overflow-y: auto;
+
                 // overflow-x: hidden;
                 font-size: 14px;
                 padding-bottom: 12px;
                 &:hover { 
                     cursor: default;
                 }
-                li {
-                    &.input {
+
+                    .input {
                         @include flex(row, center, flex-start);
                         height: 44px;
                         border-bottom: 1px solid $dark-tan;
@@ -94,7 +95,10 @@ body {
                             }
                         }
                     }
-                    &:not(.input) {
+                    ul {
+                        max-height: 390px;
+                        overflow-y: auto;
+                        li {
                         height: 40px;
                         width: 100%;
                         margin: unset;
@@ -125,6 +129,7 @@ body {
                             }
                         }
                         a {
+                            width: 100%;
                             position: relative;
                             @include flex(row, center, space-between);
                             span {
@@ -143,29 +148,31 @@ body {
                                 height: 14px;
                                 width: 14px;
                                 position: absolute;
+                                left: 31px;
+                                top: 13px;
+                                transform: scale(0.9,1);
+                            }
+                        }
+                        &.no-search {
+                            position: relative;
+                            height: 40px;
+                            width: 100%;
+                            margin: unset;
+                            padding: 4px 28px 4px 60px;
+                            font-weight: 500;
+                            @include flex(row, center, flex-start);
+                            svg {
+                                color: $light-grey-tan;
+                                height: 14px;
+                                width: 14px;
+                                position: absolute;
                                 left: 30px;
                                 top: 8px;
                             }
                         }
                     }
-                    &.no-search {
-                        position: relative;
-                        height: 40px;
-                        width: 100%;
-                        margin: unset;
-                        padding: 4px 28px 4px 60px;
-                        font-weight: 500;
-                        @include flex(row, center, flex-start);
-                        svg {
-                            color: $light-grey-tan;
-                            height: 14px;
-                            width: 14px;
-                            position: absolute;
-                            left: 30px;
-                            top: 8px;
-                        }
-                    }
                 }
+                
             }
         }
         button:not(.search-button) {

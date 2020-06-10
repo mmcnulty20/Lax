@@ -5,6 +5,7 @@ export const RECEIVE_CHANNEL = "RECEIVE_CHANNEL";
 export const REMOVE_CHANNEL = "REMOVE_CHANNEL";
 export const RECEIVE_CHANNEL_ERRORS = "RECEIVE_CHANNEL_ERRORS"
 export const RECEIVE_NAME_BOOL = "RECEIVE_NAME_BOOL";
+export const RECEIVE_CHANNEL_SEARCH = "RECEIVE_CHANNEL_SEARCH"
 
 const receiveChannels = channels => (
     {
@@ -38,6 +39,13 @@ const receiveNameBool = bool => (
     {
         type: RECEIVE_NAME_BOOL,
         bool
+    }
+)
+
+const receiveChannelSearch = results => (
+    {
+        type: RECEIVE_CHANNEL_SEARCH,
+        results,
     }
 )
 
@@ -90,9 +98,14 @@ export const checkName = name => {
 }
 
 export const addChannelMembers = (channel, userIds) => {
-    console.log(channel)
-    console.log(userIds)
     return dispatch => ChannelAPIUtil.addChannelMembers(channel, userIds).then(
         res => dispatch(receiveChannel(res))
+    )
+}
+
+export const searchChannels = () => {
+    return dispatch => ChannelAPIUtil.searchChannels().then(
+        res => dispatch(receiveChannelSearch(res)),
+        res => receiveChannelErrors(res)
     )
 }

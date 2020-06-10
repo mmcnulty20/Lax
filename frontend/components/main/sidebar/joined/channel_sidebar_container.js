@@ -7,7 +7,9 @@ import { openModal } from "../../../../actions/ui_actions"
 import { withRouter } from "react-router-dom"
 
 const mapStateToProps = ({ entities: { channels }, session: { currentUserId }, ui: { modal } }) => {
-    channels = Object.values(channels)
+    channels = { ...channels }
+    delete channels["search"]
+    channels = Object.values(channels).filter( c => !c.members || c.members.includes(currentUserId) )
     return {
         type: "Channels",
         content: channels,

@@ -20,7 +20,6 @@ const usersReducer = (state = {}, action) => {
             newState[action.user.id] = action.user;
             return newState;
         case RECEIVE_CHANNEL: {
-            console.log(action.channel)
             return { ...state, ...action.channel.users }
         }
         default:

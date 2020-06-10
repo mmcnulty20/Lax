@@ -56,3 +56,10 @@ export const addChannelMembers = (channelId, user_ids) => (
         data: { members: { user_ids } }
     })
 )
+
+export const searchChannels = () => (
+    $.ajax({
+        method: "GET",
+        url: `/api/channels/?channel[search]=true`
+    })
+)

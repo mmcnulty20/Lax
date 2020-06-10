@@ -1,9 +1,12 @@
 class Api::ChannelsController < ApplicationController
     def index
-        @channels = params[:user_id] ? 
-            User.find(current_user.id).joined_channels :
-            Channel.all
-        render :index
+        if params[:user_id]
+            @channels = User.find(current_user.id).joined_channels
+            render :index
+        else
+            @channels = Channel.all
+            render ( channel_params[:search] ? "api/channels/search" : :index )
+        end
     end
 
     def show
@@ -52,6 +55,6 @@ class Api::ChannelsController < ApplicationController
 
     private
     def channel_params
-        params.require(:channel).permit(:name, :topic, :isPrivate)
+        params.require(:channel).permit(:name, :topic, :isPrivate, :search)
     end
 end

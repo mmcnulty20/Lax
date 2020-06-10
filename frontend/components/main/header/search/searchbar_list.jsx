@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 class SearchbarList extends Component {
 
     componentDidMount(){
-        this.props.fetchAllChannels()
+        this.props.searchChannels()
     }
 
     constructor(props){
@@ -17,7 +17,7 @@ class SearchbarList extends Component {
 
     filterResults(){
         const search = this.state.searchString.toLowerCase();
-        const filtered = this.props.channels.filter( c => c.name.slice(0, search.length).toLowerCase() === search )
+        const filtered = this.props.search.filter( c => c.name.slice(0, search.length).toLowerCase() === search )
         return filtered.slice(0,10)
     }
 
@@ -32,7 +32,12 @@ class SearchbarList extends Component {
                     </span>
                 </li>
                 { filtered.map( c => (
-                    <li key={ c.id } >
+                    <li key={ c.id } className="link"
+                        onMouseDown={ e => e.preventDefault() }
+                        // onClick={ e => {
+                            // this.props.history.push(`/c/${c.id}`) 
+                            // this.props.close()
+                         >
                         <Link to={ `/c/${c.id}` }>
                             <FontAwesomeIcon icon={ c.isPrivate ? "lock" : "hashtag" } />
                             <span>
@@ -44,10 +49,20 @@ class SearchbarList extends Component {
                 ))}
             </>
             ) : (
-            <>
-                <li key="no" className="no-search">
-                    Narrow your search
-                </li>
+            <> 
+                { this.state.searchString.length === 0 ? (
+                    <li key="no" className="no-search">
+                        Narrow your search
+                    </li>
+                ) : ( 
+                    <li key="string" className="string" >
+                        <FontAwesomeIcon icon="search" />
+                        <span>
+                            { this.state.searchString }
+                        </span>
+                    </li>
+                ) }
+
                 <li className="no-search">
                     <FontAwesomeIcon icon="search" />
                     Search for a channel name
@@ -58,10 +73,12 @@ class SearchbarList extends Component {
 
     render(){
         return(
-            <ul className="header-searchbar-dropdown"
+            <div className="header-searchbar-dropdown"
                 tabIndex="0"
+                // onFocus={ () => this.props.focus() }
+
                 onBlur={ () => this.props.close() } >
-                <li key="input" className="input">
+                <div key="input" className="input">
                     <FontAwesomeIcon icon="search" />
 
                     <input type="text"
@@ -72,7 +89,7 @@ class SearchbarList extends Component {
                         onClick={ () => this.setState({ searchString: "" }) }>
                         Clear
                     </button>
-
+                    
                     <button onClick={ () => this.props.close() } >
                         <figure className="x" >
                             <span>
@@ -80,9 +97,11 @@ class SearchbarList extends Component {
                             </span>
                         </figure>
                     </button>
-                </li>
-                { this.formatResults() }
-            </ul>
+                </div>
+                <ul>
+                    { this.formatResults() }
+                </ul>
+            </div>
         )
     }
 }

@@ -1,37 +1,44 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SearchListContainer from "./search_list_container";
+import { withRouter } from "react-router-dom";
 
 class Searchbar extends Component {
+    componentDidUpdate(prevProps, prevState){
+        if ( prevProps.location.pathname !== this.props.location.pathname ) {
+            this.setState({ open: false })
+        }
+    }
+
     constructor(props) {
         super(props)
         this.state = {
-            open: true,
+            open: false,
         }
         this.handleClose = this.handleClose.bind(this)
         this.handleOpen = this.handleOpen.bind(this)
     }
 
     handleClose(e){
-        this.setState({ open: true })
+        this.setState({ open: false })
     }
     handleOpen(e){
         this.setState({ open: true })
     }
 
     render(){
-        console.log(this.state)
         return (
             <div className="header-searchbar"
                 tabIndex="0"
-                onFocus={ this.handleOpen }>
+                onClick={ this.handleOpen }>
                 <figure
                     className="search-button" >
-                    Searchbar coming soon
+                    Find a channel and start relaxing
 
                 </figure>
                 { this.state.open ? (
                         <SearchListContainer 
+                            history={ this.props.history }
                             close={ this.handleClose } />
                     ) : null }
                 <FontAwesomeIcon icon="search" />
@@ -40,4 +47,4 @@ class Searchbar extends Component {
     }
 }
 
-export default Searchbar;
+export default withRouter(Searchbar);

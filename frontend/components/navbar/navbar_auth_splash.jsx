@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import LaunchButton from "./launch_button";
 
 export default props => {
-    //console.log(arguments)
     return (
     <div className={props.location === "/welcome" ? "splash-header" : "auth-header"}>
         <figure id="logo-button">
