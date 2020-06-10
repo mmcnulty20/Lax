@@ -4,8 +4,9 @@ import MessageForm from "./message_form";
 class ChannelShow extends Component {
 
     componentDidMount(){
-        console.log(App)
-        console.log(App.cable)
+
+        this.props.fetchChannelMessages(this.props.pathId)
+
         App.cable.subscriptions.create(
             { channel: "ChatChannel" },
             {
@@ -19,18 +20,18 @@ class ChannelShow extends Component {
                 }
             }
         )
-        console.log(App.cable.subscriptions)
     }
 
-    componentDidUpdate() {
-        console.log(this.bottom)
+    componentDidUpdate(prevProps) {
+        if ( JSON.stringify(prevProps.messages) !== JSON.stringify(this.props.messages) ) this.setState({ messages: Object.values(this.props.messages) }) 
+        if ( this.props.pathId !== prevProps.pathId ) this.props.fetchChannelMessages(this.props.pathId).then( this.setState({ messages: Object.values(this.props.messages) }) )
         if ( this.bottom.current ) this.bottom.current.scrollIntoView();
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            messages: this.props.messages,
+            messages: Object.values(this.props.messages),
         }
         this.bottom = React.createRef();
     }
@@ -38,17 +39,14 @@ class ChannelShow extends Component {
     render(){
         const { channel, currentUserId } = this.props
         const newChannel = channel && channel.members && !channel.members.includes(currentUserId)
-
-        const messageList = this.state.messages.map( m => { 
-            const listItem = (
+        console.log(this.state.messages)
+        const messageList = this.state.messages.map( m => (
             <li key={ m.id }>
                 { m.body }
                 <div ref={ this.bottom } />
             </li>
-        )
-        console.log(listItem)
-        return listItem
-            })
+        ))
+        console.log(messageList)
         return(
             <div className="show">
                 <main className="chat-container">

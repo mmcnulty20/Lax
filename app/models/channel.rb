@@ -27,6 +27,10 @@ class Channel < ApplicationRecord
         through: :memberships,
         source: :user
     
+    has_many :messages,
+        as: :messageable,
+        dependent: :destroy
+
     private
     def ensure_topic
         self.topic ||= "Add a topic."

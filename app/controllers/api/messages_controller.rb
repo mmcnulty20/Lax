@@ -1,13 +1,19 @@
 class Api::MessagesController < ApplicationController
-  def index
-  end
+    def index
+        # @messages = Message.where( messageable_id: params[:channel_id], messageable_type: "Channel" )
+        @messages = Message.all
+    end
 
-  def create
-  end
+    def show
+        @message = Message.find(params[:id])
+    end
 
-  def update
-  end
+    def create
+    end
 
-  def destroy
-  end
+    def update
+    end
+
+    def destroy
+    end
 end

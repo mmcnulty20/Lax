@@ -2,12 +2,14 @@ import { connect } from "react-redux";
 import ChannelShow from "./channel_show";
 import { withRouter } from "react-router-dom";
 import { addChannelMembers } from "../../../actions/channel_actions";
+import { fetchChannelMessages, fetchNewMessage } from "../../../actions/message_actions";
 
 const mapStateToProps = ( { entities: { channels, messages }, session: { currentUserId } }, { location: { pathname } }) => {
-    const channel = channels[pathname.slice(3)]
-    // messages = messages.filter( m => m.channelId === channel.id )
-    messages = [ {id: 1, body: "heres some text"}, { id: 2, body: "and more"} ]
+    const pathId = pathname.slice(3)
+    const channel = channels[pathId]
+    messages = messages[`c${pathId}`] || {}
     return {
+        pathId,
         channel,
         currentUserId,
         messages
@@ -16,7 +18,9 @@ const mapStateToProps = ( { entities: { channels, messages }, session: { current
 
 const mapDispatchToProps = dispatch => (
     {
-        handleJoin: (channel, id) => dispatch(addChannelMembers( channel, id ))
+        handleJoin: (channel, id) => dispatch(addChannelMembers( channel, id )),
+        fetchChannelMessages: channelId => dispatch(fetchChannelMessages(channelId)),
+        fetchNewMessage: messageId => dispatch(fetchNewMessage(messageId)),
     }
 )
 

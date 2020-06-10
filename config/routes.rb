@@ -2,6 +2,11 @@
 #
 #                     Prefix Verb   URI Pattern                                                                              Controller#Action
 #                       root GET    /                                                                                        static_pages#root
+#                                   /cable                                                                                   #<ActionCable::Server::Base:0x0000557a756fa028 @mutex=#<Monitor:0x0000557a756fa000 @mon_owner=nil, @mon_count=0, @mon_mutex=#<Thread::Mutex:0x0000557a756f9fb0>>, @pubsub=nil, @worker_pool=nil, @event_loop=nil, @remote_connections=nil>
+#                api_message GET    /api/messages/:id(.:format)                                                              api/messages#show {:format=>:json}
+#                            PATCH  /api/messages/:id(.:format)                                                              api/messages#update {:format=>:json}
+#                            PUT    /api/messages/:id(.:format)                                                              api/messages#update {:format=>:json}
+#                            DELETE /api/messages/:id(.:format)                                                              api/messages#destroy {:format=>:json}
 #          api_user_channels GET    /api/users/:user_id/channels(.:format)                                                   api/channels#index {:format=>:json}
 #     email_in_use_api_users GET    /api/users/email_in_use(.:format)                                                        api/users#email_in_use {:format=>:json}
 #                  api_users GET    /api/users(.:format)                                                                     api/users#index {:format=>:json}
@@ -10,6 +15,8 @@
 #                            PATCH  /api/users/:id(.:format)                                                                 api/users#update {:format=>:json}
 #                            PUT    /api/users/:id(.:format)                                                                 api/users#update {:format=>:json}
 #                            DELETE /api/users/:id(.:format)                                                                 api/users#destroy {:format=>:json}
+#       api_channel_messages GET    /api/channels/:channel_id/messages(.:format)                                             api/messages#index {:format=>:json}
+#                            POST   /api/channels/:channel_id/messages(.:format)                                             api/messages#create {:format=>:json}
 # already_taken_api_channels GET    /api/channels/already_taken(.:format)                                                    api/channels#already_taken {:format=>:json}
 #    api_channel_memberships POST   /api/channels/:channel_id/memberships(.:format)                                          api/memberships#create {:format=>:json}
 #     api_channel_membership DELETE /api/channels/:channel_id/memberships/:id(.:format)                                      api/memberships#destroy {:format=>:json}
@@ -35,7 +42,7 @@ Rails.application.routes.draw do
   mount ActionCable.server, at: '/cable'
 
   namespace :api, defaults: { format: :json } do 
-    resources :messages, only: [:update, :destroy]
+    resources :messages, only: [:show, :update, :destroy]
     resources :users, only: [:index, :show, :create, :update, :destroy] do
         resources :channels, only: [:index]
         collection do
