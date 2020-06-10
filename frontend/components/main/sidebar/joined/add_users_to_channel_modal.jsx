@@ -36,6 +36,7 @@ class AddUsersToChannelModal extends Component {
 
     handleClose(e) {
         e.preventDefault();
+        Object.values(this.state.members).forEach( m => m.selected = false )
         this.closeModal();
     }
 
@@ -47,6 +48,7 @@ class AddUsersToChannelModal extends Component {
         if ( all === false ) {
             this.setState({ all: false, skip: size(this.state.members) === 0 })
         } else {
+            Object.values(this.state.members).forEach( m => m.selected = false )
             this.setState({ all: true, skip: false, members: {} })
         }
     }
@@ -57,6 +59,7 @@ class AddUsersToChannelModal extends Component {
         const newMembers = size(members) > 0 ? Object.keys(members) : 
             this.state.all ? Object.keys(this.props.users) : null
             this.props.history.push(`/c/${ this.props.channelId }`)
+        Object.values(this.state.members).forEach( m => m.selected = false )
         if (newMembers !== null ) {
             this.props.addMembers(this.props.channelId, newMembers).then( () => this.props.closeModal() )
             this.props.history.push(`/c/${ this.props.channelId }`)

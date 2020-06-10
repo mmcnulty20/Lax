@@ -250,7 +250,7 @@ body {
                         min-width: unset;
                         width: 2px;
                         margin: unset;
-                        background: $light-tan;
+                        background: rgba($color: $lighter-grey-tan, $alpha: 0.2);
                         position: relative;
                         bottom: -1.5px;
                     }

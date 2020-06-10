@@ -28,10 +28,14 @@
 #       rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'static_pages#root'
+  
+  mount ActionCable.server, at: '/cable'
 
   namespace :api, defaults: { format: :json } do 
+    resources :messages, only: [:update, :destroy]
     resources :users, only: [:index, :show, :create, :update, :destroy] do
         resources :channels, only: [:index]
         collection do
@@ -39,6 +43,7 @@ Rails.application.routes.draw do
         end
     end
     resources :channels, only: [:index, :show, :create, :update, :destroy] do
+        resources :messages, only: [:index, :create]
         collection do
             get :already_taken
         end
