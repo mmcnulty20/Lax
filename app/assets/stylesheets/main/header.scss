@@ -31,8 +31,144 @@ body {
                 border-color: rgba($color: $background, $alpha: 0.5);
                 cursor: pointer;
             }
+            .header-searchbar-dropdown {
+                width: 800px;
+                min-height: 109px;
+                background: $background;
+                position: absolute;
+                top: 4px;
+                // z-index: 2;
+                border: 1px solid $dark-tan;
+                border-radius: 8px;
+                left: calc(50% - 400px);
+                color: $text;
+                overflow-y: auto;
+                // overflow-x: hidden;
+                font-size: 14px;
+                padding-bottom: 12px;
+                &:hover { 
+                    cursor: default;
+                }
+                li {
+                    &.input {
+                        @include flex(row, center, flex-start);
+                        height: 44px;
+                        border-bottom: 1px solid $dark-tan;
+                        margin-bottom: 12px;
+                        svg {
+                            color: $light-grey-tan;
+                            height: 14px;
+                            width: 14px;
+                            position: absolute;
+                            left: 30px;
+                        }
+                        input {
+                            width: 674px;
+                            height: 22px;
+                            margin-left: 59px;
+                            background: $background;
+                        }
+                        button {
+                            position: relative;
+                            top: -2px;
+                            right: 7px;
+                            &.clear {
+                                font-size: 13px;
+                                color: $light-grey-tan;
+                                font-weight: 400;
+                                height: 16px;
+                                width: 63px;
+                                padding: 0 16px;
+                                letter-spacing: -0.5px;
+                                border-right: 1px solid $dark-tan;
+                            }
+                            .x{
+                                // height: 20px;
+                                color: $lightest-text;
+                                font-weight: 300;
+                                font-size: 18px;
+                                transform: scale(1.75,1.13);
+                                position: absolute;
+                                right: 9px;
+                                top: -1.5px;
+                            }
+                        }
+                    }
+                    &:not(.input) {
+                        height: 40px;
+                        width: 100%;
+                        margin: unset;
+                        &.string {
+                            padding: 4px 28px 4px 60px;
+                            font-weight: 500;
+                            position: relative;
+                            svg {
+                                color: $light-grey-tan;
+                                height: 15px;
+                                width: 15px;
+                                position: absolute;
+                                left: 32px;
+                                top: 12px;
+                            }
+                            span {
+                                display: block;
+                                position: relative;
+                                bottom: -7px;
+                            }
+                            &:hover {
+                                cursor: default;
+                                color: $background;
+                                background: $link-blue;
+                                svg {
+                                    color: $background;
+                                }
+                            }
+                        }
+                        a {
+                            position: relative;
+                            @include flex(row, center, space-between);
+                            span {
+                                display: block;
+                            }
+                            // display: block;
+                            height: 100%;
+                            width: 100%;
+                            padding: 4px 28px 4px 60px;
+                            font-weight: 500;
+                            &:hover {
+                                background: $link-blue;
+                            }
+                            svg {
+                                color: $light-grey-tan;
+                                height: 14px;
+                                width: 14px;
+                                position: absolute;
+                                left: 30px;
+                                top: 8px;
+                            }
+                        }
+                    }
+                    &.no-search {
+                        position: relative;
+                        height: 40px;
+                        width: 100%;
+                        margin: unset;
+                        padding: 4px 28px 4px 60px;
+                        font-weight: 500;
+                        @include flex(row, center, flex-start);
+                        svg {
+                            color: $light-grey-tan;
+                            height: 14px;
+                            width: 14px;
+                            position: absolute;
+                            left: 30px;
+                            top: 8px;
+                        }
+                    }
+                }
+            }
         }
-        button {
+        button:not(.search-button) {
             margin-right: 16px;
             height: 26px;
             width: 26px;

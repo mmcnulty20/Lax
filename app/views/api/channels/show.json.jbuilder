@@ -3,7 +3,7 @@ json.channels do
         json.extract! @channel, :id, :name, :topic
         json.admin (@channel.admin_id == current_user.id)
         json.isPrivate @channel.is_private
-        json.members ( @channel.members.pluck("id") )
+        json.members ( @channel.member_ids )
     end
 end
 

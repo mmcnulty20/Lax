@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserSearchContainer from "./user_search_container";
 import DefaultAvatarIcon from "../../avatar_icon";
 import size from "lodash/size";
+import UserSearch from "./user_search";
 
 class AddUsersToChannelModal extends Component {
     componentWillUnmount(){
@@ -147,7 +148,7 @@ class AddUsersToChannelModal extends Component {
                     </label>
 
                     <label htmlFor="names">
-                        <UserSearchContainer
+                        <UserSearch
                             members={ size( this.state.members ) > 0 ? members : [] }
                             // height={ Math.floor(members.length / 2) + 1 }
                             users={ Object.values( this.props.users ) }
