@@ -1,4 +1,6 @@
 .auth-page {
+    position: relative;
+    z-index: 0;
     &.signup {
         height: 100vh;
         #logo-button {

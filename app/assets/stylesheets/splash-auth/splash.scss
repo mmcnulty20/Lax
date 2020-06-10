@@ -14,8 +14,10 @@ header {
     top: 0;
     background: $background;
     // position: relative;
-    z-index: 2;
+    z-index: 1;
     nav {
+        position: relative;
+        z-index: 4;
     }
 }
 
@@ -52,6 +54,7 @@ header {
 
 .splash-header {
     @include splash-navbar();
+    // z-index: 2;
     .nav-btns {
         &.logged-in{
             padding: unset;
@@ -217,6 +220,8 @@ header {
     font-family: $splash-sans-serif;
     margin: 160px auto 0 auto;
     width: 1230px;
+    position: relative;
+    z-index: 0;
     h1 {
         font-size: 46px;
         font-weight: 600;

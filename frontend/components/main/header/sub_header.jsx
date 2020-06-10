@@ -4,8 +4,10 @@ import LocationDetailsButton from "./location_details";
 
 const SubHeader = ({ fetchDetails, locationDetails, path }) => {
     useEffect( () => {
-        fetchDetails(path.slice(3));
-    }, [ path ] );
+        if ( !locationDetails || !locationDetails.topic ) {
+            fetchDetails(path.slice(3));
+        }
+    }, [ path, locationDetails ] );
     return (
         <div className="sub-header">
             <div className="location-info">

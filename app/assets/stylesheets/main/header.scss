@@ -5,7 +5,7 @@ body {
     width: 100%;
     .search-header {
         position: fixed;
-        z-index: 2;
+        z-index: 0;
         height: 39px;
         background: mix($dark-blue, $hover-dark-blue, $weight: 50%);
         color: $background;
@@ -189,14 +189,13 @@ body {
         position: fixed;
         top: 39px;
         left: 260px;
-        z-index: 1;
-        height: 63px;
+        z-index: -1;
+        height: 62px;
         width: calc(100% - 260px);
         // margin-left: auto;
         padding: 0 20px;
         font-size: 14px;
         @include flex(row,center,space-between);
-        border-bottom: 1px solid $dark-tan;
         .location-info {
             height: 40px;
             min-width: 386px;

@@ -82,6 +82,7 @@ class SearchbarList extends Component {
                     <FontAwesomeIcon icon="search" />
 
                     <input type="text"
+                        autoFocus={ true }
                         onChange={ e => this.setState({ searchString: e.target.value }) }
                         value={ this.state.searchString } />
 
