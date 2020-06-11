@@ -3,14 +3,17 @@ body {
 }
 .mainpage-head {
     width: 100%;
+    // position: relative;
+    // z-index: 1;
     .search-header {
         position: fixed;
-        z-index: 0;
-        height: 39px;
+        z-index: 1;
+        top: 0;
+        height: 38px;
         background: mix($dark-blue, $hover-dark-blue, $weight: 50%);
         color: $background;
         width: 100%;
-        border-bottom: 1px solid rgba($color: $background, $alpha: 0.2);
+        // border-bottom: 1px solid rgba($color: $background, $alpha: 0.2);
         @include flex(row, center, unset);
         .header-searchbar {
             margin: 0 auto;
@@ -37,7 +40,6 @@ body {
                 background: $background;
                 position: absolute;
                 top: 4px;
-                z-index: 2;
                 max-height: 460px;
                 border: 1px solid $dark-tan;
                 border-radius: 8px;
@@ -186,13 +188,10 @@ body {
         }
     }
     .sub-header {
-        position: fixed;
-        top: 39px;
-        left: 260px;
-        z-index: -1;
-        height: 62px;
+        margin: 38px 0 0 260px;
+        height: 64px;
         width: calc(100% - 260px);
-        // margin-left: auto;
+        border-bottom: 1px solid $dark-tan;
         padding: 0 20px;
         font-size: 14px;
         @include flex(row,center,space-between);
@@ -203,7 +202,7 @@ body {
             h2 {
                 font-size: 13.5px;
                 margin-left: 11px;
-                margin-top: 2px;
+                margin-top: 1px;
                 font-weight: 700;
                 line-height: 22px;
                 letter-spacing: -0.5px;

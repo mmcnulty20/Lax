@@ -1,6 +1,6 @@
 .auth-page {
     position: relative;
-    z-index: 0;
+    
     &.signup {
         height: 100vh;
         #logo-button {
@@ -109,9 +109,6 @@
                     }
                     background-color: white; 
                 }
-                // button {
-                //     @include auth-button();
-                // }
             }
         }
         &.login {
@@ -143,7 +140,7 @@
                     width: 400px;
                     font-size: 15px;
                     position: relative;
-                    z-index: 1;
+                    
                     &.focus-blue {
                         box-shadow: 0 0 0 4px rgba($color: $link-hover-blue, $alpha: 0.4);
                     }
@@ -177,7 +174,7 @@
                         position: absolute;
                         top: 12px;
                         right: 13px;
-                        z-index: 1;
+                        
                     }
                 }
                 .signup-error {
@@ -233,7 +230,7 @@
 
 .errors {
     position: relative;
-    z-index: 8;
+    
     font-size: 15px;
     width: 635px;
     background: $background;

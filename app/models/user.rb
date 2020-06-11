@@ -42,6 +42,10 @@ class User < ApplicationRecord
         source: :joinable,
         source_type: "Channel"
 
+    has_many :authored_messages,
+        class_name: :Message,
+        foreign_key: :author_id
+
 
     def password=(password)
         @password = password

@@ -4,11 +4,13 @@ import { withRouter } from "react-router-dom";
 import { addChannelMembers } from "../../../actions/channel_actions";
 import { fetchChannelMessages, fetchNewMessage } from "../../../actions/message_actions";
 
-const mapStateToProps = ( { entities: { channels, messages }, session: { currentUserId } }, { location: { pathname } }) => {
+const mapStateToProps = ( { entities: { channels, messages, users }, session: { currentUserId } }, { location: { pathname } }) => {
     const pathId = pathname.slice(3)
     const channel = channels[pathId]
+    console.log(currentUserId)
     messages = messages[`c${pathId}`] || {}
     return {
+        users,
         pathId,
         channel,
         currentUserId,

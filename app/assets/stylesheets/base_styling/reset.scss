@@ -21,7 +21,7 @@ footer, header, figcaption, nav, section {
     margin-inline-end: 0;
 }
 
-html, body {
+html {
     height: 100%;
     width: 100%;
 }
@@ -58,8 +58,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-body > #root {
-    height: 100%;
-    width: 100%;
-    position: relative;
-}
+// body > #root {
+//     height: 100vh;
+//     width: 100vw;
+// }

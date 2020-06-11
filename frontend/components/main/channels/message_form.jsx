@@ -18,7 +18,8 @@ class MessageForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         console.log(App)
-        App.cable.subscriptions.subscriptions[0].speak({ message: this.state.body })
+        console.log({ message: { body: this.state.body, authorId: this.props.user, channelId: this.props.channelId }})
+        App.cable.subscriptions.subscriptions[0].speak({ message: { body: this.state.body, authorId: this.props.user, channelId: this.props.channelId }})
         this.setState({ body: "" })
     }
 
