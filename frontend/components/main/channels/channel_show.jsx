@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MessageForm from "./message_form";
 import DefaultAvatarIcon from "../avatar_icon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class ChannelShow extends Component {
 
@@ -52,7 +53,7 @@ class ChannelShow extends Component {
             console.log(m)
             console.log(this.props)
             return(
-            <li key={ m.id }>
+            <li key={ m.id } className={ newChannel ? "extra-space" : "" }>
                 <DefaultAvatarIcon username={ m.username } />
                 <div className="message-details">
                     <h3> { m.username || this.props.users[m.author_id].username } <span> { this.formatTimeString(new Date(m.created_at)) } </span> </h3>
@@ -64,6 +65,7 @@ class ChannelShow extends Component {
                 <div ref={ this.bottom } />
             </li>
         )})
+        if ( newChannel ) console.log(messageList[messageList.length - 1])
         return(
             <div className="show">
                 <main className="chat-container">
@@ -71,22 +73,22 @@ class ChannelShow extends Component {
                         { messageList }
                     </div>
                     </main>
-                    { channel ? (
-                        <MessageForm
-                            user={ currentUserId }
-                            channelId={ channel.id }
-                            private={ channel.isPrivate }
-                            name={ channel.name } />
-                    ) : null }
                 { newChannel ? (
                     <footer className="new-channel">
                         <div>
-                            <h1>You are viewing {channel.name} </h1>
+                            <FontAwesomeIcon icon="hashtag"/>
+                            <h1>You are viewing <strong>{channel.name}</strong> </h1>
                             <button onClick={ () => this.props.handleJoin( channel.id, [currentUserId] ) }>
                                 Join Channel
                             </button>
                         </div>
                     </footer>
+                ) : channel ? (
+                    <MessageForm
+                        user={ currentUserId }
+                        channelId={ channel.id }
+                        private={ channel.isPrivate }
+                        name={ channel.name } />
                 ) : null }
             </div>
         )

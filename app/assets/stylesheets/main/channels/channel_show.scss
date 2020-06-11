@@ -25,6 +25,9 @@
             position: absolute;
             z-index: 0;
             bottom: 0;
+            &.hidden {
+                display: none;
+            }
             .input {
                 height: 44px;
                 border-bottom: 1px solid $dark-tan;
@@ -119,6 +122,9 @@
                     &:last-of-type {
                         padding-bottom: 12px;
                     }
+                    &.extra-space:last-of-type {
+                        margin-bottom: 20px;
+                    }
                     &:hover {
                         background-color: rgba($color: $light-tan, $alpha: 0.6);
                     }
@@ -155,18 +161,30 @@
         // width: 100%;
         width: calc(100% - 260px);
         // padding-left: 260px;
-        position: relative;
-        bottom: -10px;
-        // right: 0;
+        position: absolute;
+        // bottom: -10px;
+        right: 0;
+        bottom: 0;
         // position: absolute;
         div {
+            svg {
+                position: absolute;
+                bottom: 92px;
+                font-size: 15px;
+                right: calc(50% + 56px);
+            }
             // width: 100%;
             background: $light-tan;
             height: 100%;
             @include flex(column);
+            padding-right: 130px;
             h1 {
                 font-size: 17px;
                 margin-bottom: 26px;
+                strong {
+                    margin-left: 14px;
+                    font-weight: 700;
+                }
             }
             button {
                 color: $background;
