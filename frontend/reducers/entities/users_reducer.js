@@ -23,8 +23,10 @@ const usersReducer = (state = {}, action) => {
         case RECEIVE_CHANNEL:
             return { ...state, ...action.channel.users }
         case RECEIVE_CHANNEL_MESSAGES:
-            debugger
-            return state;
+            Object.values(action.users).forEach( u => {
+                if ( !newState[u.id] ) newState[u.id] = u
+            })
+            return newState;
         default:
             return state;
     }

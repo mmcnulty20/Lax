@@ -13,9 +13,9 @@
         width: 100%;
         $w: width;
         background-color: $background;
-        padding-bottom: 16px;
+        padding-bottom: 4px;
         .message-form {
-            background: $dark-tan;
+            background: $light-tan;
             width: calc(100vw - 260px - 2.8%);
 
             height: 85px;
@@ -23,22 +23,104 @@
             border: 1px solid $light-grey-tan;
             margin: 0 20px 24px;
             position: absolute;
-            z-index: 1;
+            z-index: 0;
             bottom: 0;
+            .input {
+                height: 44px;
+                border-bottom: 1px solid $dark-tan;
+                width: 100%;
+                background: $background;
+                input {
+                    background: transparent;
+                    padding: 10px;
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+            .placeholder {
+                color: $lighter-grey-tan;
+                font-size: 15px;
+                font-weight: 400;
+                text-transform: scale(1.2,1);
+                position: absolute;
+                top: 10px;
+                margin-left: 10px;
+                &.lock::after {
+                    content: "\f023";
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    display: block;
+                    height: 14px;
+                    width: 14px;
+                    position: absolute;
+                    top: 3px;
+                    left: 75px;
+                }
+                &.hash::after {
+                    content: "\f292";
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    display: block;
+                    height: 14px;
+                    width: 14px;
+                    position: absolute;
+                    top: 3px;
+                    left: 75px;
+                }
+            }
+            button {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                height: 32px;
+                width: 32px;
+                border-radius: 4px;
+                color: $lighter-grey-tan;
+                padding: 7px;
+                margin: 5px;
+                &:valid {
+                    background: $green;
+                    color: $background;
+                }
+                svg {
+                    transform: rotate(45deg);
+                    margin-bottom: 4px;
+                }
+            }
         }
         .chat-container {
             height: 100%;
             .message-list {
                 overflow-y: auto;
+                margin-top: auto;
                 height: 100%;
+                // margin-right: 5px;
                 // padding-bottom: 85px;
+                @include flex(column, flex-start, flex-end);
                 list-style: none;
+                &::-webkit-scrollbar {
+                    margin-top: 5px;
+                    width: 8px;
+                    // margin-right: 4px;
+                }
+                &::-webkit-scrollbar-track{
+                    border-radius: 3px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    -webkit-border-radius: 10px;
+                    border-radius: 10px;
+                    background: mix($background, $lighter-grey-tan, $weight: 30%)
+                }
                 li {
                     @include flex(row, center, flex-start);
-                    height: 64px;
+                    height: 52px;
+                    width: 100%;
                     padding: 8px 20px;
+                    &:last-of-type {
+                        padding-bottom: 12px;
+                    }
                     &:hover {
-                        background-color: $light-tan;
+                        background-color: rgba($color: $light-tan, $alpha: 0.6);
                     }
                     .avatar {
                         width: 36px;
@@ -52,9 +134,16 @@
                     .message-details {
                         height: 100%;
                         width: 100%;
+                        font-size: 14px;
+                        line-height: 20px;
                         h3 {
-                            font-size: 14px;
-                            font-weight: 500;
+                            margin-top: -3px;
+                            font-weight: 600;
+                            span {
+                                font-size: 11px;
+                                font-weight: 400;
+                                color: $lightest-text;
+                            }
                         }
                     }
                 }

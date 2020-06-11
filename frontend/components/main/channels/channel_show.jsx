@@ -11,9 +11,7 @@ class ChannelShow extends Component {
             { channel: "ChatChannel" },
             {
                 received: data => {
-                    console.log(this.props.pathId)
-                    console.log(data.message.channelId)
-                    console.log( this.props.pathId == data.message.channelId )
+                    console.log(data.message)
                     if ( data.message.channelId == this.props.pathId ) {
                         this.setState({
                             messages: [ ...this.state.messages, data.message ]
@@ -41,6 +39,12 @@ class ChannelShow extends Component {
         this.bottom = React.createRef();
     }
 
+    formatTimeString(time) {
+        time = time.toLocaleTimeString().split(":")
+        time[2] = time[2].slice(2)
+        return `${time[0]}:${time[1]}${time[2]}`
+    }
+
     render(){
         const { channel, currentUserId } = this.props
         const newChannel = channel && channel.members && !channel.members.includes(currentUserId)
@@ -51,7 +55,7 @@ class ChannelShow extends Component {
             <li key={ m.id }>
                 <DefaultAvatarIcon username={ m.username } />
                 <div className="message-details">
-                    <h3> { m.username || this.props.users[m.authorId] } <span> { m.createdAt } </span> </h3>
+                    <h3> { m.username || this.props.users[m.author_id].username } <span> { this.formatTimeString(new Date(m.created_at)) } </span> </h3>
                     <p>
                         { m.body }
                         { m.edited ? <span>(edited)</span> : null }
@@ -60,7 +64,6 @@ class ChannelShow extends Component {
                 <div ref={ this.bottom } />
             </li>
         )})
-        console.log(messageList)
         return(
             <div className="show">
                 <main className="chat-container">

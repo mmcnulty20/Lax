@@ -3,11 +3,12 @@ import * as MessageAPIUtil from "../utils/message_api_utils";
 export const RECEIVE_CHANNEL_MESSAGES = "RECEIVE_CHANNEL_MESSAGES"
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE"
 
-const receiveChannelMessages = ({ messages, id }) => (
+const receiveChannelMessages = ({ messages, id, users }) => (
     {
         type: RECEIVE_CHANNEL_MESSAGES,
         messages,
         id,
+        users,
     }
 )
 

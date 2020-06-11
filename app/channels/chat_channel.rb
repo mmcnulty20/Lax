@@ -9,9 +9,9 @@ class ChatChannel < ApplicationCable::Channel
         message = Message.create(body: data["message"]["body"], author_id: data["message"]["authorId"], messageable_type: "Channel", messageable_id: data["message"]["channelId"] )
         socket = { message: {
             id: message.id,
-            authorId: message.author_id,
+            author_id: message.author_id,
             body: message.body,
-            createdAt: message.created_at,
+            created_at: message.created_at,
             edited: false,
             channelId: message.messageable_id,
             username: message.author.username
