@@ -12,7 +12,6 @@ class ChannelShow extends Component {
             { channel: "ChatChannel" },
             {
                 received: data => {
-                    console.log(data.message)
                     if ( data.message.channelId == this.props.pathId ) {
                         this.setState({
                             messages: [ ...this.state.messages, data.message ]
@@ -50,8 +49,6 @@ class ChannelShow extends Component {
         const { channel, currentUserId } = this.props
         const newChannel = channel && channel.members && !channel.members.includes(currentUserId)
         const messageList = this.state.messages.map( m => {
-            console.log(m)
-            console.log(this.props)
             return(
             <li key={ m.id } className={ newChannel ? "extra-space" : "" }>
                 <DefaultAvatarIcon username={ m.username } />
@@ -65,19 +62,21 @@ class ChannelShow extends Component {
                 <div ref={ this.bottom } />
             </li>
         )})
-        if ( newChannel ) console.log(messageList[messageList.length - 1])
+        // if ( newChannel ) console.log(messageList[messageList.length - 1])
         return(
             <div className="show">
                 <main className="chat-container">
-                    <div className="message-list">
+                    <div className={ `message-list${ newChannel ? " extra-space" : "" }`}>
                         { messageList }
                     </div>
                     </main>
                 { newChannel ? (
                     <footer className="new-channel">
                         <div>
+                            <h1>You are viewing 
                             <FontAwesomeIcon icon="hashtag"/>
-                            <h1>You are viewing <strong>{channel.name}</strong> </h1>
+                                <strong>{channel.name}</strong>
+                            </h1>
                             <button onClick={ () => this.props.handleJoin( channel.id, [currentUserId] ) }>
                                 Join Channel
                             </button>

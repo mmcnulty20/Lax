@@ -65,3 +65,10 @@ mailing bonus feature
 
 
 
+
+Clear checks properly from user search
+align chat to bottom properly
+combine messages from same user in a row
+    (style accordingly)
+make base page route dynamic? 
+fix fetch on no content

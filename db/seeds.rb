@@ -17,11 +17,10 @@ users = User.create([
     {username: "Demo User", email: "demouser@demo.com", password: "nobodyneedstoknowthisonelol"}
 ])
 
-welcome_channel = Channel.new(name: "welcome", topic: "Welcome to Lax! Feel free to have a look around.", admin_id: users[2].id )
-welcome_channel.id = 12
-welcome_channel.save!
-
 channels = Channel.create!([
+    { name: "welcome",
+    topic: "Welcome to Lax! Feel free to have a look around.",
+    admin_id: users[2].id },
     { name: "test-channel-1",
         topic: "This is only temporary, but more info when I'm more creative",
         admin_id: users[2].id },
@@ -29,10 +28,6 @@ channels = Channel.create!([
         topic: "This is only temporary, but more info when I'm more creative",
         admin_id: users[0].id,
         is_private: false },
-    { name: "secret-mission",
-        topic: "Shhhh",
-        admin_id: users[3].id,
-        is_private: true },
     { name: "dungeons-and-dragons",
         topic: "Talk about and plan your newest adventures",
         admin_id: users[1].id,
@@ -40,7 +35,7 @@ channels = Channel.create!([
     { name: "dms-only",
         topic: "Only dungeon masters here, laugh about your players!",
         admin_id: users[1].id,
-        is_private: true }
+        is_private: true },
 ])
 
 memberships = Membership.create([
@@ -59,7 +54,5 @@ memberships = Membership.create([
     { user_id: users[2].id, joinable_id: channels[3].id, joinable_type: "Channel" },
     { user_id: users[3].id, joinable_id: channels[3].id, joinable_type: "Channel" },
     { user_id: users[1].id, joinable_id: channels[4].id, joinable_type: "Channel" },
-    { user_id: users[2].id, joinable_id: channels[4].id, joinable_type: "Channel" }
+    { user_id: users[2].id, joinable_id: channels[4].id, joinable_type: "Channel" },
 ])
-
-users.each { |user| Membership.create(user_id: user.id, joinable_id: welcome_channel.id, joinable_type: "Channel") }

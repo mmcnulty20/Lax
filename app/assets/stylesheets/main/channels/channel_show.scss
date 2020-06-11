@@ -8,7 +8,7 @@
     height: calc(100% - 173px);
     width: 100%;
     .show {
-        overflow-y: auto;
+        // overflow-y: auto;
         height: 100%;
         width: 100%;
         $w: width;
@@ -92,19 +92,19 @@
             }
         }
         .chat-container {
+            position: relative;
             height: 100%;
+            margin-right: 5px;
             .message-list {
                 overflow-y: auto;
-                margin-top: auto;
-                height: 100%;
-                // margin-right: 5px;
-                // padding-bottom: 85px;
-                @include flex(column, flex-start, flex-end);
-                list-style: none;
+                position: absolute;
+                bottom: 0;
+                max-height: 100%;
+                width: 100%;
+                scrollbar-width: thin;
+                scrollbar-color: mix($background, $lighter-grey-tan, $weight: 30%) transparent;
                 &::-webkit-scrollbar {
-                    margin-top: 5px;
                     width: 8px;
-                    // margin-right: 4px;
                 }
                 &::-webkit-scrollbar-track{
                     border-radius: 3px;
@@ -112,19 +112,18 @@
                 &::-webkit-scrollbar-thumb {
                     -webkit-border-radius: 10px;
                     border-radius: 10px;
-                    background: mix($background, $lighter-grey-tan, $weight: 30%)
+                    background: mix($background, $lighter-grey-tan, $weight: 30%);
+                }
+                list-style: none;
+                &.extra-space {
+                    margin-bottom: 24px;
+                    max-height: calc(100% - 24px);
                 }
                 li {
                     @include flex(row, center, flex-start);
                     height: 52px;
                     width: 100%;
                     padding: 8px 20px;
-                    &:last-of-type {
-                        padding-bottom: 12px;
-                    }
-                    &.extra-space:last-of-type {
-                        margin-bottom: 20px;
-                    }
                     &:hover {
                         background-color: rgba($color: $light-tan, $alpha: 0.6);
                     }
@@ -158,31 +157,25 @@
     }
     footer {
         height: 136px;
-        // width: 100%;
         width: calc(100% - 260px);
-        // padding-left: 260px;
         position: absolute;
-        // bottom: -10px;
         right: 0;
         bottom: 0;
-        // position: absolute;
         div {
             svg {
-                position: absolute;
-                bottom: 92px;
                 font-size: 15px;
-                right: calc(50% + 56px);
+                margin-left: 3px;
             }
-            // width: 100%;
             background: $light-tan;
             height: 100%;
             @include flex(column);
             padding-right: 130px;
             h1 {
+                @include flex(row, center, flex-start);
                 font-size: 17px;
                 margin-bottom: 26px;
                 strong {
-                    margin-left: 14px;
+                    display: block;
                     font-weight: 700;
                 }
             }

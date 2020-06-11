@@ -7,7 +7,6 @@ import { fetchChannelMessages, fetchNewMessage } from "../../../actions/message_
 const mapStateToProps = ( { entities: { channels, messages, users }, session: { currentUserId } }, { location: { pathname } }) => {
     const pathId = pathname.slice(3)
     const channel = channels[pathId]
-    console.log(users)
     messages = messages[`c${pathId}`] || {}
     return {
         users,
