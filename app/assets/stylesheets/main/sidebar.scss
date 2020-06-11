@@ -215,8 +215,24 @@
         top: 63px;
     }
     .sidebar-content {
-        border-top: 1px solid rgba($color: $background, $alpha: 0.2);
+        overflow: hidden;
+        &:hover {
+            overflow-y: auto;
+        }
+        max-height: calc(100% - 175px);
+        box-shadow: 0 -1px 0 0px rgba($color: $background, $alpha: 0.2);
+        border-top: 14px solid $dark-blue;
+        border-bottom: 4px solid $dark-blue;
         margin-top: 112px;
+        &::-webkit-scrollbar {
+            width: 12px;
+        }
+        &::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 30px;
+            background: rgba($color: $background, $alpha: 0.4);
+            border-right: solid 4px $dark-blue;
+        }
         .modal-container {
             position: fixed;
             height: 100vh;
@@ -713,7 +729,7 @@
             z-index: 0;
         }
         &.c {
-            margin-top: 14px;
+            // margin-top: 14px;
             z-index: 1;
         }
         font-size: 13.5px;
@@ -741,7 +757,7 @@
             }
             figure {
                 position: absolute;
-                right: 16px;
+                left: 216px;
                 bottom: 6px;
                 height: 28px;
                 width: 28px;
@@ -763,6 +779,8 @@
             }
         }
         ul li {
+            width: 260px;
+            margin-right: -18px;
             padding: 4px 16px;
             @include flex(row, flex-end, flex-start);
             height: 28px;

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import UserSearchContainer from "./user_search_container";
 import DefaultAvatarIcon from "../../avatar_icon";
 import size from "lodash/size";
 import UserSearch from "./user_search";
@@ -36,8 +35,10 @@ class AddUsersToChannelModal extends Component {
 
     handleClose(e) {
         e.preventDefault();
-        Object.values(this.state.members).forEach( m => m.selected = false )
-        this.closeModal();
+        Object.values(this.state.members).forEach( m => {
+            m.selected = false;
+        })
+        this.props.closeModal();
     }
 
     handleRadio(e) {
@@ -121,7 +122,7 @@ class AddUsersToChannelModal extends Component {
                             { this.props.name || "doesitwork"}
                         </span>
                     </div>
-                    <button onClick={ () => this.props.closeModal() } >
+                    <button onClick={ this.handleClose } >
                         <figure className="x" >
                             <span>
                                 x
@@ -153,7 +154,6 @@ class AddUsersToChannelModal extends Component {
                     <label htmlFor="names">
                         <UserSearch
                             members={ size( this.state.members ) > 0 ? members : [] }
-                            // height={ Math.floor(members.length / 2) + 1 }
                             users={ Object.values( this.props.users ) }
                             focus={ this.handleFocus } />
                     </label>                    
