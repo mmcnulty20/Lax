@@ -1,5 +1,5 @@
 <p align="right">
- <img src="app/assets/images/icons/readme_logo.png" style="height: 81px" alt="lax"/>
+ <a href="https://lax-chat.herokuapp.com/"><img src="app/assets/images/icons/readme_logo.png" style="height: 81px" alt="lax"/></a>
  </p>
  
  ---
