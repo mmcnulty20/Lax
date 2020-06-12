@@ -5,41 +5,59 @@
 }
 .mainpage-body{
     margin-top: 64px;
-    height: calc(100% - 173px);
+    height: calc(100% - 64px);
     width: 100%;
     .show {
         // overflow-y: auto;
         height: 100%;
         width: 100%;
-        $w: width;
         background-color: $background;
-        padding-bottom: 4px;
+        @include flex(column, flex-start, flex-start);
         .message-form {
-            background: $light-tan;
             width: calc(100vw - 260px - 2.8%);
+            min-height: 85px;
 
-            height: 85px;
-            border-radius: 4px;
             border: 1px solid $light-grey-tan;
-            margin: 0 20px 24px;
-            position: absolute;
-            z-index: 0;
-            bottom: 0;
+            // box-shadow: 0 0 0 1px $light-grey-tan;
+            border-radius: 4px;
+            margin: 4px 20px 24px;
+            // position: absolute;
             &.hidden {
                 display: none;
             }
+            form {
+                flex: 2 0 auto;
+                padding: 9px 10px 0;
+                @include flex(column, flex-start,flex-start)
+            }
             .input {
-                height: 44px;
-                border-bottom: 1px solid $dark-tan;
+                border-radius: 4px 4px 0 0;
+                min-height: 20px;
+                max-height: 548px;
+                overflow-x: auto;
+                margin-top: 2px;
                 width: 100%;
                 background: $background;
-                input {
+                // padding-bottom: 5px;
+                textarea {
+                    font-size: 14px;
+                    line-height: 18px;
                     background: transparent;
-                    padding: 10px;
                     height: 100%;
                     width: 100%;
+                    resize: none;
                 }
             }
+            .bottom-space {
+                border-radius: 0 0 4px 4px;
+                border-top: 1px solid $dark-tan;
+                height: 41px;
+                margin-top: 4px;
+                width: 100%;
+                display: block;
+                background: $light-tan;
+            }
+            &:not(.edit) {
             .placeholder {
                 color: $lighter-grey-tan;
                 font-size: 15px;
@@ -73,8 +91,9 @@
             }
             button {
                 position: absolute;
-                right: 0;
-                bottom: 0;
+                // right: 1.33%;
+                align-self: flex-end;
+                bottom: 24px;
                 height: 32px;
                 width: 32px;
                 border-radius: 4px;
@@ -91,12 +110,54 @@
                 }
             }
         }
+        }
         .chat-container {
+            flex: 1 1 auto;
             position: relative;
-            height: 100%;
+            width: 100%;
+            bottom: 0;
             margin-right: 5px;
             .message-list {
-                overflow-y: auto;
+                section.message-form.edit {
+                    position: relative;
+                    margin-bottom: 44px;
+                    button {
+                        position: absolute;
+                        bottom: -36px;
+                        height: 28px;
+                        font-size: 13px;
+                        font-weight: 600;
+                        letter-spacing: -1px;
+                        @include flex(row);
+                        border-radius: 4px;
+                        &.save {
+                            // color: mix($background, white, $weight: 50%);
+                            color: $background;
+                            width: 132px;
+                            left: 73px;
+                            background: $green;
+                            svg {
+                                transform: rotate(90deg) scale(1.1,1);
+                                margin-right: 14px;
+                                margin-left: 5px;
+                            }
+
+                        }
+                        &.cancel {
+                            color: $lighter-text;
+                            left: 0;
+                            width: 65px;
+                            border: 1px solid $lighter-grey-tan;
+                            background: mix($background, white, $weight: 50%);
+                        }
+
+                    }
+                }
+                overflow: hidden;
+                scroll-snap-align: start;
+                &:hover {
+                    overflow-y: auto;
+                }
                 position: absolute;
                 bottom: 0;
                 max-height: 100%;
@@ -104,7 +165,7 @@
                 scrollbar-width: thin;
                 scrollbar-color: mix($background, $lighter-grey-tan, $weight: 30%) transparent;
                 &::-webkit-scrollbar {
-                    width: 8px;
+                    width: 9px;
                 }
                 &::-webkit-scrollbar-track{
                     border-radius: 3px;
@@ -120,37 +181,108 @@
                     max-height: calc(100% - 24px);
                 }
                 li {
-                    @include flex(row, center, flex-start);
-                    height: 52px;
                     width: 100%;
-                    padding: 8px 20px;
+                    padding: 8px 20px 8px 30px;
+                    white-space: pre-line;
+                    font-size: 14px;
+                    line-height: 20px;
+                    position: relative;
+                    @include flex(row, flex-start, flex-start);
                     &:hover {
                         background-color: rgba($color: $light-tan, $alpha: 0.6);
                     }
-                    .avatar {
-                        width: 36px;
+
+                    .message-tool {
+                        position: absolute;
+                        top: -15px;
+                        left: calc(100vw - 344px);
                         height: 36px;
-                        // position: absolute;
-                        border-radius: 3px;
-                        margin-right: 4px;
-                        overflow: none;
-                        background: $light-blue-grey;
-                    }
-                    .message-details {
-                        height: 100%;
-                        width: 100%;
-                        font-size: 14px;
-                        line-height: 20px;
-                        h3 {
-                            margin-top: -3px;
-                            font-weight: 600;
-                            span {
-                                font-size: 11px;
-                                font-weight: 400;
-                                color: $lightest-text;
+                        // width: 132px;
+                        border: 1px solid $dark-tan;
+                        background: $background;
+                        border-radius: 4px;
+                        padding: 2px;
+                        color: $lighter-grey-tan;
+                        @include flex(row);
+                        svg {
+                            width: 14px;
+                            height: 14px;
+                        }
+                        button {
+                            height: 30px;
+                            width: 30px;
+                            // @include flex(row);
+                            padding: 6px 6px 8px 8px;
+                            position: relative;
+                            &:hover {
+                                background: $light-tan;
+                                border-radius: 4px;
+                                color: $text;
+                            }
+                            &.delete {
+                                &::after {
+                                    content: "\f056";
+                                    font-family: "Font Awesome 5 Free";
+                                    font-weight: 900;
+                                    font-size: 16px;
+                                }
                             }
                         }
                     }
+                    &.message-stub {
+                        align-items: center;
+                        min-height: 30px;
+                        padding: 4px 20px 4px 68px;
+                        margin: -4px 0 -4px;
+                        @include flex(row-reverse, flex-end, flex-end);
+                        &:not(:hover) {
+                            margin-left: 7px;
+                        }
+                        aside {
+                            height: 100%;
+                            width: 73px;
+                            margin-left: -76px;
+                            margin-right: 10px;
+                            vertical-align: center;
+                            text-align: right;
+                            font-size: 11px;
+                            letter-spacing: -0.5px;
+                            color: $lighter-grey-tan;
+                        }
+                    }
+                    &.message-full {
+                        
+
+                        min-height: 52px;
+                        .avatar {
+                            min-width: 36px;
+                            min-height: 36px;
+                            width: 36px;
+                            height: 36px;
+                            border-radius: 3px;
+                            margin-right: 8px;
+                            overflow: none;
+                            background: $light-blue-grey;
+                        }
+                        .message-details {
+                            height: 100%;
+                            width: 100%;
+
+                            h3 {
+                                display: block;
+                                // margin-top: -3px;
+                                font-weight: 600;
+                                // margin: -6px 0 6px;
+                                span {
+                                    font-size: 11px;
+                                    font-weight: 400;
+                                    color: $lightest-text;
+                                }
+                            }
+                        }
+                    }
+
+
                 }
             }
         }

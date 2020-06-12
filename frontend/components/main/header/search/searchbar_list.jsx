@@ -87,7 +87,12 @@ class SearchbarList extends Component {
                         value={ this.state.searchString } />
 
                     <button className="clear" 
-                        onClick={ () => this.setState({ searchString: "" }) }>
+                        // onMouseDown={  }
+                        onMouseDown={ e => e.preventDefault() }
+                        onClick={ (e) => {
+                            e.preventDefault();
+                            this.setState({ searchString: "" })
+                        } }>
                         Clear
                     </button>
                     

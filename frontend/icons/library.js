@@ -20,10 +20,14 @@ import { faBars,
         faSearch,
         faPlus,
         faCircle,
-        faCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+        faCheck,
+        faPaperPlane,
+        faPenFancy,
+        faLevelDownAlt } from '@fortawesome/free-solid-svg-icons';
 import { 
     faQuestionCircle,
     faUser,
+    // faMinusSquare,
 } from "@fortawesome/free-regular-svg-icons"
 import {
     fab,
@@ -37,4 +41,5 @@ export default library.add(
     faQuestionCircle, faInfoCircle, faTimes,
     faFeatherAlt, faCaretDown, faCaretRight,
     faCircle, faLock, faHashtag, faSearch,
-    faPlus, faCheck, faUser, faPaperPlane)
+    faPlus, faCheck, faUser, faPaperPlane,
+    faPenFancy, faLevelDownAlt)

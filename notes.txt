@@ -40,9 +40,10 @@ mailing bonus feature
 - [~] Excellent job so far!! :) I love the beach theme
 
 
-    Clear checks properly from user search
+ X  Clear checks properly from user search
  X  align chat to bottom properly
     combine messages from same user in a row
         (style accordingly)
     make base page route dynamic? 
  X  fix fetch on no content
+    fix clear button

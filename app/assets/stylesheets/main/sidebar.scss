@@ -658,6 +658,12 @@
                                 display: block;
                             }
                             li {
+                                &.no-match {
+                                    strong {
+                                        font-weight: 600;
+                                        padding-left: 4px;
+                                    }
+                                }
                                 height: 32px;
                                 width: 100%;
                                 padding: 6px 21px;

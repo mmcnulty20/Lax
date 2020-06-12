@@ -31,7 +31,7 @@ const UserSearchList = ({ members, inputValue, onInputChange, filtered, focus, b
                 typeof focused === "number" ) &&
                 inputValue.length > 0 ? " open" : "" }`}>
             { filtered.length === 0 ? (
-                <li>
+                <li className="no-match">
                     No one found matching <strong> {inputValue} </strong>
                 </li>
                 ) : filtered.map( user => (
