@@ -64,8 +64,8 @@
                 font-weight: 400;
                 text-transform: scale(1.2,1);
                 position: absolute;
-                top: 10px;
-                margin-left: 10px;
+                bottom: 75px;
+                // margin-left: 10px;
                 &.lock::after {
                     content: "\f023";
                     font-family: "Font Awesome 5 Free";
