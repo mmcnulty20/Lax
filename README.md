@@ -1,24 +1,46 @@
-# README
+ <div style="height: 81px; text-align: right; margin: 10px 30px -4px 0; display: flex;flex-direction: row; justify-content: flex-end; align-items: center; border-bottom: 3px solid grey; padding-bottom: 10px; width: 100%;">
+ <p style="font-size: 40px; margin: 14px auto 0; font-weight: 600;">LAX</p>
+ <img src="app/assets/images/icons/readme_logo.png" style="height: 81px; position: absolute" alt="lax"/>
+ </div>
+ 
+ ---
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### The better way to chat and reLAX
 
-Things you may want to cover:
+___
 
-* Ruby version
+Welcome to Lax! Lax is a single page application maded with Ruby on Rails, PostgreSQL, and React-Redux. It is a clone of the website [Slack](https://slack.com/), a popular application used to communicate within companies. With Lax, however, we prioritize relaxation, communicating with friends, and having fun.
 
-* System dependencies
+[ splash image here]
 
-* Configuration
+---
 
-* Database creation
+### Lax uses the following technologies:
+  * Backend - Ruby on Rails
+  * Database - PostgreSQL
+  * Frontend - JavaScript | React | Redux
+  * Design - HTML5/SCSS
+___
 
-* Database initialization
+## Features
+* Create an account, with passwords protected with BCrypt hashing
+  * Or use a Demo Account we've already set up to skip this step completely! You'll still get full use of the app.
 
-* How to run the test suite
+  [gif of errors]
+* Channels and Chat:
+    * View channels you've joined and communicate with other people - live! No need to refresh the page.
+       * You can edit and delete your messages, and changes will show up live for other users as well!
+       * [ chat gif]
+    * Search channels by name, with indication of channels you haven't joined
+        * You won't be able to chat in a channel until you join, so join the channel and get relaxing
+        * Private channels won't show up in the search bar unless you've already joined them.
+        * [search gif] 
+    * Create new channels for new groups or topics
+        * They'll be public by default, but you can make them private and not viewable in search
+            * [ toggle private gif ]
+        * After making a channel, you can add all the users as members, skip adding people completely, or search for users you want to add by name (usually full name) or email
+            * [ user search gif ]
+    * Delete channels - You can delete channels you've made, removing all messages forever.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+---
+### Have feedback or looking for a developer? Send me an <a href="mailto:megan.mcnulty07@gmail.com">email</a> and let me know!
