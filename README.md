@@ -1,7 +1,6 @@
- <div style="height: 81px; text-align: right; margin: 10px 30px -4px 0; display: flex;flex-direction: row; justify-content: flex-end; align-items: center; border-bottom: 3px solid grey; padding-bottom: 10px; width: 100%;">
- <p style="font-size: 40px; margin: 14px auto 0; font-weight: 600;">LAX</p>
- <img src="app/assets/images/icons/readme_logo.png" style="height: 81px; position: absolute" alt="lax"/>
- </div>
+<p align="right">
+ <img src="app/assets/images/icons/readme_logo.png" style="height: 81px" alt="lax"/>
+ </p>
  
  ---
 
