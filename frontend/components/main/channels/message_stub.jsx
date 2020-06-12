@@ -19,11 +19,6 @@ const MessageStub = React.forwardRef(({ chatChannel, user, newChannel, message: 
                         messageId={ id }
                         body={ body }
                         edit={ true } />
-                    { hover ? (
-                        <aside>
-                            { time }
-                        </aside>
-                    ) : null }
                 </>
             ) : (
                 <li 
