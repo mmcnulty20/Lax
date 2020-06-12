@@ -33,7 +33,7 @@ const App = () => (
             <AuthRoute path="/login" component={LoginFormContainer} />
             <AuthRoute path="/signup" component={SignUpFormContainer} />
             <Route exact path="/welcome" component={SplashContainer} />
-            <Redirect exact from="/" to="/c/12" />
+            <Redirect exact from="/" to="/c/18" />
             <ProtectedRoute path="/" component={ Main } />
         </Switch>
     </>

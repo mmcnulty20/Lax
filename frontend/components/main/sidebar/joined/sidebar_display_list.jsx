@@ -22,7 +22,7 @@ class DisplayList extends Component {
         return e => {
             if ( Number.isInteger(id) ) {
                 this.props.delete(id);
-                this.props.history.push("/c/12")
+                this.props.history.push("/c/18")
             }
         }
     }
