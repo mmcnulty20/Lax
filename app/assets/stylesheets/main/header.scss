@@ -144,6 +144,10 @@ body {
                             font-weight: 500;
                             &:hover {
                                 background: $link-blue;
+                                color: $background;
+                                svg {
+                                    color: $background;
+                                }
                             }
                             svg {
                                 color: $light-grey-tan;

@@ -10,7 +10,11 @@ const usersReducer = (state = {}, action) => {
     let newState = {...state}
     switch (action.type) {
         case RECEIVE_ALL_USERS:
-            return {...action.users, ...newState}
+            const users = {}
+            Object.keys(action.users).forEach(id => { 
+                users[id] = { ...newState[id], ...action.users[id] } 
+            })
+            return {...newState, ...users}
         case RECEIVE_USER_DETAILS:
             newState[action.user.id] = action.user;
             return newState;

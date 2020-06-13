@@ -42,7 +42,7 @@ class MessageForm extends Component {
         } else {
             message.messageId = this.props.messageId
         }
-        this.props.chatChannel.speak({ message })
+        App.cable.subscriptions.subscriptions[0].speak({ message })
         if (this.props.edit) { 
             e.persist();
             this.props.handleEditEnd(e)

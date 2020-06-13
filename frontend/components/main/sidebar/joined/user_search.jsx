@@ -20,8 +20,8 @@ class UserSearch extends Component {
     }
 
     filterUsers(){
+        const search = this.state.searchString.toLowerCase();
         return this.props.users.filter( user => {
-            const search = this.state.searchString.toLowerCase();
             return user.username.toLowerCase().includes(search) ||
                 user.email.toLowerCase().includes(search)
         } ).sort()

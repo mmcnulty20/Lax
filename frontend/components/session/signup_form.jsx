@@ -212,6 +212,7 @@ class SignupForm extends Component {
                                 <span>Name</span>
                                 <div className={this.errors[0] ? "signup-error" : "no-err"}>
                                     <input type="text"
+                                        autoComplete={ false }
                                         onFocus={this.handleFocus(0)}
                                         onBlur={this.handleLeave(0)}
                                         id="fullname"
@@ -227,6 +228,7 @@ class SignupForm extends Component {
                                 <span>Email address</span>
                                 <div className={this.errors[1] ? "signup-error" : "no-err"}>
                                     <input type="text"
+                                        autoComplete={ false }
                                         id="email"
                                         value={this.state.email}
                                         onFocus={this.handleFocus(1)}

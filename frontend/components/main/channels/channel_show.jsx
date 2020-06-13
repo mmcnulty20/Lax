@@ -23,7 +23,7 @@ class ChannelShow extends Component {
     }
 
     createChannelSubscription(){
-        this.chatChannel = App.cable.subscriptions.create(
+        App.cable.subscriptions.create(
             { channel: "ChatChannel", channel_id: this.props.pathId },
             {
                 received: data => {
@@ -48,6 +48,7 @@ class ChannelShow extends Component {
                 }
             }
         )
+        if ( App.cable.subscriptions.subscriptions.length > 1 ) App.cable.subscriptions.subscriptions.shift()
     }
 
     constructor(props) {
@@ -79,7 +80,6 @@ class ChannelShow extends Component {
                 ( ((( time - prevTime ) / 1000 ) / 60) < 3 ) ) {
                     return ( 
                         <MessageStub key={ message.id }
-                            chatChannel={ this.chatChannel }
                             user={ currentUserId }
                             message={ message }
                             newChannel={ newChannel }
@@ -89,7 +89,6 @@ class ChannelShow extends Component {
             } else {
                 return (
                     <MessageFull key={ message.id }
-                        chatChannel={ this.chatChannel }
                         user={ currentUserId }
                         message={ message }
                         newChannel={ newChannel }
@@ -102,8 +101,10 @@ class ChannelShow extends Component {
         return(
             <div className="show">
                 <main className="chat-container">
-                    <div className={ `message-list${ newChannel ? " extra-space" : "" }`}>
-                        { messageList }
+                    <div className="message-list-container">
+                        <div className={ `message-list${ newChannel ? " extra-space" : "" }`}>
+                            { messageList }
+                        </div>
                     </div>
                     </main>
                 { newChannel ? (
@@ -120,7 +121,6 @@ class ChannelShow extends Component {
                     </footer>
                 ) : channel ? (
                     <MessageForm
-                        chatChannel={ this.chatChannel }
                         edit={ false }
                         user={ currentUserId }
                         channelId={ channel.id }
