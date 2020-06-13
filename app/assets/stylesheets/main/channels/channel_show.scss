@@ -11,37 +11,55 @@
         // overflow-y: auto;
         height: 100%;
         width: 100%;
+        padding-bottom: 28px;
         background-color: $background;
         @include flex(column, flex-start, flex-start);
         .message-form {
             width: calc(100vw - 260px - 2.8%);
             min-height: 85px;
-
+            // overflow: hidden;
             border: 1px solid $light-grey-tan;
-            // box-shadow: 0 0 0 1px $light-grey-tan;
             border-radius: 4px;
-            margin: 4px 20px 24px;
-            // position: absolute;
+            margin: 4px 20px 0;
+            display: block;
+            // padding-bottom: 1px;
+            max-height: 399px;
+            position: relative;
+            // max-height: calc(46.36vh + 47px);
+            flex: 1 0 auto;
+            // flex: 1 0 auto;
             &.hidden {
                 display: none;
             }
             form {
-                flex: 2 0 auto;
-                padding: 9px 10px 0;
-                @include flex(column, flex-start,flex-start)
+                // padding-bottom: 1px;
+                // max-height: 46.36vh;
+                // flex: 1 0 auto;
+                padding: 9px 10px 1px;
+                position: relative;
+                @include flex(column, flex-start,flex-start);
+                // max-height: 349px;
+                width: 100%;
+                // height: calc(100% - 45px);
+                // height: 100%;
             }
             .input {
                 border-radius: 4px 4px 0 0;
                 min-height: 20px;
-                max-height: 548px;
-                overflow-x: auto;
+                height: 100%;
+                max-height: 340px;
+                // height: calc(100% - 45px);
+                // max-height: 548px;
+                overflow: auto;
                 margin-top: 2px;
                 width: 100%;
                 background: $background;
                 // padding-bottom: 5px;
                 textarea {
+                    overflow: auto;
+                    // max-height: 340px;
                     font-size: 14px;
-                    line-height: 18px;
+                    line-height: 20px;
                     background: transparent;
                     height: 100%;
                     width: 100%;
@@ -49,12 +67,16 @@
                 }
             }
             .bottom-space {
+                // flex: 1 0 auto;
                 border-radius: 0 0 4px 4px;
                 border-top: 1px solid $dark-tan;
                 height: 41px;
                 margin-top: 4px;
                 width: 100%;
                 display: block;
+                // padding-bottom: 1px;
+                position: relative;
+                bottom: 1px;
                 background: $light-tan;
             }
             &:not(.edit) {
@@ -64,7 +86,7 @@
                 font-weight: 400;
                 text-transform: scale(1.2,1);
                 position: absolute;
-                bottom: 75px;
+                // bottom: 75px;
                 // margin-left: 10px;
                 &.lock::after {
                     content: "\f023";
@@ -90,10 +112,11 @@
                 }
             }
             button {
+                z-index: 1;
                 position: absolute;
                 // right: 1.33%;
                 align-self: flex-end;
-                bottom: 24px;
+                bottom: -46px;
                 height: 32px;
                 width: 32px;
                 border-radius: 4px;
@@ -113,7 +136,8 @@
         }
         .chat-container {
             flex: 1 1 auto;
-            max-height: 793px;
+            max-height: 78.25vh;
+            min-height: 21.18vh;
             position: relative;
             width: 100%;
             bottom: 0;

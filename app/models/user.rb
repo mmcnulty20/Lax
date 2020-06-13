@@ -44,7 +44,8 @@ class User < ApplicationRecord
 
     has_many :authored_messages,
         class_name: :Message,
-        foreign_key: :author_id
+        foreign_key: :author_id,
+        dependent: :destroy
 
 
     def password=(password)

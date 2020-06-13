@@ -26,7 +26,14 @@ class MessageForm extends Component {
 
     handleChange(target){
         target.style.height = "20px";
+        
         target.style.height = `${target.scrollHeight}px`;
+
+        this.messageForm = target.parentElement.parentElement.parentElement
+
+        let formHeight = (target.scrollHeight + 65) < 399 ? (target.scrollHeight + 65) : 399
+        this.messageForm.style.maxHeight = `${formHeight}px`;
+
         this.setState({ body: target.value})
     }
 
@@ -48,6 +55,7 @@ class MessageForm extends Component {
             this.props.handleEditEnd(e)
         } else {
             e.target.style.height = "20px"
+            this.messageForm.style.maxHeight = "83px"
             this.setState({ body: "" })
         }
     }
@@ -61,7 +69,9 @@ class MessageForm extends Component {
 
     render(){
         return(
+
             <section className={ `message-form` + ( this.props.edit ? " edit" : "" ) }>
+                {/* <section className="form-container"> */}
                 <form onSubmit={ this.handleSubmit } >
                     <div className="input" onClick={ () => this.divRef.current.focus() }>
                         { ( this.props.edit || this.state.body.length > 0 ) ? null : (
@@ -102,6 +112,7 @@ class MessageForm extends Component {
                     ) }
                 </form>
                 <div className="bottom-space" />
+                {/* </section> */}
             </section>
         )
     }
