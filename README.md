@@ -39,10 +39,10 @@ ___
 <br>
 <img margin-right="50px" src="app/assets/images/readme/channel-search.gif" align="right" width="650px" >
 
-**Search channels by name, with indication of channels you haven't joined**<br>
+### Search channels by name, with indication of channels you haven't joined<br>
 * You won't be able to chat in a channel until you join, so join the channel and get relaxing<br>
 * Private channels won't show up in the search bar unless you've already joined them.
-<br><br><br><br>
+<br><br><br><br><br>
 
 <img src="app/assets/images/readme/channel.gif" align="left" width="650px"> <br><br><br><br>
 
