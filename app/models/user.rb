@@ -47,6 +47,10 @@ class User < ApplicationRecord
         foreign_key: :author_id,
         dependent: :destroy
 
+    has_many :direct_messages,
+        through: :memberships,
+        source: :joinable,
+        source_type: "DirectMessage"
 
     def password=(password)
         @password = password

@@ -8,7 +8,7 @@ class Api::MembershipsController < ApplicationController
                 member ? {
                         user_id: id,
                         joinable_id: joined.id,
-                        joinable_type: joined.is_a?(Channel) ? "Channel" : "DM"
+                        joinable_type: joined.is_a?(Channel) ? "Channel" : "DirectMessage"
                     } : nil
             end
             Membership.create!(new_members)
@@ -33,7 +33,7 @@ class Api::MembershipsController < ApplicationController
             membership = Membership.find_by(
                 user_id: current_user.id,
                 joinable_id: joined.id, 
-                joinable_type: joined.is_a?(Channel) ? "Channel" : "DM")
+                joinable_type: joined.is_a?(Channel) ? "Channel" : "DirectMessage")
             membership.destroy
         end
     end
