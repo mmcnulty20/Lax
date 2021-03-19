@@ -24,7 +24,7 @@ class Api::MembershipsController < ApplicationController
     def find_joined
         return params[:channel_id] ? 
             Channel.find(params[:channel_id]) :
-            DM.find(params[:dm_id])
+            DirectMessage.find(params[:direct_message_id])
     end
 
     def destroy
