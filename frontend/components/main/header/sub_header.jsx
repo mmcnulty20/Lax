@@ -36,7 +36,7 @@ const SubHeader = ({ fetchDetails, locationDetails, path }) => {
                 <h2>Location Info Here</h2> 
                 )}
             </div>
-            <LocationDetailsButton />
+            {/* <LocationDetailsButton /> */}
         </div>
     )
 }

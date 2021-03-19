@@ -2,13 +2,17 @@ import React from "react";
 
 import SubHeaderContainer from "./sub_header_container";
 import SearchHeaderContainer from "./search/search_header_container";
-import { Redirect } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
+import DMHeader from "./dm_header";
 
 
 const MainHeader = props => (
     <div className="mainpage-head">
         <SearchHeaderContainer path={ props.location.pathname } />
-        <SubHeaderContainer path={ props.location.pathname }/>
+        <Switch>
+            <Route path="/c/:id" component={SubHeaderContainer} />
+            <Route path="/d/:id" component={DMHeader} />
+        </Switch>
     </div>
 )
 

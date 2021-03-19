@@ -10,6 +10,8 @@ User.destroy_all
 Channel.destroy_all
 Membership.destroy_all
 
+
+# Bellith, Addy, Tiffan, Table (Lothar), Nissa, Veth, Caleb, Bren, Jester, 
 users = User.create([
     {username: "test", email: "test@user.com", password: "password"},
     {username: "test2", email: "test2@user.com", password: "password"},
