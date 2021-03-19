@@ -77,7 +77,7 @@ class MessageForm extends Component {
                     <div className="input" onClick={ () => this.divRef.current.focus() }>
                         { ( this.props.edit || this.state.body.length > 0 ) ? null : (
                             <div className={ `placeholder ${ this.icon }`}>
-                                Message <span class={ this.props.type === "Channel" ? "space" : "" }></span> {this.props.name}
+                                Message <span className={ this.props.type === "Channel" ? "space" : "" }></span> {this.props.name}
                                 {/* Message &nbsp;&nbsp;&nbsp;&nbsp; {this.props.name} */}
                             </div>
                         ) }

@@ -2,8 +2,10 @@ class ChatChannel < ApplicationCable::Channel
     def subscribed
         if params.has_key?(:channel_id)
             @channel = Channel.find(params[:channel_id])
-            stream_for @channel if @channel
+        elsif params.has_key?(:dm_id)
+            @channel = DirectMessage.find(params[:dm_id])
         end
+        stream_for @channel if @channel
         # stream_for "chat_channel"
     end 
 
@@ -30,7 +32,7 @@ class ChatChannel < ApplicationCable::Channel
             } }
 
         else
-            message = Message.create(body: data["message"]["body"], author_id: data["message"]["authorId"], messageable_type: "Channel", messageable_id: data["message"]["channelId"] )
+            message = Message.create(body: data["message"]["body"], author_id: data["message"]["authorId"], messageable: @channel )
             socket = { message: {
                 id: message.id,
                 author_id: message.author_id,
@@ -41,6 +43,7 @@ class ChatChannel < ApplicationCable::Channel
                 username: message.author.username
             } }
         end
+        # debugger
         ChatChannel.broadcast_to(@channel, socket)
     end
 

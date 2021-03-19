@@ -17,6 +17,7 @@ class DMShow extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        debugger
         if (JSON.stringify(prevProps.messages) !== JSON.stringify(this.props.messages)) this.setState({ messages: Object.values(this.props.messages) })
         if (this.props.pathId !== prevProps.pathId) {
             this.props.fetchDirectMessages(this.props.pathId).then(this.setState({ messages: Object.values(this.props.messages) }))
@@ -30,6 +31,7 @@ class DMShow extends Component {
             { channel: "ChatChannel", dm_id: this.props.pathId },
             {
                 received: data => {
+                    debugger
                     if (data.message.type === "delete") {
                         let messages = this.state.messages.filter(m => m.id !== data.message.id)
                         this.setState({ messages })
@@ -94,6 +96,7 @@ class DMShow extends Component {
                         user={currentUserId}
                         message={message}
                         time={this.formatTimeString(time)}
+                        // keep getting cannot read username of undefined
                         username={message.username || this.props.users[message.author_id].username}
                         ref={this.bottom} />
                 )
