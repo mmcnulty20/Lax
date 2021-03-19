@@ -7,11 +7,12 @@ export const RECEIVE_CHANNEL_ERRORS = "RECEIVE_CHANNEL_ERRORS"
 export const RECEIVE_NAME_BOOL = "RECEIVE_NAME_BOOL";
 export const RECEIVE_CHANNEL_SEARCH = "RECEIVE_CHANNEL_SEARCH"
 
-const receiveChannels = ({channels, dms}) => (
+const receiveChannels = ({channels, dms, users}) => (
     {
         type: RECEIVE_CHANNELS,
         channels,
-        dms
+        dms,
+        users
     }
 )
 

@@ -1,7 +1,10 @@
 class Api::ChannelsController < ApplicationController
     def index
         if params[:user_id]
-            @channels_and_dms = { channels: current_user.joined_channels, dms: current_user.direct_messages }
+            @channels_and_dms = { 
+                channels: current_user.joined_channels,
+                dms: current_user.direct_messages.includes(:members)
+            }
             render :index
         else
             @channels = Channel.all

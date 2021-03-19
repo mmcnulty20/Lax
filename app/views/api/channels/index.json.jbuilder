@@ -8,12 +8,18 @@ json.channels do
     end
 end
 
-json.dms do
-    @channels_and_dms[:dms].each do |dm|
+@channels_and_dms[:dms].each do |dm|
+    json.dms do
         json.set! dm.id do
             json.extract! dm, :id
             json.members dm.member_ids
         end
     end
+    json.users do
+        dm.members.each do |member|
+            json.set! member.id do
+                json.extract! member, :id, :username
+            end
+        end
+    end
 end
-
