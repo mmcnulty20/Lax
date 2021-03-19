@@ -123,7 +123,8 @@ class ChannelShow extends Component {
                     <MessageForm
                         edit={ false }
                         user={ currentUserId }
-                        channelId={ channel.id }
+                        id={ channel.id }
+                        type="Channel"
                         private={ channel.isPrivate }
                         name={ channel.name } />
                 ) : null }

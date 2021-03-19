@@ -124,6 +124,10 @@
                     top: 3px;
                     left: 75px;
                 }
+                > span.space {
+                    display: inline-block;
+                    width: 18px;
+                }
             }
             button {
                 z-index: 1;

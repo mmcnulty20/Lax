@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class MessageForm extends Component {
     componentDidUpdate(oldProps) {
-        if ( this.props.channelId !== oldProps.channelId ) this.icon = this.props.private ? "lock" : "hash"
+        if (this.props.id !== oldProps.id || this.props.type !== oldProps.type ) this.icon = this.props.type === "Channel" ? (this.props.private ? "lock" : "hash") : ""
     }
 
     componentDidMount(){
@@ -16,7 +16,7 @@ class MessageForm extends Component {
         this.state = {
             body: props.body || "",
         }
-        this.icon = props.private ? "lock" : "hash"
+        this.icon = props.type === "Channel" ? ( props.private ? "lock" : "hash" ) : ""
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -42,10 +42,11 @@ class MessageForm extends Component {
         const message = {
             body: this.state.body,
             edit: this.props.edit,
+            type: this.props.type
         }
         if ( !this.props.edit ) {
             message.authorId = this.props.user
-            message.channelId = this.props.channelId
+            message.channelId = this.props.id
         } else {
             message.messageId = this.props.messageId
         }
@@ -76,7 +77,8 @@ class MessageForm extends Component {
                     <div className="input" onClick={ () => this.divRef.current.focus() }>
                         { ( this.props.edit || this.state.body.length > 0 ) ? null : (
                             <div className={ `placeholder ${ this.icon }`}>
-                                Message &nbsp;&nbsp;&nbsp;&nbsp; {this.props.name}
+                                Message <span class={ this.props.type === "Channel" ? "space" : "" }></span> {this.props.name}
+                                {/* Message &nbsp;&nbsp;&nbsp;&nbsp; {this.props.name} */}
                             </div>
                         ) }
                         <textarea
