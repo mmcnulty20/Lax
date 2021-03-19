@@ -1,6 +1,10 @@
 class Api::MessagesController < ApplicationController
     def index
-        @messages = Message.where( messageable_id: params[:channel_id], messageable_type: "Channel" ).includes(:author)
+        if params[:channel_id]
+            @messages = Message.where( messageable_id: params[:channel_id], messageable_type: "Channel" ).includes(:author)
+        else 
+            @messages = Message.where( messageable_id: params[:direct_message_id], messageable_type: "DirectMessage" ).includes(:author)
+        end
         # @messages = Message.all
     end
 

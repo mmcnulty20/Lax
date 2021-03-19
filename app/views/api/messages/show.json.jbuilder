@@ -1,6 +1,9 @@
 if @message
-
-    json.id "c#{@message.messageable_id}"
+    if @message.messageable_type == "Channel"
+        json.id "c#{@message.messageable_id}",
+    else
+        json.id "d#{@message.messageable_id}"
+    end
     json.message do
         json.partial! "/api/messages/message", message: @message
     end

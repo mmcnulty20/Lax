@@ -15,8 +15,11 @@ unless @messages.empty?
             end
         end
     end
-
-    json.id "c#{@messages[0].messageable_id}"
+    if @messages[0].messageable_type == "Channel"
+        json.id "c#{@messages[0].messageable_id}"
+    else
+        json.id "d#{@messages[0].messageable_id}"
+    end
 
 else
 
