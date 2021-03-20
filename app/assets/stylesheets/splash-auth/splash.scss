@@ -212,9 +212,14 @@ header > nav {
 
 .splash {
     font-size: 18px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 160px;
     font-family: $splash-sans-serif;
-    margin: 160px auto 0 auto;
-    width: 1230px;
+    // margin: 160px auto 0 auto;
+    // width: 1230px;
     position: relative;
     
     h1 {
@@ -231,7 +236,8 @@ header > nav {
         @include flex(row);
         align-items: unset;
         height: 515px;
-        width: 100%;
+        // width: 100%;
+        width: 1230px;
         font-size: 17px;
         font-weight: 500;
         padding-bottom: 80px;
@@ -265,7 +271,8 @@ header > nav {
         }
     }
     .splash-breakdown-underline {
-        @include fullWidthSubComponent();
+        // @include fullWidthSubComponent();
+        width: 100%;
         border-bottom: 1px solid $dark-tan;
         .splash-breakdown {
             margin: 33px auto 0 auto;
@@ -316,6 +323,7 @@ header > nav {
         align-items: center;
         justify-content: center;
         // line-height: 0.8em;
+        width: 1230px;
         nav {
             @include flex(row);
             justify-content: space-around;
@@ -328,7 +336,8 @@ header > nav {
     }
     .splash-lower-btns-bg {
         color: $background;
-        @include fullWidthSubComponent();
+        // @include fullWidthSubComponent();
+        width: 100%;
         height: 370px;
         background: $dark-blue;
         @include flex(column);
@@ -349,8 +358,10 @@ header > nav {
 
     .splash-footer {
         font-size: 12px;
+        width: 100%;
         .footer-lists {
-            margin: 80px 0;
+            width: 1230px;
+            margin: 80px auto;
             height: 400px;
             @include flex(row);
             align-items: flex-start;
@@ -391,7 +402,8 @@ header > nav {
             }
         }
         .footer-nav {
-            @include fullWidthSubComponent();
+            width: 100%;
+            // @include fullWidthSubComponent();
             background: $dark-tan;
             nav {
                 height: 84px;
