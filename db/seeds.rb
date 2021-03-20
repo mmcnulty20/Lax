@@ -10,14 +10,31 @@ User.destroy_all
 Channel.destroy_all
 Membership.destroy_all
 
-
-# Bellith, Addy, Tiffan, Table (Lothar), Nissa, Veth, Caleb, Bren, Jester, 
-users = User.create([
-    {username: "test", email: "test@user.com", password: "password"},
-    {username: "test2", email: "test2@user.com", password: "password"},
-    {username: "test3", email: "test3@user.com", password: "password"},
+puts "Creating users..."
+users = User.create!([
+    { username: "Bellith Brighton", email: "bellith@atrea.com", password: "suggestion" },
+    { username: "Addy", email: "goliath@wildmother.com", password: "pinecones" },
+    { username: "Tiffan", email: "bestbard@circus.com", password: "disguisekit" },
+    { username: "Table (Lothar)", email: "notatable@rogues.com", password: "onlytwolegs" },
+    { username: "Nissa", email: "druids@circleoftheland.com", password: "fuckdragons" },
+    { username: "Veth", email: "goblin@ihategoblins.com", password: "yezzaandluc" },
+    { username: "Caleb Widogast", email: "fire@fire.fire", password: "notrauma" },
+    { username: "Bren Aldric Ermendrud", email: "fire@soltryce.edu", password: "killtrent" },
+    { username: "Jester Lavore", email: "pranks@traveller.con", password: "realgod" },
     {username: "Demo User", email: "demouser@demo.com", password: "nobodyneedstoknowthisonelol"}
 ])
+
+puts "#{users.length} users seeded!\n\n"
+puts "Seeding channels..."
+
+
+# Bellith, Addy, Tiffan, Table (Lothar), Nissa, Veth, Caleb, Bren, Jester, 
+# users = User.create([
+#     {username: "test", email: "test@user.com", password: "password"},
+#     {username: "test2", email: "test2@user.com", password: "password"},
+#     {username: "test3", email: "test3@user.com", password: "password"},
+#     {username: "Demo User", email: "demouser@demo.com", password: "nobodyneedstoknowthisonelol"}
+# ])
 
 channels = Channel.create!([
     { name: "welcome",

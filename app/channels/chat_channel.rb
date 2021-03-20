@@ -43,7 +43,6 @@ class ChatChannel < ApplicationCable::Channel
                 username: message.author.username
             } }
         end
-        # debugger
         ChatChannel.broadcast_to(@channel, socket)
     end
 
