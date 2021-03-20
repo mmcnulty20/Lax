@@ -9,7 +9,7 @@ const mapStateToProps = ({ entities: { dms, users }, session: { currentUserId } 
         if ( name.length > 1 ) {
             quantity = `(${ name.length }) `
         }
-        name = quantity + name.map( memberId => users ? users[memberId].username : "" ).join(", ")
+        name = quantity + name.map( memberId => users[memberId] ? users[memberId].username : "" ).join(", ")
         return { id: dm.id, name }
     } )
     return {

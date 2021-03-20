@@ -2,7 +2,7 @@ import { RECEIVE_ALL_USERS,
             RECEIVE_CURRENT_USER, 
             RECEIVE_USER_DETAILS,
             REMOVE_USER} from "../../actions/session_actions";
-import { RECEIVE_CHANNEL } from "../../actions/channel_actions";
+import { RECEIVE_CHANNEL, RECEIVE_CHANNELS } from "../../actions/channel_actions";
 import { RECEIVE_CHANNEL_MESSAGES } from "../../actions/message_actions";
 
 const usersReducer = (state = {}, action) => {
@@ -26,7 +26,7 @@ const usersReducer = (state = {}, action) => {
             return newState;
         case RECEIVE_CHANNEL:
             return { ...state, ...action.channel.users }
-            case RECEIVE_CHANNEL_MESSAGES:
+        case RECEIVE_CHANNEL_MESSAGES, RECEIVE_CHANNELS:
             Object.values(action.users).forEach( u => {
                 if ( !newState[u.id] ) newState[u.id] = u
             })
