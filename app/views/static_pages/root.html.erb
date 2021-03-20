@@ -3,7 +3,7 @@
         window.currentUser = 
             <%= render("/api/users/user.json.jbuilder",
                 user: current_user).html_safe %>
-        window.mainChannel = <%= main_channel %>
+        window.mainChannel = <%= main_channel.id %>
     </script>
 <% end %>
 

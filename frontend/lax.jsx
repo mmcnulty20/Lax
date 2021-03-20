@@ -16,12 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             session: {
                 currentUserId: window.currentUser.id,
+            },
+            ui: {
+                modal: false,
+                mainChannel: window.mainChannel
             }
         }
         delete window.currentUser
+        delete window.mainChannel
     }
     const store = configureStore(preloadedState)
     window.size = size
-
     ReactDOM.render(<Root store={store} />, root)
 });

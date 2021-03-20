@@ -15,7 +15,6 @@ const DMHeader = ({ location: { pathname } }) => {
             .map(memberId => users[memberId] ? users[memberId].username : "").join(", ")
             : ""
     })
-    if (!names) { debugger }
     return (
         <div className="sub-header">
             <div className="location-info dm">

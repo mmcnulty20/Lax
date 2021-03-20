@@ -10,10 +10,12 @@ import NavBarContainer from './navbar/navbar_container';
 import Main from "./main/main";
 import SplashContainer from './splash/splash_container';
 import MainHeader from './main/header/main_header';
+import { useSelector } from 'react-redux';
 
 
-const App = () => (
-    <>
+const App = () => {
+    const cId = useSelector( ({ui: { mainChannel }}) => mainChannel )
+    return (<>
         <svg id="logo-bg">
                 <defs>
                     <pattern id="logo-colors"  patternContentUnits="objectBoundingBox" width="1" height="1" 
@@ -33,10 +35,10 @@ const App = () => (
             <AuthRoute path="/login" component={LoginFormContainer} />
             <AuthRoute path="/signup" component={SignUpFormContainer} />
             <Route exact path="/welcome" component={SplashContainer} />
-            <Redirect exact from="/" to="/c/18" />
+            <Redirect exact from="/" to={`/c/${cId}`} />
             <ProtectedRoute path="/" component={ Main } />
         </Switch>
-    </>
-);
+    </>)
+};
 
 export default App;
