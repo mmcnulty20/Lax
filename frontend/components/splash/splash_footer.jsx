@@ -76,13 +76,13 @@ class SplashFooter extends Component {
                         <ul>
                             <li>OTHER PROJECTS</li>
                             <li>
-                                <a href="#">
-                                    [MERNstack name here]
+                                <a href="http://polisee-app.herokuapp.com/#/" title="MERN Stack built June 2020 for finding and contacting your representatives">
+                                    Polisee
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    [Javascript Game here]
+                                <a href="http://the-tavern.herokuapp.com/" title="Dungeons and Dragons-themed Canvas & Vanilla JS minigame">
+                                    The Tavern
                                 </a>
                             </li>
                         </ul>
@@ -99,11 +99,6 @@ class SplashFooter extends Component {
                             <li>
                                 <a href="mailto:megan@mcnulty.com" >
                                     Email me
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    [angellist]
                                 </a>
                             </li>
                         </ul>
