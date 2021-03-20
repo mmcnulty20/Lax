@@ -17,7 +17,6 @@ class DMShow extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // debugger
         if (JSON.stringify(prevProps.messages) !== JSON.stringify(this.props.messages)) this.setState({ messages: Object.values(this.props.messages) })
         if (this.props.pathId !== prevProps.pathId) {
             this.props.fetchDirectMessages(this.props.pathId).then(this.setState({ messages: Object.values(this.props.messages) }))
@@ -31,7 +30,6 @@ class DMShow extends Component {
             { channel: "ChatChannel", dm_id: this.props.pathId },
             {
                 received: data => {
-                    // debugger
                     if (data.message.type === "delete") {
                         let messages = this.state.messages.filter(m => m.id !== data.message.id)
                         this.setState({ messages })
@@ -75,7 +73,7 @@ class DMShow extends Component {
         const { dm, currentUserId, users } = this.props
         const messages = this.state.messages
         const name = dm ? ( dm.members.filter(i => i != currentUserId)
-            .map(memberId => users[memberId].username).join(", ") ) : null
+            .map(memberId => users[memberId] ? users[memberId].username : "").join(", ") ) : null
         let prevTime = null
         const messageList = messages.map((message, i) => {
             const prevMessage = messages[i - 1]
