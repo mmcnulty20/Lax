@@ -11,7 +11,8 @@ Channel.destroy_all
 Membership.destroy_all
 
 puts "Creating users..."
-users = User.create!([
+megan, bellith, addy, tiffan, lothar, nissa, veth, caleb, bren, jester, demo_user = User.create!([
+    { username: "Megan McNulty", email: "megan.mcnulty07@gmail.com", password: "welcometolax" },
     { username: "Bellith Brighton", email: "bellith@atrea.com", password: "suggestion" },
     { username: "Addy", email: "goliath@wildmother.com", password: "pinecones" },
     { username: "Tiffan", email: "bestbard@circus.com", password: "disguisekit" },
@@ -24,54 +25,51 @@ users = User.create!([
     {username: "Demo User", email: "demouser@demo.com", password: "nobodyneedstoknowthisonelol"}
 ])
 
-puts "#{users.length} users seeded!\n\n"
-puts "Seeding channels..."
+puts "11 users seeded!"
+puts "-----"
+puts "Seeding channels...\n\n"
 
+welcome, search, dnd, secret = megan.admined_channels.create!([
+    {
+        name: "welcome",
+        topic: "Welcome to Lax! Feel free to have a look around.",
+    },
+    {
+        name: "search-for-channels",
+        topic: "Use the top bar to find and join new channels!"
+    },
+    {
+        name: "dungeons-and-dragons",
+        topic: "Talk about and plan your latest adventures!",
+    },
+    {
+        name: "secret-mission",
+        topic: "https://youtu.be/HLrpb8Z--fs",
+        is_private: true
+    }
+]).each { |c| c.members = User.all }
 
-# Bellith, Addy, Tiffan, Table (Lothar), Nissa, Veth, Caleb, Bren, Jester, 
-# users = User.create([
-#     {username: "test", email: "test@user.com", password: "password"},
-#     {username: "test2", email: "test2@user.com", password: "password"},
-#     {username: "test3", email: "test3@user.com", password: "password"},
-#     {username: "Demo User", email: "demouser@demo.com", password: "nobodyneedstoknowthisonelol"}
-# ])
+puts "Megan created #welcome, #dungeons-and-dragons, and 🔒secret mission! All users have joined."
 
-channels = Channel.create!([
-    { name: "welcome",
-    topic: "Welcome to Lax! Feel free to have a look around.",
-    admin_id: users[2].id },
-    { name: "test-channel-1",
-        topic: "This is only temporary, but more info when I'm more creative",
-        admin_id: users[2].id },
-    { name: "test-channel-2",
-        topic: "This is only temporary, but more info when I'm more creative",
-        admin_id: users[0].id,
-        is_private: false },
-    { name: "dungeons-and-dragons",
-        topic: "Talk about and plan your newest adventures",
-        admin_id: users[1].id,
-        is_private: false },
-    { name: "dms-only",
-        topic: "Only dungeon masters here, laugh about your players!",
-        admin_id: users[1].id,
-        is_private: true },
-])
+wiz = bellith.admined_channels.create!(
+    name: "wizards-only",
+    topic: "Discuss spell slots, the latest tomes, and which spell you should take on level up!",
+).members = [bellith, caleb, bren, tiffan]
 
-memberships = Membership.create([
-    { user_id: users[0].id, joinable_id: channels[0].id, joinable_type: "Channel" },
-    { user_id: users[1].id, joinable_id: channels[0].id, joinable_type: "Channel" },
-    { user_id: users[2].id, joinable_id: channels[0].id, joinable_type: "Channel" },
-    { user_id: users[3].id, joinable_id: channels[0].id, joinable_type: "Channel" },
-    { user_id: users[1].id, joinable_id: channels[1].id, joinable_type: "Channel" },
-    { user_id: users[0].id, joinable_id: channels[1].id, joinable_type: "Channel" },
-    { user_id: users[2].id, joinable_id: channels[1].id, joinable_type: "Channel" },
-    { user_id: users[3].id, joinable_id: channels[1].id, joinable_type: "Channel" },
-    { user_id: users[0].id, joinable_id: channels[2].id, joinable_type: "Channel" },
-    { user_id: users[2].id, joinable_id: channels[2].id, joinable_type: "Channel" },
-    { user_id: users[0].id, joinable_id: channels[3].id, joinable_type: "Channel" },
-    { user_id: users[1].id, joinable_id: channels[3].id, joinable_type: "Channel" },
-    { user_id: users[2].id, joinable_id: channels[3].id, joinable_type: "Channel" },
-    { user_id: users[3].id, joinable_id: channels[3].id, joinable_type: "Channel" },
-    { user_id: users[1].id, joinable_id: channels[4].id, joinable_type: "Channel" },
-    { user_id: users[2].id, joinable_id: channels[4].id, joinable_type: "Channel" },
-])
+puts "Bellith created #wizards-only! Arcane casters have joined."
+
+crit = caleb.admined_channels.create!(
+    name: "mighty-nein",
+    topic: "Talk all about critical role!"
+).members = User.all[-5..-2]
+
+puts "Caleb created #mighty-nein! Critical role characters have joined."
+
+movies = demo_user.admined_channels.create!(
+    name: "movies",
+    topic: "For anyone that wants to talk about movies or plan movie nights!"
+).members = [demo, megan]
+
+puts "Bellith created #movies! Megan and the Demo User have joined.\n\n"
+puts "All channels created!"
+puts "-----"
