@@ -47,26 +47,29 @@ welcome, dnd, secret = megan.admined_channels.create!([
 
 puts "Megan created #welcome, #dungeons-and-dragons, and 🔒secret mission! All users have joined."
 
-wiz = bellith.admined_channels.create!(
+bellith.admined_channels.create!(
     name: "wizards-only",
     topic: "Discuss spell slots, the latest tomes, and which spell you should take on level up!",
 ).members = [bellith, caleb, bren, tiffan]
+wiz = Channel.last
 
 puts "Bellith created #wizards-only! Arcane casters have joined."
 
-crit = caleb.admined_channels.create!(
+caleb.admined_channels.create!(
     name: "mighty-nein",
     topic: "Talk all about critical role!"
 ).members = User.all[-5..-2]
+crit = Channel.last
 
 puts "Caleb created #mighty-nein! Critical role characters have joined."
 
-movies = demo_user.admined_channels.create!(
+demo_user.admined_channels.create!(
     name: "movies",
     topic: "For anyone that wants to talk about movies or plan movie nights!"
-).members = [demo, megan]
+).members = [demo_user, megan]
+movies = Channel.last
 
-puts "Bellith created #movies! Megan and the Demo User have joined.\n\n"
+puts "Demo created #movies! Megan and the Demo User have joined.\n\n"
 puts "All channels created!"
 puts "-----"
 puts "Seeding channel messages...\n\n"
@@ -98,7 +101,7 @@ dnd.messages.create!([
     },
     {
         body: "What's the character?",
-        author: demo
+        author: demo_user
     },
     {
         body: "Well I don't really want to spoil too much of her backstory......",
@@ -190,7 +193,7 @@ puts "Veth, Caleb, and Jester wrote 5 messages in #mighty-nein!"
 movies.messages.create!([
     {
         body: "Anyone want to get together for a digital?",
-        author: demo
+        author: demo_user
     },
     {
         body: "Sure! What movie?",
