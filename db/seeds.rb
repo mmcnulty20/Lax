@@ -29,14 +29,10 @@ puts "11 users seeded!"
 puts "-----"
 puts "Seeding channels...\n\n"
 
-welcome, search, dnd, secret = megan.admined_channels.create!([
+welcome, dnd, secret = megan.admined_channels.create!([
     {
         name: "welcome",
         topic: "Welcome to Lax! Feel free to have a look around.",
-    },
-    {
-        name: "search-for-channels",
-        topic: "Use the top bar to find and join new channels!"
     },
     {
         name: "dungeons-and-dragons",
@@ -73,3 +69,136 @@ movies = demo_user.admined_channels.create!(
 puts "Bellith created #movies! Megan and the Demo User have joined.\n\n"
 puts "All channels created!"
 puts "-----"
+puts "Seeding channel messages...\n\n"
+
+welcome.messages.create!([
+    {
+        body: "Welcome to Lax!",
+        author: megan
+    },
+    {
+        body: "Check out channels by searching through the top bar!\nOr you can make your own.",
+        author: megan
+    },
+    {
+        body: "Chat about anything you'd like!",
+        author: megan
+    }
+])
+puts "Megan wrote 3 messages in #welcome!"
+
+dnd.messages.create!([
+    {
+        body: "Anyone up for a game?",
+        author: megan
+    },
+    {
+        body: "I have this idea for a new character I really want to play!",
+        author: megan
+    },
+    {
+        body: "What's the character?",
+        author: demo
+    },
+    {
+        body: "Well I don't really want to spoil too much of her backstory......",
+        author: megan
+    },
+    {
+        body: "But basically she's an artificer! I'd actually go full artificer this time! NOT a full caster. Gasp, I know.\n\nWell I can also say she's gonna be young and a little oldschool British. Her name's Guinevere",
+        author: megan
+    },
+    {
+        body: "💔",
+        author: bellith
+    },
+    {
+        body: "...I knoooow. I want to play a wizard again too :(",
+        author: megan
+    }
+])
+puts "Megan, Demo, and Bellith wrote 7 messages in #dungeons-and-dragons!"
+
+secret.messages.create!([
+    {
+        body: "Weeeeeee're off on a secret mission~",
+        author: lothar
+    },
+    {
+        body: ".......",
+        author: nissa
+    }
+])
+puts "Lothar and Nissa wrote 2 messages in secret-mission!"
+
+wiz.messages.create!([
+    {
+        body: "Anyone know if there's a way to use suggestion over a text channel?",
+        author: bellith
+    },
+    {
+        body: "Not for any particular reason...",
+        author: bellith
+    },
+    {
+        body: "Well you're not within 30 feet of them, so...it may require a different spell.",
+        author: caleb
+    },
+    {
+        body: "But they're within 30 feet of their computer!",
+        author: bellith
+    },
+    {
+        body: "What if I send them a video of a song with the spell?\nBards are close enough to wizards, right? We're both arcane ;)",
+        author: tiffan
+    },
+    {
+        body: "...Well you did give me that scroll.",
+        author: bellith
+    },
+    {
+        body: "We may bore you if all we talk about is books.",
+        author: caleb
+    }
+])
+puts "Bellith, Caleb, and Tiffan wrote 7 messages in #wizards-only!"
+
+crit.messages.create!([
+    {
+        body: "Chaos Crew!",
+        author: veth
+    },
+    {
+        body: "Yes",
+        author: caleb
+    },
+    {
+        body: "Chaos Crew!!!!",
+        author: jester
+    },
+    {
+        body: "We're missing some people though :(",
+        author: jester
+    },
+    {
+        body: "We'll have to get them over here too.",
+        author: veth
+    }
+])
+puts "Veth, Caleb, and Jester wrote 5 messages in #mighty-nein!"
+
+movies.messages.create!([
+    {
+        body: "Anyone want to get together for a digital?",
+        author: demo
+    },
+    {
+        body: "Sure! What movie?",
+        author: megan
+    }
+])
+puts "Demo and Megan wrote 2 messages in #movies!\n\n"
+
+puts "All messages seeded!"
+puts "-----"
+puts "Seeding complete!\n\n"
