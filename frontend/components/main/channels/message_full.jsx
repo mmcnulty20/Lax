@@ -21,6 +21,7 @@ const MessageFull = React.forwardRef(({ user, newChannel, username, message: { a
                  </section>
             ) : (
                 <li 
+                    key={ id }
                     onMouseEnter={ () => setHover(true) }
                     onMouseLeave={ () => setHover(false) }
                     className={ "message-full" + ( newChannel ? "extra-space" : "" ) }>

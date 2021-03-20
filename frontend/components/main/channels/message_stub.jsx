@@ -20,7 +20,8 @@ const MessageStub = React.forwardRef(({ user, newChannel, message: { author_id, 
                         edit={ true } />
                 </section>
             ) : (
-                <li 
+                <li
+                    key={id} 
                     onMouseEnter={ () => setHover(true) }
                     onMouseLeave={ () => setHover(false) }
                     className={ "message-stub" + ( newChannel ? "extra-space" : "" ) }>
