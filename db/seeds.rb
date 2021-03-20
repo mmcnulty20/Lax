@@ -202,6 +202,60 @@ movies.messages.create!([
 ])
 puts "Demo and Megan wrote 2 messages in #movies!\n\n"
 
-puts "All messages seeded!"
+puts "All channel messages seeded!"
+puts "-----"
+puts "Seeding direct messages...\n\n"
+
+DirectMessage.create!.members = [demo_user, megan]
+d = DirectMessage.last
+d.messages.create!([
+    {
+        body: "Hey, you can message people privately too!",
+        author: megan
+    },
+    {
+        body: "Just hit the plus by DMs in the sidebar to create a new DM conversation between one or multiple users!",
+        author: megan
+    },
+    {
+        body: "Cool, thanks!",
+        author: demo_user
+    },
+    
+])
+puts "Demo and Megan wrote 3 messages in a Direct Message between the 2 of them!"
+
+DirectMessage.create!.members = [demo_user, nissa, addy, lothar, veth]
+d2 = DirectMessage.last
+
+d2.messages.create!([
+    {
+        body: "You all seem like normal enough people...wanna chat?",
+        author: demo_user
+    },
+    {
+        body: "Everyone here seems cool. Relax. Have a pinecone. :)",
+        author: addy
+    },
+    {
+        body: "FLUFFERNUTTER!!!!!!!",
+        author: veth
+    },
+    {
+        body: "You mean you won't just call me a table? :D",
+        author: lothar
+    },
+    {
+        body: "...I'm sorry about them.",
+        author: nissa
+    },
+    {
+        body: "...",
+        author: demo_user
+    }
+])
+puts "Demo, Nissa, Addy, Lothar, and Veth wrote 6 messages between the 5 of them!\n\n"
+
+puts "All direct messages seeded!"
 puts "-----"
 puts "Seeding complete!\n\n"
