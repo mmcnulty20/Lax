@@ -48,6 +48,7 @@ class AuthForm extends Component {
                                 
                                 <input type="email"
                                     id="email"
+                                    autoComplete="email"
                                     value={this.state.email}
                                     placeholder="you@example.com"
                                     onChange={this.handleChange("email")} />
@@ -58,6 +59,7 @@ class AuthForm extends Component {
                                 
                                 <input type="password"
                                     id="password"
+                                    autoComplete="current-password"
                                     value={this.state.password}
                                     placeholder="password"
                                     onChange={this.handleChange("password")} />
