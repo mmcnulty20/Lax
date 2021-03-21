@@ -31,7 +31,7 @@ const MessageStub = React.forwardRef(({ user, newChannel, message: { author_id, 
                             { edited ? <span className="edited">(edited)</span> : null }
                         </p>
                     </div>
-                    <div ref={ ref } />
+                    {/* <div ref={ ref } /> */}
                     { hover && author_id === user ? (
                     <>
                         <MessageTools

@@ -5,24 +5,35 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MessageFull from "./message_full";
 import MessageStub from "./message_stub";
 import { checkSubbed } from "../../../utils/function_helpers";
+import MessageAlert from "./message_alert";
 
 class ChannelShow extends Component {
 
     componentDidMount(){
+        console.log("did mount")
+        console.log(this.bottom)
+        this.observer = new IntersectionObserver( this.handleIntersect.bind(this), { 
+            root: document.querySelector('.message-list'),
+            rootMargin: "-64px 0px 0px 0px",
+            threshold: [0, 0.5, 1]
+        })
         this.props.fetchChannelMessages(this.props.pathId)
         this.createChannelSubscription()
     }
-
+    
     componentDidUpdate(prevProps){
-        const { pathId, messages } = this.props
-        const { pathId: prevPathId, messages: prevMessages } = prevProps
+        const { props: { pathId }, observer, bottom: { current: bot } } = this
+        const { pathId: prevPathId } = prevProps
         if ( pathId !== prevPathId ) {
             this.createChannelSubscription()
+        }
+        if (bot && !observer.takeRecords().find( ({ target }) => target === bot )) {
+            observer.observe(bot)
         }
     }
     
     createChannelSubscription(){
-        const { receiveMessage, pathId, currentUserId } = this.props;
+        const { props: { receiveMessage, pathId, currentUserId }, bottom } = this;
         this.sub = checkSubbed(`c${pathId}`) || App.cable.subscriptions.create(
             { channel: "ChatChannel", channel_id: `c${pathId}` },
             {
@@ -30,71 +41,109 @@ class ChannelShow extends Component {
                     if ( data.type === "delete" ) {
                     } else {
                         receiveMessage(data).then( authorId => {
-                            if ( data.type === "new" && authorId === currentUserId ) {
-                                this.bottom.current.scrollIntoView()
+                            if ( data.type === "new" ) {
+                                debugger
+                                if ( authorId === currentUserId ) {
+                                    bottom.current.scrollIntoView()
+                                } else if ( this.state.scrolled ) {
+                                    this.setState({ newMessages: this.state.newMessages + 1 })
+                                }
                             }
-                        })
+                        }, (err) => { debugger })
                     }
                 },
                 speak: function(data) {
                     return this.perform("speak", data);
                 }
             }
-        )
-    }
+            )
+        }
+        
+        constructor(props) {
+            super(props);
+            this.state = {
+                newMessages: 0,
+                scrolled: false
+            }
+            this.bottom = React.createRef();
+        }
+        
+        handleIntersect(entries, observer){
+            const entry = entries[0]
+            if ( entry.isIntersecting ) {
+                this.setState({ newMessages: 0, scrolled: false })
+            } else {
+                this.setState({ scrolled: true })
+            }
+        }
+        
+        handleClick(section) {
+            return e => {
+                e.stopPropagation();
+                if (section === "see-new") {
+                    this.bottom.current.scrollIntoView()
+                } else if ( section === "clear-new" ) {
+                    this.setState({ newMessages: 0 })
+                }
+            }
+        }
+        
+        formatTimeString(time) {
+            time = time.toLocaleTimeString().split(":")
+            time[2] = time[2].slice(2)
+            return `${time[0]}:${time[1]}${time[2]}`
+        }
+        
+        
+        render(){
 
-    constructor(props) {
-        super(props);
-        this.bottom = React.createRef();
-    }
+            const { channel, messages, currentUserId } = this.props
+            const numMessages = this.state.newMessages
 
-    formatTimeString(time) {
-        time = time.toLocaleTimeString().split(":")
-        time[2] = time[2].slice(2)
-        return `${time[0]}:${time[1]}${time[2]}`
-    }
-
-
-    render(){
-        const { channel, messages, currentUserId } = this.props
-        const newChannel = channel && channel.members && !channel.members.includes(currentUserId)
-        if (!channel || messages.length === 0) { return null }
-        let prevTime = null
-        const messageList = messages.map( (message, i) => {
-            const prevMessage = messages[i-1]
-            const time = new Date( message.created_at )
-            if (prevMessage) prevTime = new Date(prevMessage.created_at)
-            if ( !!prevMessage && ( message.author_id === prevMessage.author_id ) &&
+            const newChannel = channel && channel.members && !channel.members.includes(currentUserId)
+            if (!channel || messages.length === 0) { return null }
+            let prevTime = null
+            const messageList = messages.map( (message, i) => {
+                const prevMessage = messages[i-1]
+                const time = new Date( message.created_at )
+                if (prevMessage) prevTime = new Date(prevMessage.created_at)
+                if ( !!prevMessage && ( message.author_id === prevMessage.author_id ) &&
                 ( ((( time - prevTime ) / 1000 ) / 60) < 3 ) ) {
                     return ( 
                         <MessageStub key={ message.id }
-                            user={ currentUserId }
-                            message={ message }
-                            newChannel={ newChannel }
-                            time={ this.formatTimeString(time) }
-                            ref={ this.bottom } />
-                    )
-            } else {
-                return (
-                    <MessageFull key={ message.id }
+                        user={ currentUserId }
+                        message={ message }
+                        newChannel={ newChannel }
+                        time={ this.formatTimeString(time) }
+                        />
+                        )
+                    } else {
+                        return (
+                            <MessageFull key={ message.id }
                         user={ currentUserId }
                         message={ message }
                         newChannel={ newChannel }
                         time={ this.formatTimeString(time) }
                         username={ message.username || this.props.users[message.author_id].username }
-                        ref={ this.bottom } />
+                        />
             )}
         })
 
+        const messageAlert = numMessages > 0 ? (
+            <MessageAlert num={numMessages} handleClick={ this.handleClick.bind(this) }/>
+        ) : null
+        
         return(
             <div className="show">
                 <main className="chat-container">
+                    { messageAlert }
                     <div className="message-list-container">
                         <div className={ `message-list${ newChannel ? " extra-space" : "" }`}>
                             { messageList }
+                            <div className="bottom" style={{ height: "10px", margin: "-100px 0 100px" }} ref={this.bottom}></div>
                         </div>
                     </div>
-                    </main>
+                </main>
                 { newChannel ? (
                     <footer className="new-channel">
                         <div>

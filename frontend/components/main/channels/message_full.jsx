@@ -33,7 +33,7 @@ const MessageFull = React.forwardRef(({ user, newChannel, username, message: { a
                             { edited ? <span className="edited">(edited)</span> : null }
                         </p>
                     </div>
-                    <div ref={ ref } />
+                    {/* <div ref={ ref } /> */}
                     { hover &&  author_id === user ? (
                         <MessageTools
                             id={ id }
