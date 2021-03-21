@@ -27,26 +27,12 @@ class ChannelShow extends Component {
             { channel: "ChatChannel", channel_id: `c${pathId}` },
             {
                 received: data => {
-                    // debugger
+                    debugger
+                    console.log("WTF")
                     if ( data.type === "delete" ) {
-                    // if ( data.message.type === "delete" ) {
-                        // let messages = this.state.messages.filter( m => m.id !== data.message.id )
-                        // this.setState({ messages })
-                    // } else if ( data.message.edited === false ) {
-                    //     this.setState({
-                    //         messages: [ ...this.state.messages, data.message ]
-                    //     })
-                    // } else if ( data.message.edited === true ) {
-                        // let messages = this.state.messages.map( (m,i) => {
-                        //     return m.id === data.message.id ?
-                        //         data.message :
-                        //         m
-                        // })
-                        // this.setState({ messages })
-
                     } else {
                         debugger
-                        receiveMessage(data)
+                        return receiveMessage(data)
                     }
                 },
                 speak: function(data) {
@@ -55,7 +41,6 @@ class ChannelShow extends Component {
                 }
             }
         )
-        // if ( App.cable.subscriptions.subscriptions.length > 1 ) App.cable.subscriptions.subscriptions.shift()
     }
 
     constructor(props) {
