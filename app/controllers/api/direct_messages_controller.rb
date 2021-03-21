@@ -1,8 +1,4 @@
-class Api::ChannelsController < ApplicationController
-    def index
-        @dms = current_user.direct_messages
-        render :index
-    end
+class Api::DirectMessagesController < ApplicationController
 
     def show
         @dm = DirectMessage.includes(:members, :messages).find(params[:id])

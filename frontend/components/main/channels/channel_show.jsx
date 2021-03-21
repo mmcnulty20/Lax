@@ -29,6 +29,10 @@ class ChannelShow extends Component {
             observer.observe(bot)
         }
     }
+
+    componentWillUnmount(){
+        this.observer.disconnect()
+    }
     
     createChannelSubscription(){
         const { props: { receiveMessage, pathId, currentUserId }, bottom } = this;

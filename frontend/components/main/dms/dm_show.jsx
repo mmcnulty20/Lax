@@ -3,48 +3,61 @@ import React, { Component } from "react";
 import DefaultAvatarIcon from "../avatar_icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { fetchDirectMessages } from "../../../actions/message_actions";
+import { receiveMessage } from "../../../actions/message_actions";
 import MessageForm from "../channels/message_form";
 import MessageStub from "../channels/message_stub";
 import { connect } from "react-redux";
 import MessageFull from "../channels/message_full";
+import MessageAlert from "../channels/message_alert";
+import { checkSubbed } from "../../../utils/function_helpers";
+import { fetchDM } from "../../../actions/dm_actions";
 
 class DMShow extends Component {
 
     componentDidMount() {
+        this.observer = new IntersectionObserver( this.handleIntersect.bind(this), { 
+            root: document.querySelector('.message-list'),
+            rootMargin: "-64px 0px 0px 0px",
+            threshold: [0, 0.5, 1]
+        })
         this.props.fetchDirectMessages(this.props.pathId)
         this.createChannelSubscription()
     }
 
     componentDidUpdate(prevProps) {
-        if (JSON.stringify(prevProps.messages) !== JSON.stringify(this.props.messages)) this.setState({ messages: Object.values(this.props.messages) })
-        if (this.props.pathId !== prevProps.pathId) {
-            this.props.fetchDirectMessages(this.props.pathId).then(this.setState({ messages: Object.values(this.props.messages) }))
+        const { props: { pathId }, observer, bottom: { current: bot } } = this
+        const { pathId: prevPathId } = prevProps
+        if ( pathId !== prevPathId ) {
+            this.props.fetchDirectMessages(pathId)
             this.createChannelSubscription()
         }
-        if (this.bottom.current) this.bottom.current.scrollIntoView();
+        if (bot && !observer.takeRecords().find( ({ target }) => target === bot )) {
+            observer.observe(bot)
+        }
     }
 
-    createChannelSubscription() {
-        const sub = App.cable.subscriptions.create(
-            { channel: "ChatChannel", dm_id: this.props.pathId },
+    componentWillUnmount(){
+        this.observer.disconnect()
+    }
+
+    createChannelSubscription(){
+        const { props: { receiveMessage, pathId, currentUserId }, bottom } = this;
+        this.sub = checkSubbed(`d${pathId}`) || App.cable.subscriptions.create(
+            { channel: "ChatChannel", dm_id: `d${pathId}` },
             {
                 received: data => {
                     debugger
-                    if (data.message.type === "delete") {
-                        let messages = this.state.messages.filter(m => m.id !== data.message.id)
-                        this.setState({ messages })
-                    } else if (data.message.edited === false) {
-                        this.setState({
-                            messages: [...this.state.messages, data.message]
-                        })
-                    } else if (data.message.edited === true) {
-                        let messages = this.state.messages.map((m, i) => {
-                            return m.id === data.message.id ?
-                                data.message :
-                                m
-                        })
-                        this.setState({ messages })
+                    if (data.type === "delete" ) {
+                    } else {
+                        receiveMessage(data).then( authorId => {
+                            if ( data.type === "new" ) {
+                                if ( authorId === currentUserId && bottom.current ) {
+                                    bottom.current.scrollIntoView()
+                                } else if ( this.state.scrolled && data.cId === `d${pathId}`) {
+                                    this.setState({ newMessages: this.state.newMessages + 1 })
+                                }
+                            }
+                        }, (err) => { /* debugger */ })
                     }
                 },
                 speak: function (data) {
@@ -52,17 +65,37 @@ class DMShow extends Component {
                 }
             }
         )
-        if (App.cable.subscriptions.subscriptions.length > 1) App.cable.subscriptions.subscriptions.shift()
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            messages: Object.values(this.props.messages),
+            newMessages: 0,
+            scrolled: false
         }
         this.bottom = React.createRef();
     }
 
+    handleIntersect(entries, observer){
+        const entry = entries[0]
+        if ( entry.isIntersecting ) {
+            this.setState({ newMessages: 0, scrolled: false })
+        } else {
+            this.setState({ scrolled: true })
+        }
+    }
+        
+    handleClick(section) {
+        return e => {
+            e.stopPropagation();
+            if (section === "see-new") {
+                this.bottom.current.scrollIntoView()
+            } else if ( section === "clear-new" ) {
+                this.setState({ newMessages: 0 })
+            }
+        }
+    }
+    
     formatTimeString(time) {
         time = time.toLocaleTimeString().split(":")
         time[2] = time[2].slice(2)
@@ -71,10 +104,12 @@ class DMShow extends Component {
 
 
     render() {
-        const { dm, currentUserId, users } = this.props
-        const messages = this.state.messages
-        const name = dm ? ( dm.members.filter(i => i != currentUserId)
+
+        const { dm, messages, currentUserId, users } = this.props
+        const numMessages = this.state.newMessages
+        const name = dm ? ( dm.members.filter(i => i !== currentUserId)
             .map(memberId => users[memberId] ? users[memberId].username : "").join(", ") ) : null
+
         let prevTime = null
         const messageList = messages.map((message, i) => {
             const prevMessage = messages[i - 1]
@@ -87,7 +122,7 @@ class DMShow extends Component {
                         user={currentUserId}
                         message={message}
                         time={this.formatTimeString(time)}
-                        ref={this.bottom} />
+                    />
                 )
             } else {
                 return ( 
@@ -95,12 +130,15 @@ class DMShow extends Component {
                         user={currentUserId}
                         message={message}
                         time={this.formatTimeString(time)}
-                        // keep getting cannot read username of undefined
                         username={message.username || (this.props.users[message.author_id]) ? this.props.users[message.author_id].username : "" }
-                        ref={this.bottom} />
+                    />
                 )
             }
         })
+
+        const messageAlert = numMessages > 0 ? (
+            <MessageAlert num={numMessages} handleClick={ this.handleClick.bind(this) }/>
+        ) : null
 
         return (
             <div className="show">
@@ -108,8 +146,10 @@ class DMShow extends Component {
                     <div className="message-list-container">
                         <div className="message-list">
                             {messageList}
+                            <div className="bottom" ref={this.bottom}></div>
                         </div>
                     </div>
+                    { messageAlert }
                 </main>
                 {dm ? (
                     <MessageForm
@@ -117,6 +157,7 @@ class DMShow extends Component {
                         user={currentUserId}
                         type="DM"
                         id={dm.id}
+                        sub={this.sub}
                         name={name} />
                 ) : null}
             </div>
@@ -127,7 +168,7 @@ class DMShow extends Component {
 const mStP = ({ entities: { dms, messages, users }, session: { currentUserId } }, { location: { pathname } }) => {
     const pathId = pathname.slice(3)
     const dm = dms[pathId]
-    messages = messages[`d${pathId}`] || {}
+    messages = Object.values(messages[`d${pathId}`] || {} )
     return {
         users,
         pathId,
@@ -138,8 +179,14 @@ const mStP = ({ entities: { dms, messages, users }, session: { currentUserId } }
 }
 
 const mDtP = dispatch => ({
-    fetchDirectMessages: dmId => dispatch(fetchDirectMessages(dmId)),
-    fetchNewMessage: messageId => dispatch(fetchNewMessage(messageId))
+    fetchDirectMessages: dmId => dispatch(fetchDM(dmId)),
+    fetchNewMessage: messageId => dispatch(fetchNewMessage(messageId)),
+    receiveMessage: message => {
+        return new Promise( (res, rej) => {
+            dispatch(receiveMessage(message))
+            res(message.user.id)
+        })
+    },
 })
 
 export default connect(mStP, mDtP)(DMShow);

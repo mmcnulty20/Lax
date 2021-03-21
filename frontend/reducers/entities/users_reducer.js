@@ -4,6 +4,7 @@ import { RECEIVE_ALL_USERS,
             REMOVE_USER} from "../../actions/session_actions";
 import { RECEIVE_CHANNEL, RECEIVE_CHANNELS } from "../../actions/channel_actions";
 import { RECEIVE_CHANNEL_MESSAGES } from "../../actions/message_actions";
+import { RECEIVE_DM } from "../../actions/dm_actions";
 
 const usersReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -24,7 +25,9 @@ const usersReducer = (state = {}, action) => {
         case RECEIVE_CURRENT_USER:
             newState[action.user.id] = action.user;
             return newState;
-        case RECEIVE_CHANNEL_MESSAGES, RECEIVE_CHANNELS:
+        case RECEIVE_CHANNEL_MESSAGES:
+        case RECEIVE_CHANNELS:
+        case RECEIVE_DM:
             Object.values(action.users).forEach( u => {
                 if ( !newState[u.id] ) newState[u.id] = u
             })

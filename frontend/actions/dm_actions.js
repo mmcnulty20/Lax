@@ -7,8 +7,8 @@ export const REMOVE_DM = "REMOVE_DM";
 
 const receiveDM = dm => (
     {
+        ...dm,
         type: RECEIVE_DM,
-        dm
     }
 )
 
