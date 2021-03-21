@@ -50,6 +50,7 @@ class MessageForm extends Component {
         } else {
             message.messageId = this.props.messageId
         }
+        debugger
         App.cable.subscriptions.subscriptions[0].speak({ message })
         if (this.props.edit) { 
             e.persist();

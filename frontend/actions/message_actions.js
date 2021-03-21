@@ -12,7 +12,7 @@ const receiveChannelMessages = ({ messages, id, users }) => (
     }
 )
 
-const receiveMessage = ({ message, id }) => (
+export const receiveMessage = ({ message, id }) => (
     {
         type: RECEIVE_MESSAGE,
         message,

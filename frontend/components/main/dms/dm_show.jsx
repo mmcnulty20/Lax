@@ -26,10 +26,11 @@ class DMShow extends Component {
     }
 
     createChannelSubscription() {
-        App.cable.subscriptions.create(
+        const sub = App.cable.subscriptions.create(
             { channel: "ChatChannel", dm_id: this.props.pathId },
             {
                 received: data => {
+                    debugger
                     if (data.message.type === "delete") {
                         let messages = this.state.messages.filter(m => m.id !== data.message.id)
                         this.setState({ messages })
