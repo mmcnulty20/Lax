@@ -718,7 +718,6 @@
                         }
                         &.skip {
                             border: 1px solid rgba($color: $lighter-grey-tan, $alpha: 0.5);
-                            width: 110px;
                             &:hover {
                                 cursor: pointer;
                                 background: rgba($color: $lighter-grey-tan, $alpha: .1);

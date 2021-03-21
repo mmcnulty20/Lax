@@ -86,9 +86,6 @@ class ChannelShow extends Component {
                             ref={ this.bottom } />
                     )
             } else {
-                console.log(message)
-                console.log(this.props.users)
-                console.log("----")
                 return (
                     <MessageFull key={ message.id }
                         user={ currentUserId }
