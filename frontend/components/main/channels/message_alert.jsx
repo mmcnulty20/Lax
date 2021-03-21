@@ -6,8 +6,8 @@ const MessageAlert = ({ num, handleClick }) => {
         <div className="new-message-alert">
             <section className="see-new"
                 onClick={ handleClick("see-new") }>
-                <span>
-                    &#129131;
+                <span className="arrow">
+                    ↓
                 </span>
                 <span>
                     { num } new message{ num > 1 ? "s" : "" }
@@ -15,7 +15,9 @@ const MessageAlert = ({ num, handleClick }) => {
             </section>
             <section className="clear-new"
                 onClick={ handleClick("clear-new") }>
-                X
+                    <span>
+                        X
+                    </span>
             </section>
         </div>
     )

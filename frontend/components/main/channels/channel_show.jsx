@@ -10,8 +10,6 @@ import MessageAlert from "./message_alert";
 class ChannelShow extends Component {
 
     componentDidMount(){
-        console.log("did mount")
-        console.log(this.bottom)
         this.observer = new IntersectionObserver( this.handleIntersect.bind(this), { 
             root: document.querySelector('.message-list'),
             rootMargin: "-64px 0px 0px 0px",
@@ -42,14 +40,13 @@ class ChannelShow extends Component {
                     } else {
                         receiveMessage(data).then( authorId => {
                             if ( data.type === "new" ) {
-                                debugger
                                 if ( authorId === currentUserId ) {
                                     bottom.current.scrollIntoView()
-                                } else if ( this.state.scrolled ) {
+                                } else if ( this.state.scrolled && data.cId === `c${pathId}`) {
                                     this.setState({ newMessages: this.state.newMessages + 1 })
                                 }
                             }
-                        }, (err) => { debugger })
+                        }, (err) => { /* debugger */ })
                     }
                 },
                 speak: function(data) {
@@ -136,13 +133,13 @@ class ChannelShow extends Component {
         return(
             <div className="show">
                 <main className="chat-container">
-                    { messageAlert }
                     <div className="message-list-container">
                         <div className={ `message-list${ newChannel ? " extra-space" : "" }`}>
                             { messageList }
-                            <div className="bottom" style={{ height: "10px", margin: "-100px 0 100px" }} ref={this.bottom}></div>
+                            <div className="bottom" ref={this.bottom}></div>
                         </div>
                     </div>
+                    { messageAlert }
                 </main>
                 { newChannel ? (
                     <footer className="new-channel">

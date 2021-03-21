@@ -3,6 +3,66 @@
     margin-top: -64px;
     @include flex(row, flex-start, flex-start)
 }
+
+.new-message-alert {
+    height: 28px;
+    overflow: hidden;
+    border-radius: 14px;
+    width: 170px;
+    background-color: $dark-blue;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 5px;
+    right: calc(50% - (170px / 2));
+    color: $background;
+    > section {
+        height: 100%;
+        &:hover {
+            background-color: $hover-dark-blue;
+            cursor: pointer;
+        }
+        &.see-new {
+            display: flex;
+            padding: 0 5px 0 10px;
+            width: 134px;
+            > span {
+                &.arrow {
+                    line-height: 24px;
+                    font-size: 20px;
+                    transform: scale(1, 0.75);
+                    display: block;
+                    padding-right: 7px;
+                }
+                &:not(.arrow) {
+                    line-height: 27px;
+                    font-size: 11px;
+                    font-weight: 600;
+                    display: block;
+                    margin-right: auto;
+                }
+            }
+        }
+        &.clear-new {
+            display: block;
+            font-size: 16px;
+            height: 100%;
+            width: 36px;
+            padding-top: 1px;
+            > span {
+                text-align: center;
+                transform: scale(1, 0.65);
+                display: block;
+            }
+        }
+    }
+}
+
+.message-list > div.bottom {
+    height: 10px;
+    margin: -100px 0 100px;
+} 
+
 .mainpage-body{
     margin-top: 64px;
     height: calc(100% - 64px);
