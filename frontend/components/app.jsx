@@ -28,7 +28,7 @@ const App = () => {
             <Switch>
                 <Route path="/welcome" component={ NavBarContainer } />
                 <AuthRoute path="/login" component={ NavBarContainer } />
-                <AuthRoute path="/signup" render={() => null} />
+                <Route path="/signup" render={() => null} />
                 <ProtectedRoute path="/" component={ MainHeader } />
             </Switch>
         </header>
