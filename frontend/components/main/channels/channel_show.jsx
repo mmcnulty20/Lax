@@ -8,7 +8,6 @@ import MessageStub from "./message_stub";
 class ChannelShow extends Component {
 
     componentDidMount(){
-
         this.props.fetchChannelMessages(this.props.pathId)
         this.createChannelSubscription()
     }
@@ -70,7 +69,7 @@ class ChannelShow extends Component {
         const { channel, currentUserId } = this.props
         const messages = this.state.messages
         const newChannel = channel && channel.members && !channel.members.includes(currentUserId)
-
+        if (!channel || messages.length === 0) { return null }
         let prevTime = null
         const messageList = messages.map( (message, i) => {
             const prevMessage = messages[i-1]
@@ -87,6 +86,9 @@ class ChannelShow extends Component {
                             ref={ this.bottom } />
                     )
             } else {
+                console.log(message)
+                console.log(this.props.users)
+                console.log("----")
                 return (
                     <MessageFull key={ message.id }
                         user={ currentUserId }

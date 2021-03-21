@@ -12,6 +12,7 @@ const sessionReducer = (state = _nullSession, action) => {
         case PURGE_ERRORS:
             return { currentUserId: state.currentUserId }
         case LOGOUT_CURRENT_USER:
+            debugger
             return _nullSession;
         default:
             return state;

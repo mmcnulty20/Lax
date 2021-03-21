@@ -26,9 +26,10 @@ const App = () => {
             </svg>
         <header>
             <Switch>
-                <Route path={["/welcome", "/login"]} component={ NavBarContainer } />
-                <Route path="/signup" render={() => null} />
-                <Route path="/" component={ MainHeader } />
+                <Route path="/welcome" component={ NavBarContainer } />
+                <AuthRoute path="/login" component={ NavBarContainer } />
+                <AuthRoute path="/signup" render={() => null} />
+                <ProtectedRoute path="/" component={ MainHeader } />
             </Switch>
         </header>
         <Switch>

@@ -55,7 +55,7 @@ const SidebarHeaderDropdown = ({ open, user, logout}) => {
                 </section>
             </section>
             <ul>
-                <li onClick={ () => logout().then( () => history.push("/login") ) }>
+                <li onClick={ () => logout().then( () => { debugger; history.push("/login") } ) }>
                     Sign out of Lax
                 </li>
             </ul>
