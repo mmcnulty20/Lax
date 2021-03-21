@@ -9,7 +9,7 @@ const usersReducer = (state = {}, action) => {
     Object.freeze(state);
     let newState = {...state}
     switch (action.type) {
-        case RECEIVE_ALL_USERS:
+        case RECEIVE_ALL_USERS, RECEIVE_CHANNEL:
             const users = {}
             Object.keys(action.users).forEach(id => { 
                 users[id] = { ...newState[id], ...action.users[id] } 
@@ -24,8 +24,6 @@ const usersReducer = (state = {}, action) => {
         case RECEIVE_CURRENT_USER:
             newState[action.user.id] = action.user;
             return newState;
-        case RECEIVE_CHANNEL:
-            return { ...state, ...action.channel.users }
         case RECEIVE_CHANNEL_MESSAGES, RECEIVE_CHANNELS:
             Object.values(action.users).forEach( u => {
                 if ( !newState[u.id] ) newState[u.id] = u

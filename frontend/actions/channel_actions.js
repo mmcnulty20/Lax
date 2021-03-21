@@ -18,8 +18,8 @@ const receiveChannels = ({channels, dms, users}) => (
 
 const receiveChannel = channel => (
     {
+        ...channel,
         type: RECEIVE_CHANNEL,
-        channel,
     }
 )
 

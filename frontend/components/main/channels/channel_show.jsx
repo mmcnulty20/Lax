@@ -13,24 +13,27 @@ class ChannelShow extends Component {
         this.createChannelSubscription()
     }
 
-    componentDidUpdate(prevProps) {
-        if ( JSON.stringify(prevProps.messages) !== JSON.stringify(this.props.messages) ) this.setState({ messages: Object.values(this.props.messages) }) 
-        if ( this.props.pathId !== prevProps.pathId ) {
-            this.props.fetchChannelMessages(this.props.pathId).then( this.setState({ messages: Object.values(this.props.messages) }) )
+    componentDidUpdate(prevProps){
+        const { pathId, messages } = this.props
+        const { pathId: prevPathId, messages: prevMessages } = prevProps
+        if ( pathId !== prevPathId ) {
             this.createChannelSubscription()
         }
-        if ( this.bottom.current ) this.bottom.current.scrollIntoView();
     }
-
+    
     createChannelSubscription(){
-        const { receiveMessage, pathId } = this.props;
+        const { receiveMessage, pathId, currentUserId } = this.props;
         this.sub = checkSubbed(`c${pathId}`) || App.cable.subscriptions.create(
             { channel: "ChatChannel", channel_id: `c${pathId}` },
             {
                 received: data => {
                     if ( data.type === "delete" ) {
                     } else {
-                        return receiveMessage(data)
+                        receiveMessage(data).then( authorId => {
+                            if ( data.type === "new" && authorId === currentUserId ) {
+                                this.bottom.current.scrollIntoView()
+                            }
+                        })
                     }
                 },
                 speak: function(data) {
@@ -42,9 +45,6 @@ class ChannelShow extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            messages: Object.values(this.props.messages),
-        }
         this.bottom = React.createRef();
     }
 
@@ -56,8 +56,7 @@ class ChannelShow extends Component {
 
 
     render(){
-        const { channel, currentUserId } = this.props
-        const messages = this.state.messages
+        const { channel, messages, currentUserId } = this.props
         const newChannel = channel && channel.members && !channel.members.includes(currentUserId)
         if (!channel || messages.length === 0) { return null }
         let prevTime = null

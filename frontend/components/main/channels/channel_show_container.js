@@ -7,8 +7,7 @@ import { fetchChannelMessages, fetchNewMessage, receiveMessage } from "../../../
 const mapStateToProps = ( { entities: { channels, messages, users }, session: { currentUserId } }, { location: { pathname } }) => {
     const pathId = pathname.slice(3)
     const channel = channels[pathId]
-    messages = messages[`c${pathId}`] || {}
-    debugger
+    messages = Object.values(messages[`c${pathId}`] || {} )
     return {
         users,
         pathId,
@@ -23,7 +22,12 @@ const mapDispatchToProps = dispatch => (
         handleJoin: (channel, id) => dispatch(addChannelMembers( channel, id )),
         fetchChannelMessages: channelId => dispatch(fetchChannelMessages(channelId)),
         fetchNewMessage: messageId => dispatch(fetchNewMessage(messageId)),
-        receiveMessage: message => dispatch(receiveMessage(message)),
+        receiveMessage: message => {
+            return new Promise( (res, rej) => {
+                dispatch(receiveMessage(message))
+                res(message.user.id);
+            })
+        },
     }
 )
 

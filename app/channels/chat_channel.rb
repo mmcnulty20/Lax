@@ -5,19 +5,8 @@ class ChatChannel < ApplicationCable::Channel
         elsif params.has_key?(:dm_id)
             @channel = DirectMessage.find(params[:dm_id][1..-1])
         end
-        stream_for @channel# if @channel.id == params[:channel_id] || @channel.id == params[:dm_id]
+        stream_for @channel
     end
-
-    # def channel
-    #     case 
-    #     when params.has_key?[:channel_id]
-    #         Channel.find(params[:channel_id][1..-1])
-    #     when params.has_key?[:dm_id]
-    #     @channel = params.has_key?[:channel_id] ?
-
-    # end
-
-
 
     def speak(data)
         if data["message"]["edit"]
@@ -41,7 +30,6 @@ class ChatChannel < ApplicationCable::Channel
             socket={ message: { id: message.id }, type: "delete" }
 
         else
-            # debugger
             message = Message.create(body: data["message"]["body"], author_id: data["message"]["authorId"], messageable: @channel )
             socket = { 
                 message: {
@@ -51,6 +39,7 @@ class ChatChannel < ApplicationCable::Channel
                     created_at: message.created_at,
                     edited: false
                 },
+                type: "new",
                 cId: params[:channel_id] || params[:dm_id], 
                 user: {
                     id: message.author_id,
@@ -58,7 +47,6 @@ class ChatChannel < ApplicationCable::Channel
                 }
             }
         end
-        # debugger
         ChatChannel.broadcast_to(@channel, socket)
     end
 

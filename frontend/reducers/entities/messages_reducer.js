@@ -1,3 +1,4 @@
+import { RECEIVE_CHANNEL } from "../../actions/channel_actions";
 import { RECEIVE_MESSAGE, RECEIVE_CHANNEL_MESSAGES } from "../../actions/message_actions";
 
 
@@ -7,7 +8,7 @@ const messagesReducer = ( state = {}, action ) => {
         case RECEIVE_MESSAGE:
             const locationMsgs = { ...state[action.cId], [action.message.id]: action.message }
             return { ...state, [action.cId]: locationMsgs }
-        case RECEIVE_CHANNEL_MESSAGES:
+        case RECEIVE_CHANNEL_MESSAGES, RECEIVE_CHANNEL:
             return { ...state, [action.id]: action.messages }
         default:
             return state;

@@ -7,7 +7,7 @@ const channelsReducer = ( state = { search: [] }, action ) => {
         case RECEIVE_CHANNELS:
             return { ...state, ...action.channels };
         case RECEIVE_CHANNEL:
-            return { ...state, ...action.channel.channels };
+            return { ...state, ...action.channel };
         case REMOVE_CHANNEL:
             let newState = { ...state };
             delete newState[action.channel_id];
