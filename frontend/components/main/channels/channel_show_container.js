@@ -8,6 +8,7 @@ const mapStateToProps = ( { entities: { channels, messages, users }, session: { 
     const pathId = pathname.slice(3)
     const channel = channels[pathId]
     messages = messages[`c${pathId}`] || {}
+    debugger
     return {
         users,
         pathId,

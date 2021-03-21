@@ -43,15 +43,20 @@ class ChatChannel < ApplicationCable::Channel
         else
             # debugger
             message = Message.create(body: data["message"]["body"], author_id: data["message"]["authorId"], messageable: @channel )
-            socket = { message: {
-                id: message.id,
-                author_id: message.author_id,
-                body: message.body,
-                created_at: message.created_at,
-                edited: false,
-                channelId: message.messageable_id,
-                username: message.author.username
-            } }
+            socket = { 
+                message: {
+                    id: message.id,
+                    author_id: message.author_id,
+                    body: message.body,
+                    created_at: message.created_at,
+                    edited: false
+                },
+                cId: params[:channel_id] || params[:dm_id], 
+                user: {
+                    id: message.author_id,
+                    username: message.author.username
+                }
+            }
         end
         # debugger
         ChatChannel.broadcast_to(@channel, socket)

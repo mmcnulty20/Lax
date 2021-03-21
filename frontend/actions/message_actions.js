@@ -12,11 +12,11 @@ const receiveChannelMessages = ({ messages, id, users }) => (
     }
 )
 
-export const receiveMessage = ({ message, id }) => (
+export const receiveMessage = ({ message, cId }) => (
     {
         type: RECEIVE_MESSAGE,
         message,
-        id,
+        cId,
     }
 )
 
