@@ -4,6 +4,7 @@ import DefaultAvatarIcon from "../avatar_icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MessageFull from "./message_full";
 import MessageStub from "./message_stub";
+import { checkSubbed } from "../../../utils/function_helpers";
 
 class ChannelShow extends Component {
 
@@ -23,20 +24,16 @@ class ChannelShow extends Component {
 
     createChannelSubscription(){
         const { receiveMessage, pathId } = this.props;
-        this.sub = App.cable.subscriptions.create(
+        this.sub = checkSubbed(`c${pathId}`) || App.cable.subscriptions.create(
             { channel: "ChatChannel", channel_id: `c${pathId}` },
             {
                 received: data => {
-                    debugger
-                    console.log("WTF")
                     if ( data.type === "delete" ) {
                     } else {
-                        debugger
                         return receiveMessage(data)
                     }
                 },
                 speak: function(data) {
-                    debugger
                     return this.perform("speak", data);
                 }
             }
