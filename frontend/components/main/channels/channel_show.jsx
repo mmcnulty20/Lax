@@ -10,11 +10,6 @@ import MessageAlert from "./message_alert";
 class ChannelShow extends Component {
 
     componentDidMount(){
-        this.observer = new IntersectionObserver( this.handleIntersect.bind(this), { 
-            root: document.querySelector('.message-list'),
-            rootMargin: "-64px 0px 0px 0px",
-            threshold: [0, 0.5, 1]
-        })
         this.props.fetchChannelMessages(this.props.pathId)
         this.createChannelSubscription()
     }
@@ -25,13 +20,17 @@ class ChannelShow extends Component {
         if ( pathId !== prevPathId ) {
             this.createChannelSubscription()
         }
-        if (bot && !observer.takeRecords().find( ({ target }) => target === bot )) {
-            observer.observe(bot)
+        if ( !observer  ) {
+            this.observer = new IntersectionObserver(this.handleIntersect.bind(this), {
+                threshold: [0]
+            })
+            this.observer.observe(bot)
         }
     }
 
     componentWillUnmount(){
         this.observer.disconnect()
+        this.observer = null
     }
     
     createChannelSubscription(){
@@ -50,7 +49,7 @@ class ChannelShow extends Component {
                                     this.setState({ newMessages: this.state.newMessages + 1 })
                                 }
                             }
-                        }, (err) => { /* debugger */ })
+                        })
                     }
                 },
                 speak: function(data) {
@@ -102,7 +101,6 @@ class ChannelShow extends Component {
             const numMessages = this.state.newMessages
 
             const newChannel = channel && channel.members && !channel.members.includes(currentUserId)
-            if (!channel || messages.length === 0) { return null }
             let prevTime = null
             const messageList = messages.map( (message, i) => {
                 const prevMessage = messages[i-1]

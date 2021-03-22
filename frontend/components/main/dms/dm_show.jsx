@@ -15,11 +15,6 @@ import { fetchDM } from "../../../actions/dm_actions";
 class DMShow extends Component {
 
     componentDidMount() {
-        this.observer = new IntersectionObserver( this.handleIntersect.bind(this), { 
-            root: document.querySelector('.message-list'),
-            rootMargin: "-64px 0px 0px 0px",
-            threshold: [0, 0.5, 1]
-        })
         this.props.fetchDirectMessages(this.props.pathId)
         this.createChannelSubscription()
     }
@@ -31,16 +26,18 @@ class DMShow extends Component {
             this.props.fetchDirectMessages(pathId)
             this.createChannelSubscription()
         }
-        // debugger
-        if (bot && !observer.takeRecords().find( ({ target }) => target === bot )) {
-            debugger
-            observer.observe(bot)
-            debugger
+        if (!observer) {
+            this.observer = new IntersectionObserver(this.handleIntersect.bind(this), {
+                threshold: [0]
+            })
+            this.observer.observe(bot)
         }
     }
 
     componentWillUnmount(){
+        console.log("Unmounting!")
         this.observer.disconnect()
+        this.observer = null;
     }
 
     createChannelSubscription(){
@@ -49,19 +46,17 @@ class DMShow extends Component {
             { channel: "ChatChannel", dm_id: `d${pathId}` },
             {
                 received: data => {
-                    debugger
                     if (data.type === "delete" ) {
                     } else {
                         receiveMessage(data).then( authorId => {
                             if ( data.type === "new" ) {
-                                debugger
                                 if ( authorId === currentUserId && botRef ) {
                                     botRef.scrollIntoView()
                                 } else if ( this.state.scrolled && data.cId === `d${pathId}`) {
                                     this.setState({ newMessages: this.state.newMessages + 1 })
                                 }
                             }
-                        }, (err) => { /* debugger */ })
+                        })
                     }
                 },
                 speak: function (data) {
@@ -81,9 +76,8 @@ class DMShow extends Component {
     }
 
     handleIntersect(entries, observer){
-        debugger
         const entry = entries[0]
-        if ( entry.isIntersecting ) {
+        if (entry.isIntersecting) {
             this.setState({ newMessages: 0, scrolled: false })
         } else {
             this.setState({ scrolled: true })
