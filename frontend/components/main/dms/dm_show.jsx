@@ -31,8 +31,11 @@ class DMShow extends Component {
             this.props.fetchDirectMessages(pathId)
             this.createChannelSubscription()
         }
+        // debugger
         if (bot && !observer.takeRecords().find( ({ target }) => target === bot )) {
+            debugger
             observer.observe(bot)
+            debugger
         }
     }
 
@@ -41,7 +44,7 @@ class DMShow extends Component {
     }
 
     createChannelSubscription(){
-        const { props: { receiveMessage, pathId, currentUserId }, bottom } = this;
+        const { props: { receiveMessage, pathId, currentUserId }, bottom: { current: botRef } } = this;
         this.sub = checkSubbed(`d${pathId}`) || App.cable.subscriptions.create(
             { channel: "ChatChannel", dm_id: `d${pathId}` },
             {
@@ -51,8 +54,9 @@ class DMShow extends Component {
                     } else {
                         receiveMessage(data).then( authorId => {
                             if ( data.type === "new" ) {
-                                if ( authorId === currentUserId && bottom.current ) {
-                                    bottom.current.scrollIntoView()
+                                debugger
+                                if ( authorId === currentUserId && botRef ) {
+                                    botRef.scrollIntoView()
                                 } else if ( this.state.scrolled && data.cId === `d${pathId}`) {
                                     this.setState({ newMessages: this.state.newMessages + 1 })
                                 }
@@ -77,6 +81,7 @@ class DMShow extends Component {
     }
 
     handleIntersect(entries, observer){
+        debugger
         const entry = entries[0]
         if ( entry.isIntersecting ) {
             this.setState({ newMessages: 0, scrolled: false })
