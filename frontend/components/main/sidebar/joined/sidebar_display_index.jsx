@@ -17,7 +17,11 @@ class DisplayIndex extends Component {
     }
 
     showAddChannel(e){
-        this.props.openModal();
+        if (this.props.type === "Channels") {
+            this.props.openModal();
+        } else {
+            this.props.history.push("/new-dm")
+        }
     }
 
     render(){

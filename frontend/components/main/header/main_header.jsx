@@ -12,6 +12,13 @@ const MainHeader = props => (
         <Switch>
             <Route path="/c/:id" component={SubHeaderContainer} />
             <Route path="/d/:id" component={DMHeader} />
+            <Route path="/new-dm" render={
+                () => (
+                    <div className="sub-header">
+                        <div className="location-info dm">New Message</div>
+                    </div>
+                )
+            }/>
         </Switch>
     </div>
 )
