@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MemberItem from './member_item'
 
 const DMMemberList = ({ members, removeSelected }) => {
-    debugger
-    const  _formatMembers = () => members.map( ({ username, id }) => 
+    let formatted
+    useEffect(() => {
+        console.log(this)
+        formatted = _formatMembers()
+    }, [members])
+
+    const  _formatMembers = () => Object.values(members).map( ({ username, id }) => 
         <MemberItem 
             key={ id }
             id={ id }
@@ -11,7 +16,6 @@ const DMMemberList = ({ members, removeSelected }) => {
             removeSelected={ () => removeSelected(id) }
         />
     )
-    let formatted = _formatMembers()
 
     return (
         <>
