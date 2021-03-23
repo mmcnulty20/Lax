@@ -10,11 +10,20 @@ import NavBarContainer from './navbar/navbar_container';
 import Main from "./main/main";
 import SplashContainer from './splash/splash_container';
 import MainHeader from './main/header/main_header';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { memberSub } from '../utils/function_helpers';
+import { receiveChannel } from "../actions/channel_actions"
+import { receiveDM } from "../actions/dm_actions"
 
 
 const App = () => {
-    const cId = useSelector( ({ui: { mainChannel }}) => mainChannel )
+    const [cId, currentUser] = useSelector( ({ ui: { mainChannel }, session: { currentUserId }}) => [mainChannel, currentUserId] )
+    const dispatch = useDispatch()
+    memberSub({
+        currentUser,
+        receiveChannel: channel => dispatch(receiveChannel(channel)),
+        receiveDM: dm => dispatch(receiveDM(dm))
+    })
     return (<>
         <svg id="logo-bg">
                 <defs>

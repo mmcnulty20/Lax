@@ -5,7 +5,7 @@ export const RECEIVE_DM = "RECEIVE_DM";
 export const REMOVE_DM = "REMOVE_DM";
 
 
-const receiveDM = dm => (
+export const receiveDM = dm => (
     {
         ...dm,
         type: RECEIVE_DM,

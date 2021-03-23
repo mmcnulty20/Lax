@@ -4,3 +4,35 @@ export const checkSubbed = (id) => (
         return parsed.channel_id === id || parsed.dm_id === id
     })
 )
+
+export const memberSub = ({ currentUser, receiveChannel, receiveDM}) => {
+    App.cable.subscriptions.create(
+        { channel: "MembershipsChannel", id: currentUser },
+            {
+                received: ({ action, type, info }) => {
+                    debugger
+                    if (type === "Channel") {
+                        switch (action) {
+                            case "join":
+                                receiveChannel(info)
+                                break
+                            case "newMember":
+                            case "leave":
+                            case "delete":
+                            default:
+                                break;
+                        }
+                    } else if ( type === "DirectMessage" ) {
+                        switch (action) {
+                            case "join":
+                                receiveDM(info)
+                            case "delete":
+                            default:
+                                break;
+                        }
+    
+                    }
+                }
+            }
+    )
+}
