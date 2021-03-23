@@ -561,6 +561,9 @@
                                 width: 125px;
                             }
                             input[type="text"] {
+                                &.empty {
+                                    width: 270px;
+                                }
                                 padding: 3px 12px 4px 12px;
                                 border: none;
                                 height: 44px;

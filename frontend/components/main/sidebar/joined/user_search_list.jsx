@@ -14,6 +14,7 @@ const UserSearchList = ({ members, inputValue, onInputChange, filtered, focus, b
             { [ ...members, (
                 <li key="input" className="input">
                     <input type="text"
+                        className={ members.length === 0 && !inputValue ? "empty" : "" }
                         ref={ autoFocusEl }
                         id="search-text"
                         value={ inputValue }
