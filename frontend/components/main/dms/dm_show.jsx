@@ -2,15 +2,15 @@ import React, { Component } from "react";
 
 import DefaultAvatarIcon from "../avatar_icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 
-import { receiveMessage } from "../../../actions/message_actions";
+import { receiveMessage, removeMessage } from "../../../actions/message_actions";
+import { fetchDM } from "../../../actions/dm_actions";
+import { checkSubbed } from "../../../utils/function_helpers";
 import MessageForm from "../channels/message_form";
 import MessageStub from "../channels/message_stub";
-import { connect } from "react-redux";
 import MessageFull from "../channels/message_full";
 import MessageAlert from "../channels/message_alert";
-import { checkSubbed } from "../../../utils/function_helpers";
-import { fetchDM } from "../../../actions/dm_actions";
 
 class DMShow extends Component {
 
@@ -35,18 +35,18 @@ class DMShow extends Component {
     }
 
     componentWillUnmount(){
-        console.log("Unmounting!")
         this.observer.disconnect()
         this.observer = null;
     }
 
     createChannelSubscription(){
-        const { props: { receiveMessage, pathId, currentUserId }, bottom: { current: botRef } } = this;
+        const { props: { removeMessage, receiveMessage, pathId, currentUserId }, bottom: { current: botRef } } = this;
         this.sub = checkSubbed(`d${pathId}`) || App.cable.subscriptions.create(
             { channel: "ChatChannel", dm_id: `d${pathId}` },
             {
                 received: data => {
                     if (data.type === "delete" ) {
+                        removeMessage(data)
                     } else {
                         receiveMessage(data).then( authorId => {
                             if ( data.type === "new" ) {
@@ -120,6 +120,7 @@ class DMShow extends Component {
                     <MessageStub key={message.id}
                         user={currentUserId}
                         message={message}
+                        sub={this.sub}
                         time={this.formatTimeString(time)}
                     />
                 )
@@ -128,6 +129,7 @@ class DMShow extends Component {
                     <MessageFull key={message.id}
                         user={currentUserId}
                         message={message}
+                        sub={this.sub}
                         time={this.formatTimeString(time)}
                         username={message.username || (this.props.users[message.author_id]) ? this.props.users[message.author_id].username : "" }
                     />
@@ -180,10 +182,11 @@ const mStP = ({ entities: { dms, messages, users }, session: { currentUserId } }
 const mDtP = dispatch => ({
     fetchDirectMessages: dmId => dispatch(fetchDM(dmId)),
     fetchNewMessage: messageId => dispatch(fetchNewMessage(messageId)),
+    removeMessage: message => dispatch(removeMessage( message )),
     receiveMessage: message => {
         return new Promise( (res, rej) => {
             dispatch(receiveMessage(message))
-            res(message.user.id)
+            res(message.message.author_id);
         })
     },
 })

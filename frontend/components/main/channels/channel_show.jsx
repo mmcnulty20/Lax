@@ -34,12 +34,13 @@ class ChannelShow extends Component {
     }
     
     createChannelSubscription(){
-        const { props: { receiveMessage, pathId, currentUserId }, bottom } = this;
+        const { props: { removeMessage, receiveMessage, pathId, currentUserId }, bottom } = this;
         this.sub = checkSubbed(`c${pathId}`) || App.cable.subscriptions.create(
             { channel: "ChatChannel", channel_id: `c${pathId}` },
             {
                 received: data => {
                     if ( data.type === "delete" ) {
+                        removeMessage(data)
                     } else {
                         receiveMessage(data).then( authorId => {
                             if ( data.type === "new" ) {
@@ -112,6 +113,7 @@ class ChannelShow extends Component {
                         <MessageStub key={ message.id }
                         user={ currentUserId }
                         message={ message }
+                        sub={ this.sub }
                         newChannel={ newChannel }
                         time={ this.formatTimeString(time) }
                         />
@@ -119,14 +121,16 @@ class ChannelShow extends Component {
                     } else {
                         return (
                             <MessageFull key={ message.id }
-                        user={ currentUserId }
-                        message={ message }
-                        newChannel={ newChannel }
-                        time={ this.formatTimeString(time) }
-                        username={ message.username || this.props.users[message.author_id].username }
-                        />
-            )}
-        })
+                                user={ currentUserId }
+                                message={ message }
+                                sub={ this.sub }
+                                newChannel={ newChannel }
+                                time={ this.formatTimeString(time) }
+                                username={ message.username || this.props.users[message.author_id].username }
+                            />
+                        )
+                    }
+            })
 
         const messageAlert = numMessages > 0 ? (
             <MessageAlert num={numMessages} handleClick={ this.handleClick.bind(this) }/>

@@ -19,15 +19,15 @@ class ChatChannel < ApplicationCable::Channel
                     body: message.body,
                     created_at: message.created_at,
                     edited: true,
-                    channelId: message.messageable_id,
                     username: message.author.username
                 },
+                cId: params[:channel_id] || params[:dm_id], 
                 type: "edit"
             }
         elsif data["message"]["delete"]
             message = Message.find(data["message"]["messageId"])
             message.destroy
-            socket={ message: { id: message.id }, type: "delete" }
+            socket={ id: message.id, type: "delete", cId: params[:channel_id] || params[:dm_id] }
 
         else
             message = Message.create(body: data["message"]["body"], author_id: data["message"]["authorId"], messageable: @channel )

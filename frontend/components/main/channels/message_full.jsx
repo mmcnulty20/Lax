@@ -3,7 +3,7 @@ import DefaultAvatarIcon from "../avatar_icon";
 import MessageTools from "./message_tools";
 import MessageForm from "./message_form";
 
-const MessageFull = React.forwardRef(({ user, newChannel, username, message: { author_id, id, body, edited }, time}, ref ) => {
+const MessageFull = ({ user, newChannel, username, message: { author_id, id, body, edited }, time, sub }) => {
     const [ hover, setHover ] = useState(false);
     const [ edit, setEdit ] = useState(false);
     return (
@@ -16,6 +16,7 @@ const MessageFull = React.forwardRef(({ user, newChannel, username, message: { a
                             setEdit(false);
                         } }
                         messageId={ id }
+                        sub={ sub }
                         body={ body }
                         edit={ true } />
                  </section>
@@ -37,11 +38,12 @@ const MessageFull = React.forwardRef(({ user, newChannel, username, message: { a
                     { hover &&  author_id === user ? (
                         <MessageTools
                             id={ id }
+                            sub={ sub }
                             edit={ () => setEdit(true) } />
                     ) : null }
                 </li>
             ) }
         </>
     )
-})
+}
 export default MessageFull;

@@ -3,7 +3,7 @@ import MessageTools from "./message_tools";
 import MessageForm from "./message_form";
 
 
-const MessageStub = React.forwardRef(({ user, newChannel, message: { author_id, id, body, edited }, time}, ref ) => {
+const MessageStub = ({ user, newChannel, message: { author_id, id, body, edited }, time, sub }) => {
     const [ hover, setHover ] = useState(false);
     const [ edit, setEdit ] = useState(false);
     return (
@@ -15,7 +15,8 @@ const MessageStub = React.forwardRef(({ user, newChannel, message: { author_id, 
                             e.preventDefault();
                             setEdit(false);
                         } }
-                        messageId={ id }
+                        messageId={id}
+                        sub={sub}
                         body={ body }
                         edit={ true } />
                 </section>
@@ -36,6 +37,7 @@ const MessageStub = React.forwardRef(({ user, newChannel, message: { author_id, 
                     <>
                         <MessageTools
                             id={ id }
+                            sub={ sub }
                             edit={ () => setEdit(true) } />
                         <aside>
                             { time }
@@ -46,6 +48,6 @@ const MessageStub = React.forwardRef(({ user, newChannel, message: { author_id, 
             ) }
         </>
     )
-})
+}
 
 export default MessageStub;

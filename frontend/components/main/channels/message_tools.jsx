@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const MessageTools = ({ id, edit }) => {
+const MessageTools = ({ id, edit, sub }) => {
     return (
         <nav className="message-tool">
             <button className="edit" onClick={ edit }>
@@ -9,7 +9,7 @@ const MessageTools = ({ id, edit }) => {
             </button>
 
             <button className="delete" onClick={ () => {
-                App.cable.subscriptions.subscriptions[0].speak({ message: { delete: true, messageId: id } })
+                sub.speak({ message: { delete: true, messageId: id } })
             } }>
             </button>
         </nav>
