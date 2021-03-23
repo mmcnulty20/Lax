@@ -11,7 +11,7 @@ const DMUserSearch = ({ members }) => {
     // temporary for testing before hooking up to backend search functionality
     // let members=[{ id: 1, username: "Megan"}, { id: 2, username: "Demo" }]
     return (
-        <div className="dm-searchbar">
+        <div className="dm-searchbar focused">
             <span className="to">To:</span>
             <ul className="searchbar" id="search-text">
                 <DMMemberList members={ selected } removeSelected={removeSelected} />

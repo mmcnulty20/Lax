@@ -2,7 +2,7 @@ import React from 'react'
 
 const UserSearchInput = () => {
     return (
-        <input type="text" placeholder="name or name@email.com"/>
+        <input className="empty" type="text" placeholder="name or name@email.com"/>
     )
 }
 

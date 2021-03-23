@@ -7,7 +7,7 @@ const NewDMPage = (props) => {
     // temporary for testing before hooking up to backend search functionality
     let members = [{ id: 1, username: "Megan" }, { id: 2, username: "Demo" }]
     return (
-        <form>
+        <form className="new-dm-form">
             <DMUserSearch members={ members }/>
             <NewDMMessage members={ members }/>
         </form>

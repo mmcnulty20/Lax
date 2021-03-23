@@ -2,14 +2,14 @@ import React from 'react'
 import DefaultAvatarIcon from "../../avatar_icon";
 
 const MemberItem = ({ username, removeSelected, id }) => (
-    <li>
+    <li className="member">
         <DefaultAvatarIcon username={username} />
         <span>
             {username}
         </span>
         <button className="remove-member"
             onClick={ () => removeSelected(id) }>
-            x
+            <span>x</span>
         </button>
     </li>
 )
