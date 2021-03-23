@@ -1,4 +1,4 @@
-import { RECEIVE_CHANNELS, RECEIVE_CHANNEL, REMOVE_CHANNEL, RECEIVE_NAME_BOOL, RECEIVE_CHANNEL_SEARCH } from "../../actions/channel_actions";
+import { RECEIVE_CHANNELS, RECEIVE_CHANNEL, REMOVE_CHANNEL, RECEIVE_NAME_BOOL, RECEIVE_CHANNEL_SEARCH, RECEIVE_NEW_CHANNEL } from "../../actions/channel_actions";
 import { LOGOUT_CURRENT_USER } from "../../actions/session_actions";
 
 const channelsReducer = ( state = { search: [] }, action ) => {
@@ -7,6 +7,7 @@ const channelsReducer = ( state = { search: [] }, action ) => {
         case RECEIVE_CHANNELS:
             return { ...state, ...action.channels };
         case RECEIVE_CHANNEL:
+        case RECEIVE_NEW_CHANNEL:
             return { ...state, ...action.channel };
         case REMOVE_CHANNEL:
             let newState = { ...state };

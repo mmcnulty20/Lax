@@ -26,7 +26,7 @@ class Api::ChannelsController < ApplicationController
         @channel = Channel.new(create_params)
         if @channel.save
             Membership.create(user_id: current_user.id, joinable_type: "Channel", joinable_id: @channel.id)
-            render :show
+            render :create_stub
         else
             render json: @channel.errors.full_messages, status: 401
         end

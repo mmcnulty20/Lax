@@ -7,9 +7,7 @@ import { fetchChannelMessages, fetchNewMessage, receiveMessage, removeMessage } 
 const mapStateToProps = ( { entities: { channels, messages, users }, session: { currentUserId } }, { location: { pathname } }) => {
     const pathId = pathname.slice(3)
     const channel = channels[pathId]
-    debugger
     messages = Object.values(messages[`c${pathId}`] || {} )
-    debugger
     return {
         users,
         pathId,
@@ -27,7 +25,6 @@ const mapDispatchToProps = dispatch => (
         removeMessage: message => dispatch(removeMessage( message )),
         receiveMessage: message => {
             return new Promise( (res, rej) => {
-                debugger
                 dispatch(receiveMessage(message))
                 res(message.message.author_id);
             })

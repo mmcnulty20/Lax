@@ -90,7 +90,10 @@ class CreateChannelModal extends Component {
         e.preventDefault();
         const { name, topic, isPrivate } = this.state;
         const channel = { name, topic, isPrivate }
-        this.props.create(channel).then( (props) => { this.newChannel = Object.keys(props.channel.channels)[0]; this.setState({ addUsers: true }) } );
+        this.props.create(channel).then( ({ id }) => {
+            this.newChannel = id
+            this.setState({ addUsers: true }) 
+        });
     }
 
     handleFocus(e) {

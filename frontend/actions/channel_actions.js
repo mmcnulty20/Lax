@@ -2,6 +2,7 @@ import * as ChannelAPIUtil from "../utils/channel_api_utils";
 
 export const RECEIVE_CHANNELS = "RECEIVE_CHANNELS";
 export const RECEIVE_CHANNEL = "RECEIVE_CHANNEL";
+export const RECEIVE_NEW_CHANNEL = "RECEIVE_NEW_CHANNEL";
 export const REMOVE_CHANNEL = "REMOVE_CHANNEL";
 export const RECEIVE_CHANNEL_ERRORS = "RECEIVE_CHANNEL_ERRORS"
 export const RECEIVE_NAME_BOOL = "RECEIVE_NAME_BOOL";
@@ -51,6 +52,13 @@ const receiveChannelSearch = results => (
     }
 )
 
+const receiveNewChannel = channel => (
+    {
+        type: RECEIVE_NEW_CHANNEL,
+        ...channel
+    }
+)
+
 export const fetchAllChannels = () => {
     return dispatch => ChannelAPIUtil.fetchAllChannels().then(
         res => dispatch(receiveChannels(res)),
@@ -74,7 +82,7 @@ export const fetchChannel = id => {
 
 export const createChannel = channel => {
     return dispatch => ChannelAPIUtil.createChannel(channel).then(
-        res => dispatch(receiveChannel(res)),
+        res => dispatch(receiveNewChannel(res)),
         res => receiveChannelErrors(res)
     )
 }
