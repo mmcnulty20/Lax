@@ -1,7 +1,7 @@
 .dm-searchbar {
     color: $lighter-text;
-    height: 53px;
-    @include flex(row, $justify: flex-start);
+    min-height: 53px;
+    display: flex;
     border-bottom: 1px solid $dark-tan;
     padding: 0 20px;
     // "To:" is an additional 20px
@@ -9,20 +9,24 @@
         box-shadow: 0 4px 12px -2px rgba($color: #000000, $alpha: 0.06);
     }
     > .to {
+        margin-top: 15px;
         font-weight: 300;
         font-size: 15px;
     }
     > .searchbar {
         display: flex;
+        flex-wrap: wrap;
+        margin: 8px 0;
+        align-items: center;
         position: relative;
         width: 100%;
         height: 100%;
-        padding: 0 20px 0 12px;
+        padding-right: 8px;
         > li {
             color: $text;
             height: 26px;
             &.member {
-                margin-left: 12px;
+                margin: 2px 0 2px 12px;
                 padding-right: 4px;
                 display: flex;
                 align-items: center;
@@ -68,7 +72,13 @@
         }
         input.search-input {
             background: unset;
-            width: 250px;
+            flex-grow: 1;
+            flex-shrink: 0;
+            width: 46px;
+            margin: 2px 0;
+            padding: 6px 12px;
+            height: 32px;
+            line-height: 20px;
         }
     }
 }
