@@ -27,8 +27,8 @@ export const fetchDM = id => (
     )
 )
 
-export const createDM = user_ids => (
-    dispatch => DMApiUtil.createDM(user_ids).then(
+export const createDM = info => (
+    dispatch => DMApiUtil.createDM(info).then(
         res => dispatch(receiveDM(res))
     )
 )

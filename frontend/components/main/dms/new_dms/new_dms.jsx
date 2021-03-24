@@ -17,19 +17,17 @@ const NewDMPage = (props) => {
         setSelected(newSelections)
     }
     const addMember = user => {
-        debugger
         if ( !selected.hasOwnProperty(user.id) ) setSelected({ ...selected, [user.id]: user })
-        debugger
     }
 
     const actions = { removeSelected, addMember }
     // temporary for testing before hooking up to backend search functionality
     // let members = [{ id: 1, username: "Megan" }, { id: 2, username: "Demo" }]
     return (
-        <form className="new-dm-form">
+        <section className="new-dm">
             <DMUserSearch {...actions} selected={ selected }/>
             <NewDMMessage members={ selected }/>
-        </form>
+        </section>
     )
 }
 

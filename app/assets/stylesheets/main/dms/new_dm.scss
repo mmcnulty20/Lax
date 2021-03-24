@@ -66,11 +66,16 @@
                 }
             }
         }
-        input.empty {
+        input.search-input {
             background: unset;
             width: 250px;
         }
     }
+}
+
+.mainpage-body > .new-dm > .show > .message-form {
+    position: fixed;
+    bottom: 28px;
 }
 
 .search-suggestions {

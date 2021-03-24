@@ -24,7 +24,7 @@ export const memberSub = ({ currentUser, receiveChannel, receiveDM}) => {
                         }
                     } else if ( type === "DirectMessage" ) {
                         switch (action) {
-                            case "join":
+                            case "new":
                                 receiveDM(info)
                             case "delete":
                             default:
