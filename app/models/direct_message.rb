@@ -17,4 +17,10 @@ class DirectMessage < ApplicationRecord
     
     has_many :messages,
         as: :messageable
+
+    def self.group_exists?(ids)
+        DirectMessage.joins(:memberships)
+            .group(:id)
+            .having('ARRAY[?] = ARRAY_AGG(memberships.user_id ORDER BY memberships.user_id)', ids.sort)
+    end
 end
