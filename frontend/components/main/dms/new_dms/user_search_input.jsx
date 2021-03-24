@@ -11,9 +11,11 @@ const UserSearchInput = ({ selected, addMember }) => {
         if ( value === "" ) {
             setFiltered([])
         } else {
+            const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
             const suggestions = 
                 users.filter( 
-                    ({username, email}) => username.match(value) || email.match(value) )
+                    ({username, email}) => username.match(escaped) ||
+                        email.match(escaped) )
                 .slice(0, 9)
                 .map( u => {
                     const isSelected = !!selected[u.id]
@@ -36,14 +38,16 @@ const UserSearchInput = ({ selected, addMember }) => {
         }
     }, [value] )
     
+    const empty = !Object.keys(selected).length
 
     return (
         <>
             <input 
-                className="empty"
+                className={ `search-input${ empty ? " empty" : "" }` }
                 type="text"
+                value={ value }
                 onChange={ e => setValue(e.target.value) }
-                placeholder="name or name@email.com"
+                placeholder={ empty ? "name or name@email.com" : "" }
             />
             { value === "" ? null : (
                 <ul className="search-suggestions">

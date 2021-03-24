@@ -9,7 +9,7 @@ const NewDMPage = (props) => {
     const dispatch = useDispatch()
     useComponentDidMount(() => { dispatch(retrieveAllUsers()) })
 
-    const [selected, setSelected] = useState([]);
+    const [selected, setSelected] = useState({});
 
     const removeSelected = (id) => {
         const newSelections = { ...selected }
@@ -17,7 +17,9 @@ const NewDMPage = (props) => {
         setSelected(newSelections)
     }
     const addMember = user => {
-        if ( !Object.hasOwnProperty(user.id) ) setSelected({ ...selected, [user.id]: user })
+        debugger
+        if ( !selected.hasOwnProperty(user.id) ) setSelected({ ...selected, [user.id]: user })
+        debugger
     }
 
     const actions = { removeSelected, addMember }
