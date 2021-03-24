@@ -9,6 +9,8 @@
 User.destroy_all
 Channel.destroy_all
 Membership.destroy_all
+DirectMessage.destroy_all
+Message.destroy_all
 
 puts "Creating users..."
 megan, bellith, addy, tiffan, lothar, nissa, veth, caleb, bren, jester, demo_user = User.create!([

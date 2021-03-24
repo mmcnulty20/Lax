@@ -5,8 +5,7 @@ class Api::MembershipsController < ApplicationController
         if joined
             new_ids = member_params[:user_ids] - joined.member_ids
             joined.member_ids += new_ids
-            
-            socket = format_create(new_ids)
+            socket = format_create
             joined.members.each { |member| MembershipsChannel.broadcast_to(
                 member, 
                 socket
@@ -16,7 +15,7 @@ class Api::MembershipsController < ApplicationController
         end
     end
 
-    def format_create(new_ids)
+    def format_create
         type = @channel.class.name || @dm.class.name
         { 
             action: "join",

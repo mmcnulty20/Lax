@@ -21,6 +21,7 @@ class DirectMessage < ApplicationRecord
     def self.group_exists?(ids)
         DirectMessage.joins(:memberships)
             .group(:id)
-            .having('ARRAY[?] = ARRAY_AGG(memberships.user_id ORDER BY memberships.user_id)', ids.sort)
+            .having('ARRAY[?] = ARRAY_AGG(memberships.user_id ORDER BY memberships.user_id)', ids.map(&:to_i).sort)
+            .first # Should never have more than one result
     end
 end
