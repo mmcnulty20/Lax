@@ -5,7 +5,11 @@ import SearchItem from './search_item'
 const UserSearchInput = ({ selected, addMember, value, setValue }) => {
 
     const [ filtered, setFiltered ] = useState([])
-    const users = useSelector(({ entities: { users } }) => Object.values(users), shallowEqual )
+    const users = useSelector(
+    ({ entities: { users }, session: { currentUserId: id } }) => {
+        const { [id]: _, ...r } = users // r is an object with all users but the current
+        return Object.values(r)
+    }, shallowEqual )
 
     useEffect( () => {
         if ( value === "" ) {
