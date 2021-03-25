@@ -9,9 +9,7 @@ export const memberSub = ({ receiveChannel, receiveDM}) => {
     App.cable.subscriptions.create(
         { channel: "MembershipsChannel" },
             {
-                received: (args) => {
-                    debugger
-                    const { action, type, info } = args
+                received: ({ action, type, info }) => {
                     if (type === "Channel") {
                         switch (action) {
                             case "join":

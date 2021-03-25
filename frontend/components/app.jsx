@@ -18,7 +18,7 @@ import { useComponentDidMount } from '../utils/hook_utils';
 
 
 const App = () => {
-    const cId = useSelector( ({ ui: { mainChannel }, session: { currentUserId }}) => [mainChannel, currentUserId] )
+    const cId = useSelector( ({ ui: { mainChannel } }) => mainChannel )
     const dispatch = useDispatch()
     useComponentDidMount(() => memberSub({
         receiveChannel: channel => dispatch(receiveChannel(channel)),
