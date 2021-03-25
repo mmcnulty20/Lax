@@ -7,7 +7,9 @@ const DMMemberList = ({ members, removeSelected }) => {
         setFormatted(_formatMembers())
     }, [members])
 
-    const  _formatMembers = () => Object.values(members).map( ({ username, id }) => 
+    const  _formatMembers = () => Object.values(members)
+        .sort( (a,b) => a.order > b.order ? 1 : -1 )
+        .map( ({ username, id }) => 
         <MemberItem 
             key={ id }
             id={ id }
