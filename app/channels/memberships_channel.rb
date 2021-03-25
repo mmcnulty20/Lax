@@ -1,6 +1,5 @@
 class MembershipsChannel < ApplicationCable::Channel
     def subscribed
-        @user = User.find_by(id: params[:id])
-        stream_for @user
+        stream_for current_user
     end
 end

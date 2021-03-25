@@ -14,16 +14,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { memberSub } from '../utils/function_helpers';
 import { receiveChannel } from "../actions/channel_actions"
 import { receiveDM } from "../actions/dm_actions"
+import { useComponentDidMount } from '../utils/hook_utils';
 
 
 const App = () => {
-    const [cId, currentUser] = useSelector( ({ ui: { mainChannel }, session: { currentUserId }}) => [mainChannel, currentUserId] )
+    const cId = useSelector( ({ ui: { mainChannel }, session: { currentUserId }}) => [mainChannel, currentUserId] )
     const dispatch = useDispatch()
-    memberSub({
-        currentUser,
+    useComponentDidMount(() => memberSub({
         receiveChannel: channel => dispatch(receiveChannel(channel)),
         receiveDM: dm => dispatch(receiveDM(dm))
-    })
+    }))
     return (<>
         <svg id="logo-bg">
                 <defs>

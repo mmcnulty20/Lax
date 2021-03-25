@@ -5,12 +5,13 @@ export const checkSubbed = (id) => (
     })
 )
 
-export const memberSub = ({ currentUser, receiveChannel, receiveDM}) => {
+export const memberSub = ({ receiveChannel, receiveDM}) => {
     App.cable.subscriptions.create(
-        { channel: "MembershipsChannel", id: currentUser },
+        { channel: "MembershipsChannel" },
             {
-                received: ({ action, type, info }) => {
+                received: (args) => {
                     debugger
+                    const { action, type, info } = args
                     if (type === "Channel") {
                         switch (action) {
                             case "join":
