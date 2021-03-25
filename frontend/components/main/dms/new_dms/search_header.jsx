@@ -18,7 +18,9 @@ const DMUserSearch = ({ selected, focused, setFocused, removeSelected, addMember
                     </ul>
                 ) : (
                     <div className="names">
-                        { Object.values(selected).map(({ username }) => username).join(", ") }
+                            { Object.values(selected)
+                                .sort((a, b) => a.order > b.order ? 1 : -1)
+                                .map(({ username }) => username).join(", ") }
                     </div>
                 )
             }

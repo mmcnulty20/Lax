@@ -8,7 +8,9 @@ import MessageForm from '../../channels/message_form'
 const NewDMMessage = ({ members, setFocused }) => {
     const dispatch = useDispatch()
     const history = useHistory();
-    const name = Object.values(members).map( ({username}) => username).join(", ") || "someone new"
+    const name = Object.values(members)
+        .sort((a, b) => a.order > b.order ? 1 : -1)
+        .map( ({username}) => username).join(", ") || "someone new"
     const userId = useSelector( ({ session: { currentUserId } }) => currentUserId )
     
     // for duck-typing purposes
