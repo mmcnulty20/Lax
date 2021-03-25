@@ -160,6 +160,10 @@
                 font-weight: 400;
                 text-transform: scale(1.2,1);
                 position: absolute;
+                width: 97%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
                 // bottom: 75px;
                 // margin-left: 10px;
                 &.lock::after {

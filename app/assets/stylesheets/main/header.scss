@@ -204,10 +204,13 @@ body {
             min-width: 386px;
             position: relative;
             &.dm {
-                @include flex(row, center, flex-start);
+                line-height: 40px;
                 font-size: 15px;
                 font-weight: 600;
                 letter-spacing: 0.5px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
             }
             h2 {
                 font-size: 13.5px;

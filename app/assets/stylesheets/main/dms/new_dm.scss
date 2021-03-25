@@ -1,9 +1,15 @@
+.mainpage-body {
+    overflow-x: hidden;
+}
+
 .dm-searchbar {
     color: $lighter-text;
     min-height: 53px;
     display: flex;
     border-bottom: 1px solid $dark-tan;
     padding: 0 20px;
+    font-size: 15px;
+    font-weight: 600;
     // "To:" is an additional 20px
     &.focused, &.empty {
         box-shadow: 0 4px 12px -2px rgba($color: #000000, $alpha: 0.06);
@@ -11,7 +17,13 @@
     > .to {
         margin-top: 15px;
         font-weight: 300;
-        font-size: 15px;
+    }
+    > .names {
+        margin-left: 8px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        line-height: 52px;
     }
     > .searchbar {
         display: flex;
@@ -33,8 +45,6 @@
                 background: $light-blue-grey;
                 border-radius: 3px;
                 height: 26px;
-                font-weight: 600;
-                font-size: 15px;
                 &:hover {
                     cursor: pointer;
                 }
@@ -71,6 +81,7 @@
             }
         }
         input.search-input {
+            font-weight: 400;
             background: unset;
             flex-grow: 1;
             flex-shrink: 0;
@@ -79,6 +90,7 @@
             padding: 6px 12px;
             height: 32px;
             line-height: 20px;
+            cursor: default;
         }
     }
 }
@@ -119,8 +131,6 @@
         align-items: center;
         padding-left: 24px;
         padding-right: 36px;
-        font-size: 15px;
-        font-weight: 600;
         &:hover {
             background: $hover-light-blue;
             cursor: pointer;
