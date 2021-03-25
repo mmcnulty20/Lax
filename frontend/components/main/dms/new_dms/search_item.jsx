@@ -4,7 +4,7 @@ import DefaultAvatarIcon from '../../avatar_icon'
 const SearchItem = ({ user, selected, addMember }) => (
     <li
     className={ selected ? "selected" : "" }
-    onClick={ () => addMember(user) }>
+    onMouseDown={ () => addMember(user) }>
         <DefaultAvatarIcon username={ user.username } />
         { user.username }
 

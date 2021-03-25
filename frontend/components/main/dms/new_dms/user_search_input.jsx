@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
 import SearchItem from './search_item'
 
-const UserSearchInput = ({ selected, addMember }) => {
-    const [ value, setValue ] = useState("")
+const UserSearchInput = ({ selected, addMember, value, setValue }) => {
+
     const [ filtered, setFiltered ] = useState([])
     const users = useSelector(({ entities: { users } }) => Object.values(users), shallowEqual )
 

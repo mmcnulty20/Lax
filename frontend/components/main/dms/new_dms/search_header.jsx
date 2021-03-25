@@ -2,21 +2,26 @@ import React, { useState } from 'react'
 import DMMemberList from './member_list';
 import UserSearchInput from './user_search_input';
 
-const DMUserSearch = ({ selected, removeSelected, addMember }) => {
-    // const [members, setMembers] = useState([]);
-    // const [selected, setSelected] = useState([]);
-    // const [selected, setSelected] = useState(members);
+const DMUserSearch = ({ selected, focused, setFocused, removeSelected, addMember }) => {
+    const [value, setValue] = useState("")
 
-    // const removeSelected = (id) => setSelected(selected.filter(m => m.id !== id))
-    // temporary for testing before hooking up to backend search functionality
-    // let members=[{ id: 1, username: "Megan"}, { id: 2, username: "Demo" }]
     return (
-        <div className="dm-searchbar focused">
+        <div className={ `dm-searchbar${ focused ? " focused" : ""}` }
+            tabIndex="0" onFocus={ () => setFocused(true) } >
             <span className="to">To:</span>
-            <ul className="searchbar" id="search-text">
-                <DMMemberList members={ selected } removeSelected={removeSelected} />
-                <UserSearchInput selected={ selected } addMember={ addMember } />
-            </ul>
+            {
+                focused ? (
+                    <ul tabIndex="1" onBlur={ (e) => setValue("") }
+                        className="searchbar" id="search-text">
+                        <DMMemberList members={ selected } removeSelected={removeSelected} />
+                        <UserSearchInput {...{ addMember, selected, value, setValue }} />
+                    </ul>
+                ) : (
+                    <div className="names">
+                        { Object.values(selected).map(({ username }) => username).join(", ") }
+                    </div>
+                )
+            }
         </div>
     )
 }

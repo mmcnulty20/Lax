@@ -5,10 +5,11 @@ import { useComponentDidMount } from '../../../../utils/hook_utils'
 import NewDMMessage from './message_page'
 import DMUserSearch from './search_header'
 
-const NewDMPage = (props) => {
+const NewDMPage = () => {
     const dispatch = useDispatch()
     useComponentDidMount(() => { dispatch(retrieveAllUsers()) })
 
+    const [focused, setFocused] = useState(true)
     const [selected, setSelected] = useState({});
 
     const removeSelected = (id) => {
@@ -20,13 +21,10 @@ const NewDMPage = (props) => {
         if ( !selected.hasOwnProperty(user.id) ) setSelected({ ...selected, [user.id]: user })
     }
 
-    const actions = { removeSelected, addMember }
-    // temporary for testing before hooking up to backend search functionality
-    // let members = [{ id: 1, username: "Megan" }, { id: 2, username: "Demo" }]
     return (
         <section className="new-dm">
-            <DMUserSearch {...actions} selected={ selected }/>
-            <NewDMMessage members={ selected }/>
+            <DMUserSearch { ...{ removeSelected, addMember, selected, focused, setFocused } }/>
+            <NewDMMessage setFocused={ () => setFocused( !Object.keys(selected).length ) } members={ selected }/>
         </section>
     )
 }

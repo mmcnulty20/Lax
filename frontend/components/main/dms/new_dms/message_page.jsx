@@ -5,7 +5,7 @@ import { createDM } from '../../../../actions/dm_actions'
 import MessageForm from '../../channels/message_form'
 
 
-const NewDMMessage = ({ members }) => {
+const NewDMMessage = ({ members, setFocused }) => {
     const dispatch = useDispatch()
     const history = useHistory();
     const name = Object.values(members).map( ({username}) => username).join(", ") || "someone new"
@@ -24,6 +24,7 @@ const NewDMMessage = ({ members }) => {
     return (
         <div className="show">
             <MessageForm 
+                setFocused={ setFocused }
                 type="DM"
                 edit={ false }
                 id="new"

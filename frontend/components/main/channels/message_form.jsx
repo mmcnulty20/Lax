@@ -82,6 +82,7 @@ class MessageForm extends Component {
                             </div>
                         ) }
                         <textarea
+                            onFocus={ this.props.setFocused }
                             id="input"
                             autoFocus={ this.props.edit }
                             ref={ this.divRef }
