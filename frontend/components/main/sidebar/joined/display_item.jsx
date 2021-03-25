@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ListItem = ({ type, name, id, handleDelete, handleClick, icon, owner }) => {
     const [show, setShow] = useState("false");
+    const length = name.length > 22;
     return (
     <li onClick={ e => {
         e.persist;
@@ -12,7 +13,7 @@ const ListItem = ({ type, name, id, handleDelete, handleClick, icon, owner }) =>
             <FontAwesomeIcon icon={icon} />
         </figure>
         <span>
-            { name.length > 22 ? name.slice(0,20)+"..." : name } 
+            { length ? name.slice(0,20)+"..." : name } 
         </span>
         { owner === true ? (
             <div onClick={ e => handleDelete(id)(e) }>
@@ -21,9 +22,13 @@ const ListItem = ({ type, name, id, handleDelete, handleClick, icon, owner }) =>
                 </figure>
             </div>
         ): null }
-        <aside className="full-name">
-            { name }
-        </aside>
+        {
+            length ? (
+            <aside className="full-name">
+                { name }
+            </aside>
+            ) : null
+        }
     </li>
 )}
 
