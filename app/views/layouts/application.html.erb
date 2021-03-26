@@ -5,6 +5,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta property "og:title" 
+      content="Lax" />
+    <meta property='og:image'
+      content="<%= image_url('readme/splashscreenshot.png') %>"/>
+    <meta property="og:description"
+      content="A full-stack clone of the live-chat application Slack. Relax with friends instead of focusing on work!" />
+    <meta property="og:url"
+      content="http://lax-chat.herokuapp.com" />
     <%= favicon_link_tag image_path('favicon.png') %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
