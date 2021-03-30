@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import DefaultAvatarIcon from "../avatar_icon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from "react-router";
+import MyProfile from "./my_profile";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../../actions/session_actions";
 
-const SidebarHeaderDropdown = ({ open, user, logout}) => {
+const SidebarHeaderDropdown = ({ open, user }) => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [profileWarning, setProfileWarning] = useState(false)
     return (
         <aside className={`dropdown${ open ? "" : " hide" }`}>
@@ -28,7 +32,7 @@ const SidebarHeaderDropdown = ({ open, user, logout}) => {
                         }}>
                         View Profile
                         { profileWarning ? (
-                            <div>AHHH</div>
+                            <MyProfile />
                         ) : null }
                     </li>
                 </ul>
@@ -55,7 +59,7 @@ const SidebarHeaderDropdown = ({ open, user, logout}) => {
                 </section>
             </section>
             <ul>
-                <li onClick={ logout }>
+                <li onClick={ () => dispatch(logoutUser()).then(() => history.push("/login")) }>
                     Sign out of Lax
                 </li>
             </ul>

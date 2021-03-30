@@ -31,7 +31,6 @@ class SidebarHeader extends Component {
                 <ComposeButton />
                 { this.state.open ? (
                     <SidebarHeaderDropdown
-                        logout={ this.props.logout }
                         open={ this.state.open }
                         user={ this.props.currentUser } />
                 ) : null }

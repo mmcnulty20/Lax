@@ -16,7 +16,6 @@ const NewDMMessage = ({ members, setFocused }) => {
     // for duck-typing purposes
     const sub = {
         speak: ({ message: { body } }) => {
-            debugger
             dispatch(createDM({
                 ids: [userId, ...Object.keys(members)],
                 body
